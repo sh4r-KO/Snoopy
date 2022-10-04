@@ -2,8 +2,8 @@ package IHM;
 import java.awt.*;
 import javax.swing.*;
 
-public class LoadGamePanel extends JPanel{
-    public LoadGamePanel() {
+class LoadGamePanel extends JPanel{
+    private LoadGamePanel() {
         super();
         this.setUp();
     }
