@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 
 class LoadGamePanel extends JPanel{
-    private LoadGamePanel() {
+    LoadGamePanel() {
         super();
         this.setUp();
     }

@@ -32,7 +32,6 @@ public class GamePanel extends JPanel{
                 
                 myPicture = ImageIO.read(new File("galery/dog2.jpg"));//path start form the package?
                 
-                ImageResizer.resize("galery/dog copy.jpeg", "galery/R.jpeg", 0.5);
  
             } catch (IOException e1) {
                 // TODO Auto-generated catch block
