@@ -4,9 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 
 
-public class PasswordPanel extends JPanel{
+class PasswordPanel extends JPanel{
 
-    public PasswordPanel() {
+    PasswordPanel() {
         super();
         this.setUp();
     }

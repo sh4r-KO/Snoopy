@@ -3,10 +3,10 @@ package IHM;
 import javax.swing.*;
 import java.awt.*;
 
-public class ScoresPanel extends JPanel{
+class ScoresPanel extends JPanel{
 
     
-    public ScoresPanel() {
+    ScoresPanel() {
         super();
         this.setUp();
     }

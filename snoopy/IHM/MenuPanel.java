@@ -9,9 +9,9 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class MenuPanel extends JPanel{
+class MenuPanel extends JPanel{
     //AFAIRE use GridBagLayout instead of GridLayout
-    public MenuPanel() {
+    MenuPanel() {
         super();
         this.setUp1();
     }
