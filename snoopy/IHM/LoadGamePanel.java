@@ -2,34 +2,45 @@ package IHM;
 import java.awt.*;
 import javax.swing.*;
 
+import controller.Tmp;
+
 class LoadGamePanel extends JPanel{
-    LoadGamePanel() {
+    private JButton buttonValider;
+    private JButton buttonRetour;
+    private JTextField textEntry;
+    Tmp t ;
+    LoadGamePanel(Tmp t) {
         super();
+        this.t = t;
         this.setUp();
     }
 
     private void setUp(){
-        GridBagLayout layout = new GridBagLayout();
-        this.setLayout(layout);
         
+        /////////////////////////////////// set les elements ///////////////////////////////////////////////////
 
         JLabel label = new JLabel("Nom du fichier de Sauvegarde : ");
         label.setFont(new Font("Arial", Font.BOLD, 20));
         label.setForeground(Color.BLUE);
         
 
-        JTextField textEntry = new JTextField();//il y avait aussi JTextArea et JTextField mais j'ai choisi JtextPane; il est + lourd mais + manoeuvrable
-
-        JButton buttonValider = new JButton("Valider");
-        JButton buttonRetour = new JButton("retour");
+        textEntry = new JTextField();//il y avait aussi JTextArea et JTextField mais j'ai choisi JtextPane; il est + lourd mais + manoeuvrable
+        buttonValider = new JButton("Valider");
+        buttonRetour = new JButton("retour");
         JButton[] buttons = {buttonValider, buttonRetour};
 
         for (JButton button : buttons) {
+            button.addActionListener(t);
+
             button.setFont(new Font("Arial", Font.BOLD, 20));
             button.setBackground(Color.LIGHT_GRAY);
             button.setForeground(Color.BLUE);
             button.setBorder(BorderFactory.createLineBorder(Color.black, 2));
         } 
+
+        /////////////////////////////////// set l'agencement=layout des elements ///////////////////////////////////////////////////
+        GridBagLayout layout = new GridBagLayout();
+        this.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;
         //espace les elements des uns des autres

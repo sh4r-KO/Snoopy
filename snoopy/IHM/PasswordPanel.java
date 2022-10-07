@@ -1,13 +1,17 @@
 package IHM;
 
 import javax.swing.*;
+
+import controller.Tmp;
+
 import java.awt.*;
 
 
 class PasswordPanel extends JPanel{
-
-    PasswordPanel() {
+    Tmp t ;
+    PasswordPanel(Tmp t) {
         super();
+        this.t = t;
         this.setUp();
     }
     //alexandra, je te laisse comprendre comment ça marche, j'ai trop la flemme
@@ -34,6 +38,7 @@ class PasswordPanel extends JPanel{
         buttonValider.setBorder(BorderFactory.createLineBorder(Color.black, 2));
         buttonValider.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonValider.setAlignmentY(Component.CENTER_ALIGNMENT);
+        buttonValider.addActionListener(t);
 
         JButton buttonRetour = new JButton("retour");
         buttonRetour.setFont(new Font("Arial", Font.BOLD, 20));
@@ -42,7 +47,7 @@ class PasswordPanel extends JPanel{
         buttonRetour.setBorder(BorderFactory.createLineBorder(Color.black, 2));
         buttonRetour.setAlignmentX(Component.CENTER_ALIGNMENT);
         buttonRetour.setAlignmentY(Component.CENTER_ALIGNMENT);
-
+        buttonRetour.addActionListener(t);
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;

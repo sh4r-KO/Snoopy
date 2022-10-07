@@ -1,20 +1,23 @@
 package IHM;
 
 import javax.swing.*;
+
+import controller.Tmp;
+
 import java.awt.*;
 
 class ScoresPanel extends JPanel{
-
+    Tmp t ;
     
-    ScoresPanel() {
+    ScoresPanel(Tmp t) {
         super();
+        this.t = t;
         this.setUp();
     }
 
     private void setUp(){
         GridBagLayout layout = new GridBagLayout();
         this.setLayout(layout);
-        
 
         JLabel label = new JLabel("Scores : ");
         label.setFont(new Font("Arial", Font.BOLD, 20));
@@ -37,7 +40,8 @@ class ScoresPanel extends JPanel{
         buttonRetour.setBackground(Color.LIGHT_GRAY);
         buttonRetour.setForeground(Color.BLUE);
         buttonRetour.setBorder(BorderFactory.createLineBorder(Color.black, 2));
-        
+        buttonRetour.addActionListener(this.t);
+
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.fill = GridBagConstraints.HORIZONTAL;

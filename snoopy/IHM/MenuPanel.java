@@ -8,11 +8,16 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import controller.Tmp;  
+
 
 class MenuPanel extends JPanel{
+    Tmp t;
     //AFAIRE use GridBagLayout instead of GridLayout
-    MenuPanel() {
+    MenuPanel(Tmp t) {
         super();
+        this.t = t;
+
         this.setUp1();
     }
     //le meilleir set up que j'ai fait pour l'instant, il utilise un gridlayout de 7 lignes et 5 colonnes
@@ -31,11 +36,11 @@ class MenuPanel extends JPanel{
         JButton button5 = new JButton("Scores");
         JButton button6 = new JButton("Quitter");
         JButton[] buttons = {button1, button2, button3, button4, button5, button6};
-
-        
         Color lightBlue = new Color(0,0,200);
 
         for (JButton button : buttons){
+            button.addActionListener(this.t);
+
             button.setFont(new Font("Arial", Font.BOLD, 20));
             button.setBackground(Color.LIGHT_GRAY);
             button.setForeground(lightBlue);
