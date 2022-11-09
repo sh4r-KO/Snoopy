@@ -15,7 +15,7 @@ public class Main extends Application {
     //TODO: make all element in fxml responsive/relative to the size
     //TODO: super cntroler avec la methode dec hangement de fichier fxml
     //commebtaire
-
+    //comentaires sa mere
     public static final int Stage_width = 1440;//75% of 1920
     public static final int Stage_height = 810;//75% of 1080
 
