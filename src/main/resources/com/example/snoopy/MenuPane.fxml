@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" fx:id="menuPaneAnchor" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.MenuPaneController">
+   <children>
+      <Button layoutX="480.0" layoutY="257.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#JeuDeBaseCliked" fx:id="JeuDeBaseB" text="Jeu de base" />
+      <Button layoutX="480.0" layoutY="469.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#scoresCliked" fx:id="scoresB" text="scores" />
+      <Button layoutX="480.0" layoutY="363.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#mdpCliked" fx:id="mdpB" text="mot de passe" />
+      <Button layoutX="480.0" layoutY="683.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#quitterCliked" fx:id="quitterB" text="quitter" />
+      <Button layoutX="480.0" layoutY="578.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#chargerUnePartieCliked" fx:id="chargerUnePartieB" text="charger une partie" />
+      <Button layoutX="480.0" layoutY="151.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#JeuAvanceCliked" fx:id="jeuAvanceB" text="Jeu avancé" />
+      <Label layoutX="581.0" layoutY="28.0" prefHeight="100.0" prefWidth="278.0" text="SNOOPY" textAlignment="CENTER">
+         <font>
+            <Font size="68.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
