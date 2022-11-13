@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="firstPaneAnchor" prefHeight="710.0" prefWidth="1240.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.FirstPaneController">
+<AnchorPane fx:id="firstPaneAnchor" prefHeight="610.0" prefWidth="1440.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.FirstPaneController">
 <Label alignment="CENTER" layoutX="362.0" layoutY="183.0" prefHeight="222.0" prefWidth="718.0" text="SNOOPY" textFill="WHITE">
       <style>
          -fx-font-family: "Press Start 2P";

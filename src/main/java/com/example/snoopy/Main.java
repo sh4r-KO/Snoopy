@@ -23,7 +23,7 @@ public class Main extends Application {
     //******************************************************************************************************************
     //******************************************************************************************************************
 
-    public static final int Stage_width = 1340; //1440;//75% of 1920
+    public static final int Stage_width = 1240; //1440;//75% of 1920
     public static final int Stage_height = 710; //810;//75% of 1080
 
     @Override
