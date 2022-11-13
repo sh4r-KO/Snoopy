@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="firstPaneAnchor" prefHeight="710.0" prefWidth="1340.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.FirstPaneController">
+<AnchorPane fx:id="firstPaneAnchor" prefHeight="710.0" prefWidth="1240.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.FirstPaneController">
 <Label alignment="CENTER" layoutX="362.0" layoutY="183.0" prefHeight="222.0" prefWidth="718.0" text="SNOOPY" textFill="WHITE">
       <style>
          -fx-font-family: "Press Start 2P";
@@ -22,9 +23,12 @@
          <Font size="25.0" />
       </font>
    </Button>
-   <ImageView fitHeight="163.0" fitWidth="159.0" layoutX="261.0" layoutY="647.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="163.0" fitWidth="159.0" layoutX="161.0" layoutY="647.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@snoopySprite.png" />
+         <Image url="@snoopysprite.png" />
       </image>
    </ImageView>
+   <cursor>
+      <Cursor fx:constant="HAND" />
+   </cursor>
 </AnchorPane>
