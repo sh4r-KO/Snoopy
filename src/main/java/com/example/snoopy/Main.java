@@ -24,7 +24,7 @@ public class Main extends Application {
     //******************************************************************************************************************
 
     public static final int Stage_width = 1440;//75% of 1920
-    public static final int Stage_height = 810;//75% of 1080
+    public static final int Stage_height = 810;//75% of 1080 //coucou
 
     @Override
     public void start(Stage stage) throws IOException {

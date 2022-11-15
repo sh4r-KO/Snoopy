@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.JeuDeBase">
+   <children>
+      <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="82.0" layoutY="57.0" maxHeight="696.0" maxWidth="1276.0" minHeight="696.0" minWidth="1276.0" prefHeight="696.0" prefWidth="1276.0" AnchorPane.bottomAnchor="57.0" AnchorPane.leftAnchor="82.0" AnchorPane.rightAnchor="81.55555555555566" AnchorPane.topAnchor="57.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+            <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+          <ColumnConstraints hgrow="SOMETIMES" percentWidth="4.76" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+          <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+            <RowConstraints percentHeight="9.09" vgrow="SOMETIMES" />
+        </rowConstraints>
+      </GridPane>
+   </children>
+</AnchorPane>
