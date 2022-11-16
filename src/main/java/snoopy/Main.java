@@ -1,12 +1,17 @@
-package com.example.snoopy;
+package snoopy;
 
 
+import snoopy.Controller.Controller;
+import snoopy.Controller.JeuDeBaseController;
+import snoopy.Controller.PlayerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
+import java.net.URISyntaxException;
 
 public class Main extends Application {
     //******************************************************************************************************************
@@ -31,8 +36,10 @@ public class Main extends Application {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("FirstPane.fxml"));
 
-        AnchorPane anchorPane = loader.<AnchorPane>load();
+        AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
+
+        stage.addEventFilter(KeyEvent.KEY_PRESSED, new JeuDeBaseController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
         stage.setScene(scene);
         stage.show();
     }

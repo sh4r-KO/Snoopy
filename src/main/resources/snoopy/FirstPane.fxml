@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="firstPaneAnchor" prefHeight="810.0" prefWidth="1440.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.FirstPaneController">
+<AnchorPane fx:id="firstPaneAnchor" prefHeight="810.0" prefWidth="1440.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snoopy.Controller.FirstPaneController">
 <Label layoutX="362.0" layoutY="183.0" prefHeight="222.0" prefWidth="718.0" text="SNOOPY" textAlignment="CENTER" textFill="WHITE">
       <font>
          <Font name="Arial Black" size="150.0" />

@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane fx:id="chargerUnePartieAnchor" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.ChargerUnePartieController">
+<AnchorPane fx:id="chargerUnePartieAnchor" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snoopy.Controller.ChargerUnePartieController">
    <children>
       <Label layoutX="439.0" layoutY="45.0" text="Charger une partie" textAlignment="CENTER">
          <font>

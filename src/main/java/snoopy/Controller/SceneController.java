@@ -1,4 +1,4 @@
-package com.example.snoopy;
+package snoopy.Controller;
 
 public class SceneController {
 

@@ -1,4 +1,4 @@
-package com.example.snoopy;
+package snoopy.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -10,27 +10,27 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.net.URL;
 
-public class MotdepasseController {
-    @FXML public Button validerB;
+public class ChargerUnePartieController {
+
+    @FXML public AnchorPane chargerUnePartieAnchor;
     @FXML public Button retourB;
-    @FXML public TextArea motdepasseTextArea;
-    @FXML public AnchorPane motdepasseAnchor;
+    @FXML public Button validerB;
+   @FXML public TextArea chargerUnePartieTextArea;
 
     public void retourClicked(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) motdepasseAnchor.getScene().getWindow();
+        Stage stage = (Stage) chargerUnePartieAnchor.getScene().getWindow();
 
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("MenuPane.fxml"));
 
-        AnchorPane anchorPane = loader.<AnchorPane>load();
+        AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
     }
 
-    public void validerClicekd(ActionEvent actionEvent) {
-        String s = motdepasseTextArea.getText();
+    public void validerClicekd() {
+        String s = chargerUnePartieTextArea.getText();
         System.out.println(s);
     }
 }

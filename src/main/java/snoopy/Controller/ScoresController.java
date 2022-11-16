@@ -1,4 +1,4 @@
-package com.example.snoopy;
+package snoopy.Controller;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -15,26 +15,20 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ScoresController implements Initializable {
+public class ScoresController extends Controller implements Initializable {
 
     @FXML public AnchorPane scoresAnchorPane;
     @FXML public ListView<String> listviewScores;
     @FXML public Label LabelScore;
     @FXML public Button retourB;
 
-    private String[] scoresList = {"test1 : 123456","test2 : rAAAAAAh il est deja 3h du mat","test3 : magrosse","4","5","6","7","8","9","10","11","12","13","14"};//a importer plus tard du txt
+    private final String[] scoresList = {"test1 : 123456","test2 : rAAAAAAh il est deja 3h du mat","test3 : magrosse","4","5","6","7","8","9","10","11","12","13","14"};//a importer plus tard du txt
     public ScoresController(){
 
     }
     public void retourClicked(ActionEvent actionEvent) throws IOException {
-        Stage stage = (Stage) scoresAnchorPane.getScene().getWindow();
+        super.changePane("MenuPane.fxml",scoresAnchorPane);
 
-        FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("MenuPane.fxml"));
-
-        AnchorPane anchorPane = loader.<AnchorPane>load();
-        Scene scene = new Scene(anchorPane);
-        stage.setScene(scene);
     }
     //source : https://youtu.be/Pqfd4hoi5cc
     @Override
