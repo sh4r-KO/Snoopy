@@ -1,25 +1,29 @@
 package snoopy.Controller;
 
-import javafx.event.EventHandler;
+
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-import snoopy.Model.Player;
 
 import java.io.IOException;
 
-public class Controller{
+public class Controller {
 
+
+    public GridPane GridPaneJB;
+    public ImageView ImageViewJB;
+    public AnchorPane jeuDeBaseAnchor;
 
     //constructeur
     public Controller(){
 
 
     }
-
+    public void initialize(){
+    }
 
     public void changePane(String fxmlFileName, AnchorPane callingAnchor) throws IOException {
 
@@ -31,9 +35,9 @@ public class Controller{
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/snoopy/"+fxmlFileName));
         AnchorPane anchorPane = loader.load();
+
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
     }
-
 
 }

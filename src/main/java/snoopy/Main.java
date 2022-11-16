@@ -3,6 +3,7 @@ package snoopy;
 
 import snoopy.Controller.Controller;
 import snoopy.Controller.JeuDeBaseController;
+import snoopy.Controller.KeyEventController;
 import snoopy.Controller.PlayerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -39,7 +40,7 @@ public class Main extends Application {
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
 
-        stage.addEventFilter(KeyEvent.KEY_PRESSED, new JeuDeBaseController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
+        stage.addEventFilter(KeyEvent.KEY_PRESSED, new KeyEventController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
         stage.setScene(scene);
         stage.show();
     }

@@ -18,8 +18,8 @@ public class MenuPaneController extends  Controller{
     @FXML private javafx.scene.control.Button jeuAvanceB;
 
     public void JeuDeBaseCliked() throws IOException {
-        super.changePane("JeuDeBase.fxml", menuPaneAnchor);
 
+        super.changePane("JeuDeBase.fxml", menuPaneAnchor);
     }
     public void chargerUnePartieCliked() throws IOException {
         super.changePane("ChargerUnePartie.fxml", menuPaneAnchor);

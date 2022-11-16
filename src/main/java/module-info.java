@@ -6,8 +6,6 @@ module com.example.snoopy {
     requires com.almasb.fxgl.all;
     requires java.desktop;
 
-    //opens snoopy.example.snoopy to javafx.fxml;
-    //exports snoopy.example.snoopy;
 
 
 

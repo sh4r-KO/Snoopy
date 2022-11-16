@@ -6,7 +6,7 @@
 
 <AnchorPane prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" fx:id="menuPaneAnchor" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snoopy.Controller.MenuPaneController">
    <children>
-      <Button layoutX="480.0" layoutY="257.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#JeuDeBaseCliked" fx:id="JeuDeBaseB" text="Jeu de base" />
+      <Button layoutX="480.0" layoutY="257.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#JeuDeBaseCliked"  fx:id="JeuDeBaseB" text="Jeu de base" />
       <Button layoutX="480.0" layoutY="469.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#scoresCliked" fx:id="scoresB" text="scores" />
       <Button layoutX="480.0" layoutY="363.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#mdpCliked" fx:id="mdpB" text="mot de passe" />
       <Button layoutX="480.0" layoutY="683.0" mnemonicParsing="false" prefHeight="85.0" prefWidth="482.0" style="-fx-background-radius: 50;" onAction="#quitterCliked" fx:id="quitterB" text="quitter" />
