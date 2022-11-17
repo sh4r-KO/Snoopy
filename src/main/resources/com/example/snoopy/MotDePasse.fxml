@@ -17,7 +17,7 @@
                 -fx-font-family: "Press Start 2P";
             </style>
         </Label>
-        <TextArea fx:id="motdepasseTextArea" layoutX="405.0" layoutY="289.0" prefHeight="45.0" prefWidth="600.0">
+        <TextArea fx:id="motdepasseTextArea" layoutX="405.0" layoutY="289.0" prefHeight="55.0" prefWidth="600.0">
             <style>
                 -fx-text-align: center;
             </style>

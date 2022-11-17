@@ -34,6 +34,7 @@ public class Main extends Application {
         AnchorPane anchorPane = loader.<AnchorPane>load();
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
+        stage.setTitle("SNOOPY 🐶");
         stage.show();
     }
 

@@ -16,6 +16,9 @@
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="jeuAvanceB" layoutX="480.0" layoutY="151.0" mnemonicParsing="false" onAction="#JeuAvanceCliked" prefHeight="75.0" prefWidth="482.0" text="Jeu avancé">
          <style>
@@ -25,6 +28,9 @@
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="scoresB" layoutX="480.0" layoutY="469.0" mnemonicParsing="false" onAction="#scoresCliked" prefHeight="75.0" prefWidth="482.0" text="Scores">
          <style>
@@ -34,6 +40,9 @@
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="mdpB" layoutX="480.0" layoutY="363.0" mnemonicParsing="false" onAction="#mdpCliked" prefHeight="75.0" prefWidth="482.0" text="Mot de Passe">
          <style>
@@ -43,6 +52,9 @@
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="quitterB" layoutX="480.0" layoutY="683.0" mnemonicParsing="false" onAction="#quitterCliked" prefHeight="75.0" prefWidth="482.0" text="Quitter">
          <style>
@@ -52,6 +64,9 @@
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="chargerUnePartieB" layoutX="480.0" layoutY="578.0" mnemonicParsing="false" onAction="#chargerUnePartieCliked" prefHeight="75.0" prefWidth="482.0" text="Charger une partie">
          <style>
@@ -61,6 +76,9 @@
          <font>
             <Font size="16.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
 
       <Label alignment="CENTER" layoutX="546.0" layoutY="29.0" prefHeight="100.0" prefWidth="350.0" text="SNOOPY" textAlignment="CENTER">
@@ -71,13 +89,13 @@
             <Font size="54.0" />
          </font>
       </Label>
-      <ImageView fitHeight="163.0" fitWidth="159.0" layoutX="161.0" layoutY="623.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="221.0" fitWidth="195.0" layoutY="565.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@snoopysprite.png" />
+            <Image url="@img/snoopycool.png" />
          </image>
       </ImageView>
    </children>
    <cursor>
-      <Cursor fx:constant="HAND" />
+      <Cursor fx:constant="DEFAULT" />
    </cursor>
 </AnchorPane>

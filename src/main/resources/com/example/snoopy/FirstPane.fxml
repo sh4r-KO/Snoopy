@@ -14,7 +14,7 @@
       <font>
          <Font size="110.0" />
       </font></Label>
-   <Button fx:id="jouerB" layoutX="513.0" layoutY="445.0" mnemonicParsing="false" onAction="#JouerCliked" prefHeight="58.0" prefWidth="415.0" text="JOUER">
+   <Button id="#btnjouer" fx:id="jouerB" layoutX="513.0" layoutY="445.0" mnemonicParsing="false" onAction="#JouerCliked" prefHeight="58.0" prefWidth="415.0" stylesheets="@style.css" text="JOUER">
       <style>
          -fx-background-radius: 40;
          -fx-font-family: "Press Start 2P";
@@ -23,9 +23,9 @@
          <Font size="25.0" />
       </font>
    </Button>
-   <ImageView fitHeight="163.0" fitWidth="159.0" layoutX="161.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="222.0" fitWidth="177.0" layoutX="111.0" layoutY="570.0" pickOnBounds="true" preserveRatio="true">
       <image>
-         <Image url="@snoopysprite.png" />
+         <Image url="@img/snoopysprite.png" />
       </image>
    </ImageView>
    <cursor>
