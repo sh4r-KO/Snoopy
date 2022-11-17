@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="firstPaneAnchor" prefHeight="610.0" prefWidth="1440.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.FirstPaneController">
+<AnchorPane fx:id="firstPaneAnchor" prefHeight="610.0" prefWidth="1440.0" style="-fx-background-color: #000000;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.FirstPaneController">
 <Label alignment="CENTER" layoutX="362.0" layoutY="183.0" prefHeight="222.0" prefWidth="718.0" text="SNOOPY" textFill="WHITE">
       <style>
          -fx-font-family: "Press Start 2P";
@@ -23,7 +23,7 @@
          <Font size="25.0" />
       </font>
    </Button>
-   <ImageView fitHeight="163.0" fitWidth="159.0" layoutX="161.0" layoutY="647.0" pickOnBounds="true" preserveRatio="true">
+   <ImageView fitHeight="163.0" fitWidth="159.0" layoutX="161.0" layoutY="629.0" pickOnBounds="true" preserveRatio="true">
       <image>
          <Image url="@snoopysprite.png" />
       </image>

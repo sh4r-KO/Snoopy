@@ -5,20 +5,60 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane fx:id="chargerUnePartieAnchor" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.ChargerUnePartieController">
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.Cursor?>
+<AnchorPane fx:id="chargerUnePartieAnchor" prefHeight="810.0" prefWidth="1440.0" style="-fx-background-color: #D9D9D9;" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.ChargerUnePartieController">
    <children>
-      <Label layoutX="439.0" layoutY="45.0" text="Charger une partie" textAlignment="CENTER">
+      <Label layoutX="439.0" layoutY="45.0" text="Charger Une Partie" textAlignment="CENTER">
          <font>
-            <Font size="68.0" />
+            <Font size="40.0" />
          </font>
+         <style>
+            -fx-font-family: "Press Start 2P";
+         </style>
       </Label>
-      <TextArea layoutX="405.0" layoutY="290.0" prefHeight="78.0" prefWidth="631.0" fx:id="chargerUnePartieTextArea"/>
+      <TextArea layoutX="405.0" layoutY="290.0" prefHeight="78.0" prefWidth="631.0" fx:id="chargerUnePartieTextArea">
+         <style>
+            -fx-text-align: center;
+         </style>
+         <font>
+            <Font size="19.0" />
+         </font>
+         <effect>
+            <DropShadow height="1.0" radius="0.0" width="0.0">
+               <input>
+                  <InnerShadow height="11.0" radius="4.75" width="10.0">
+                     <color>
+                        <Color opacity="0.673774003982544" />
+                     </color></InnerShadow>
+               </input>
+            </DropShadow>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="TEXT" />
+         </cursor>
+      </TextArea>
       <Label layoutX="347.0" layoutY="222.0" text="Entrez le nom de votre fichier de sauvegarde">
          <font>
-            <Font size="38.0" />
+            <Font size="15.0" />
          </font>
+         <style>
+            -fx-font-family: "Press Start 2P";
+         </style>
       </Label>
-      <Button layoutX="217.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#retourClicked" fx:id="retourB" prefWidth="188.0" text="Retour" />
-      <Button layoutX="1036.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#validerClicekd" fx:id="validerB" prefWidth="188.0" text="Valider" />
+      <Button layoutX="217.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#retourClicked" fx:id="retourB" prefWidth="188.0" text="Retour">
+         <style>
+            -fx-background-radius: 40;
+            -fx-font-family: "Press Start 2P";
+         </style>
+      </Button>
+      <Button layoutX="1036.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#validerClicekd" fx:id="validerB" prefWidth="188.0" text="Valider" >
+         <style>
+            -fx-background-radius: 40;
+            -fx-font-family: "Press Start 2P";
+         </style>
+      </Button>
    </children>
 </AnchorPane>
