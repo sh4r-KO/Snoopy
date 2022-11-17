@@ -16,7 +16,7 @@ public class MenuPaneController extends Controller{
         //super.changePane("JeuDeBase.fxml", menuPaneAnchor);
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/snoopy/JeuDeBase.fxml"));
+        loader.setLocation(getClass().getResource("/ViewFmxl/JeuDeBase.fxml"));
             BorderPane borderPane = null;
         try{
              borderPane = loader.load();
@@ -38,7 +38,6 @@ public class MenuPaneController extends Controller{
     }
 
     public void quitterCliked(){
-        System.out.println("FirstPaneController.quitterCliked()");
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
         stage.close();
     }

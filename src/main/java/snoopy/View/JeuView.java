@@ -21,14 +21,14 @@ public class JeuView extends Group {
     Image Snoppy;
 
     private void initialize(){
-        this.Snoppy = new Image(new File("src/main/resources/snoopy/Stickman_red.png").toURI().toString());
-        File file = new File("src/main/resources/snoopy/Snoopy.png");
+        this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
+        File file = new File("src/main/resources/img/Snoopy.png");
         matrixImagesView = new ImageView[row][column];
         for (int i = 0; i < row; i++) {//
             for (int j = 0; j < column; j++) {
 
                 ImageView imageView = new ImageView();
-                imageView = style(imageView);
+                //imageView = style(imageView);
                 imageView.setX((double)j * CELL_WIDTH);
                 imageView.setY((double)i * CELL_WIDTH);
                 imageView.setFitHeight(CELL_WIDTH);
@@ -65,12 +65,6 @@ public class JeuView extends Group {
 
     }
 
-    public ImageView style(ImageView i){
-        String[] colorpossible = {"red", "blue", "green", "yellow"};
-        i.setStyle("-fx-background-color: "+colorpossible[(int)(Math.random()*4)]+
-                "; -fx-border-color: black" +
-                "; -fx-border-width: s5px;");
-        return i;
-    }
+
 
 }
