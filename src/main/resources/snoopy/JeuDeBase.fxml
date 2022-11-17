@@ -55,9 +55,6 @@
       </rowConstraints>
       <children>
         <ImageView fx:id="ImageViewJB" >
-          <image>
-            <Image url="@Snoopy.png" />
-          </image>
         </ImageView>
       </children>
     </GridPane>

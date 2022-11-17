@@ -40,7 +40,7 @@ public class Main extends Application {
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
 
-        stage.addEventFilter(KeyEvent.KEY_PRESSED, new KeyEventController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
+        stage.addEventFilter(KeyEvent.KEY_PRESSED, new JeuDeBaseController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
         stage.setScene(scene);
         stage.show();
     }

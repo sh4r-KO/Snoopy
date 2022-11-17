@@ -13,6 +13,8 @@ public class Player {
     protected int lives;
     protected int score;
     protected int level;
+    protected int x;
+    protected int y;
     protected Direction direction;
 
     JeuDeBaseController JeuDeBaseControler;
@@ -75,6 +77,19 @@ public class Player {
 
     }
 
+    //getters and setters
+    public int getPosX() {
+        return x;
+    }
+    public void setPosX(int x) {
+        this.x = x;
+    }
+    public int getPosY() {
+        return y;
+    }
+    public void setPosY(int y) {
+        this.y = y;
+    }
 
 
 

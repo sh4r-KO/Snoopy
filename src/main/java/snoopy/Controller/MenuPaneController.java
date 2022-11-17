@@ -27,6 +27,7 @@ public class MenuPaneController extends  Controller{
     public void JeuAvanceCliked(){
 
     }
+
     public void quitterCliked(){
         System.out.println("FirstPaneController.quitterCliked()");
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
