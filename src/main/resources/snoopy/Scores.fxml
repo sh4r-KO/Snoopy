@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="scoresAnchorPane" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.snoopy.ScoresController">
+<AnchorPane fx:id="scoresAnchorPane" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snoopy.Controller.Controller">
    <children>
       <Button fx:id="retourB" layoutX="195.0" layoutY="596.0" mnemonicParsing="false" onAction="#retourClicked" prefHeight="42.0" prefWidth="95.0" text="Retour" />
       <Label layoutX="636.0" layoutY="140.0" prefHeight="83.0" prefWidth="168.0" text="Scores">

@@ -4,7 +4,18 @@ module com.example.snoopy {
 
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
+    requires java.desktop;
 
-    opens com.example.snoopy to javafx.fxml;
-    exports com.example.snoopy;
+
+
+
+
+    exports snoopy.Controller;
+    opens snoopy.Controller to javafx.fxml;
+    exports snoopy.View;
+    opens snoopy.View to javafx.fxml;
+    exports snoopy.Model;
+    opens snoopy.Model to javafx.fxml;
+    exports snoopy;
+    opens snoopy to javafx.fxml;
 }
