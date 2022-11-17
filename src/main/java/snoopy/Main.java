@@ -8,6 +8,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import snoopy.Model.Player;
+
 import java.io.IOException;
 
 public class Main extends Application {
@@ -16,10 +18,8 @@ public class Main extends Application {
     //******************************************************************************************************************
     /*
     TODO: reduce visibilty of all elements in contorllers like public button -> private
-    TODO: make a super controller and add redundances method such as ReturnCliecked (if difference faced, re-write or add parameters)
     TODO: make all element in fxml responsive/relative to the size
-    TODO: super cntroler avec la methode dec hangement de fichier fxml
-
+    TODO: all modelView musst extends ImageView
     */
     //******************************************************************************************************************
     //******************************************************************************************************************
@@ -39,6 +39,7 @@ public class Main extends Application {
         stage.addEventFilter(KeyEvent.KEY_PRESSED, new JeuDeBaseController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
         stage.setScene(scene);
         stage.show();
+        Player player = new Player();
     }
 
     public static void main(String[] args) {

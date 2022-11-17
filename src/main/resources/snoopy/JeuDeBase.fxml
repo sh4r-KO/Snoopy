@@ -8,31 +8,24 @@
 <?import snoopy.View.*?>
 
 
-
+<?import java.lang.Integer?>
 <BorderPane prefHeight="810.0"
             prefWidth="1440.0"
             xmlns="http://javafx.com/javafx/11.0.14-internal"
             fx:id="JeuBorderPane"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="snoopy.Controller.JeuDeBaseController">
-    <top>
-    </top>
+    <fx:define>
+        <Integer fx:id="row" fx:value="12"/>
+        <Integer fx:id="column" fx:value="22"/>
 
-
-
+    </fx:define>
 
     <center>
-        <JeuView fx:id="jeuView"/>
+        <JeuView fx:id="jeuView" />
     </center>
 
-    <bottom>
-    </bottom>
 
-    <left>
-    </left>
-
-    <right>
-    </right>
 </BorderPane>
 
 

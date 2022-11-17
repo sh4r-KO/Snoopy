@@ -82,7 +82,6 @@ public class Controller  implements Initializable {
         AnchorPane anchorPane = null;
         try {
              anchorPane = loader.load();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
