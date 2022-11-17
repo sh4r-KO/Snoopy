@@ -22,15 +22,9 @@ import java.util.ResourceBundle;
 public class Controller  implements Initializable {
 
 
-    public GridPane GridPaneJB;
-    public ImageView ImageViewJB;
-    public AnchorPane jeuDeBaseAnchor;
 
-    //constructeur
-    public Controller(){
-    }
-    public void initialize(){
-    }
+
+
 
     @FXML private javafx.scene.control.Button jouerB;
     @FXML private AnchorPane firstPaneAnchor;
@@ -53,36 +47,30 @@ public class Controller  implements Initializable {
     @FXML public Button validerB;
     @FXML public TextArea chargerUnePartieTextArea;
 
-    public void retourClickedChargerPartie(ActionEvent actionEvent) throws IOException {
-
-        changePane("MenuPane.fxml", chargerUnePartieAnchor);
+    //constructeur
+    public Controller(){
     }
 
-
+    public void retourClickedChargerPartie(ActionEvent actionEvent) throws IOException {
+        changePane("MenuPane.fxml", chargerUnePartieAnchor);
+    }
     public void validerClickedChargerPartie(ActionEvent actionEvent) {
         String s = chargerUnePartieTextArea.getText();
         System.out.println(s);
     }
-
     public void retourClickedmdp(ActionEvent actionEvent) throws IOException {
         changePane("MenuPane.fxml", motdepasseAnchor);
     }
-
     public void validerClickedmdp(ActionEvent actionEvent) {
         String s = motdepasseTextArea.getText();
         System.out.println(s);
     }
-
     public void JouerCliked() throws IOException {
         changePane("MenuPane.fxml", firstPaneAnchor);
     }
-
     public void retourClicked(ActionEvent actionEvent) throws IOException {
         changePane("MenuPane.fxml",scoresAnchorPane);
     }
-
-
-
     public void changePane(String fxmlFileName, AnchorPane callingAnchor) throws IOException {
         //explications pk y'a "snoopy/" : (20h)
         //https://stackoverflow.com/a/40065607
@@ -110,6 +98,8 @@ public class Controller  implements Initializable {
         if(listviewScores != null){
             listviewScores.getItems().addAll(scoresList);
         }
+
+
 
     }
 

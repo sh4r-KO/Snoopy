@@ -12,6 +12,8 @@ module com.example.snoopy {
 
     exports snoopy.Controller;
     opens snoopy.Controller to javafx.fxml;
+    exports snoopy.View;
+    opens snoopy.View to javafx.fxml;
     exports snoopy.Model;
     opens snoopy.Model to javafx.fxml;
     exports snoopy;
