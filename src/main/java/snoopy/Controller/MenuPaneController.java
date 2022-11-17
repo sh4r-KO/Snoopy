@@ -10,12 +10,6 @@ import java.io.IOException;
 
 public class MenuPaneController extends  Controller{
     @FXML private AnchorPane menuPaneAnchor;
-    @FXML private javafx.scene.control.Button quitterB;
-    @FXML private javafx.scene.control.Button JeuDeBaseB;
-    @FXML private javafx.scene.control.Button scoresB;
-    @FXML private javafx.scene.control.Button mdpB;
-    @FXML private javafx.scene.control.Button chargerUnePartieB;
-    @FXML private javafx.scene.control.Button jeuAvanceB;
 
     public void JeuDeBaseCliked() throws IOException {
 

@@ -1,10 +1,7 @@
 package snoopy;
 
 
-import snoopy.Controller.Controller;
 import snoopy.Controller.JeuDeBaseController;
-import snoopy.Controller.KeyEventController;
-import snoopy.Controller.PlayerController;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -12,7 +9,6 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import java.io.IOException;
-import java.net.URISyntaxException;
 
 public class Main extends Application {
     //******************************************************************************************************************

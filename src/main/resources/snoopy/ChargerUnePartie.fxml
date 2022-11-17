@@ -5,7 +5,7 @@
 <?import javafx.scene.text.*?>
 
 
-<AnchorPane fx:id="chargerUnePartieAnchor" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snoopy.Controller.ChargerUnePartieController">
+<AnchorPane fx:id="chargerUnePartieAnchor" prefHeight="810.0" prefWidth="1440.0" xmlns="http://javafx.com/javafx/11.0.14-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="snoopy.Controller.Controller">
    <children>
       <Label layoutX="439.0" layoutY="45.0" text="Charger une partie" textAlignment="CENTER">
          <font>
@@ -18,7 +18,7 @@
             <Font size="38.0" />
          </font>
       </Label>
-      <Button layoutX="217.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#retourClicked" fx:id="retourB" prefWidth="188.0" text="Retour" />
-      <Button layoutX="1036.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#validerClicekd" fx:id="validerB" prefWidth="188.0" text="Valider" />
+      <Button layoutX="217.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#retourClickedChargerPartie" fx:id="retourBChargerPartie" prefWidth="188.0" text="Retour" />
+      <Button layoutX="1036.0" layoutY="588.0" mnemonicParsing="false" prefHeight="78.0" onAction="#validerClickedChargerPartie" fx:id="validerBChargerPartie" prefWidth="188.0" text="Valider" />
    </children>
 </AnchorPane>
