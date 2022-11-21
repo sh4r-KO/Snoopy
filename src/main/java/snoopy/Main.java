@@ -19,7 +19,7 @@ public class Main extends Application {
     /*
     TODO: reduce visibilty of all elements in contorllers like public button -> private
     TODO: make all element in fxml responsive/relative to the size
-    TODO: all modelView musst extends ImageView
+    TODO: all modelView musst extends ImageView.
     */
     //******************************************************************************************************************
     //******************************************************************************************************************
