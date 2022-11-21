@@ -22,10 +22,6 @@ import java.util.ResourceBundle;
 public class Controller  implements Initializable {
 
 
-
-
-
-
     @FXML private javafx.scene.control.Button jouerB;
     @FXML private AnchorPane firstPaneAnchor;
 
@@ -48,8 +44,7 @@ public class Controller  implements Initializable {
     @FXML public TextArea chargerUnePartieTextArea;
 
     //constructeur
-    public Controller(){
-    }
+    public Controller(){}
 
     public void retourClickedChargerPartie(ActionEvent actionEvent) throws IOException {
         changePane("MenuPane.fxml", chargerUnePartieAnchor);
@@ -77,7 +72,7 @@ public class Controller  implements Initializable {
 
         Stage stage = (Stage) callingAnchor.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/snoopy/"+fxmlFileName));
+        loader.setLocation(getClass().getResource("/ViewFmxl/"+fxmlFileName));
 
         AnchorPane anchorPane = null;
         try {
