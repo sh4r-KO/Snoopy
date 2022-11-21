@@ -47,23 +47,23 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
             case UP -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case DOWN -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case LEFT -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case RIGHT -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case S -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
         }
 
