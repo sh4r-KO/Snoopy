@@ -5,7 +5,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
-import snoopy.Controller.JeuDeBaseController;
+import snoopy.Controller.DefaultGameController;
 import java.lang.reflect.Field;
 
 
@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.Arrays;
 
-public class Player {
+public class Model implements iModel {
     protected int lives;
     protected int score;
     protected int level;
@@ -23,7 +23,7 @@ public class Player {
 
     private int[][] board;
 
-    JeuDeBaseController JeuDeBaseControler;
+    DefaultGameController DefaultGameController;
     /*player has coordinates, lives, score, level, direction enum, current leve
     player has a board, a board is a 2d array of int, each int is a type of block!
     0 (case vide)
@@ -41,7 +41,7 @@ public class Player {
     /**
     constructor of player, wich incarne snoopy in the game
      */
-    public Player() {
+    public Model() {
         init();
     }
 

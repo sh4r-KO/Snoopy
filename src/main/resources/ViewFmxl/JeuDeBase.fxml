@@ -22,7 +22,7 @@
     </fx:define>
 
     <center>
-        <JeuView fx:id="jeuView" />
+        <GameView fx:id="jeuView" />
     </center>
 
 

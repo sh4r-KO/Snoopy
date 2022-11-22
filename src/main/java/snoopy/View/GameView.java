@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import snoopy.Model.Player;
+import snoopy.Model.Model;
 
 import java.io.File;
 
@@ -12,16 +12,16 @@ import java.io.File;
  * this class is a view of the game, it's the game itself
  * it's a groupd element, so it can be added to a parent in this case JeuDeBase.fxml
  */
-public class JeuView extends Group {
+public class GameView extends Group implements iView {
     public final static double CELL_WIDTH = 58.0;
     @FXML final int row =12;//TODO: use the variables defined in the fxml file
     @FXML final int column =22 ;
     private ImageView[][] matrixImagesView;
 
-    Image Snoppy;
+    Image Snoopy;
 
     private void initialize(){
-        this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
+        this.Snoopy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
         File file = new File("src/main/resources/img/Snoopy.png");
         matrixImagesView = new ImageView[row][column];
         for (int i = 0; i < row; i++) {//
@@ -43,10 +43,10 @@ public class JeuView extends Group {
         System.out.println("initialize() done");
     }
 
-    public void update (Player p){
+    public void update (Model p){
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                this.matrixImagesView[i][j].setImage(this.Snoppy);
+                this.matrixImagesView[i][j].setImage(this.Snoopy);
             }
         }
         System.out.println("update() done");
@@ -58,10 +58,10 @@ public class JeuView extends Group {
     //list of all types of ImageView possible(who shares properties)
 
     //constructor
-    public JeuView() {
+    public GameView() {
         super();
         this.initialize();
-        this.update(new Player());
+        this.update(new Model());
 
     }
 

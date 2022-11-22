@@ -5,9 +5,7 @@ module com.example.snoopy {
     requires org.kordamp.bootstrapfx.core;
     requires com.almasb.fxgl.all;
     requires java.desktop;
-
-
-
+    requires javafx.graphics;
 
 
     exports snoopy.Controller;
