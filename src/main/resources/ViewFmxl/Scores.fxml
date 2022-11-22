@@ -12,7 +12,7 @@
             -fx-font-family: "Press Start 2P";
          </style>
       </Button>
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="617.0" layoutY="106.0" prefHeight="84.0" prefWidth="482.0" text="Scores" textAlignment="CENTER">
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="479.0" layoutY="105.0" prefHeight="84.0" prefWidth="482.0" text="Scores" textAlignment="CENTER">
          <font>
             <Font size="40.0" />
          </font>
@@ -20,7 +20,7 @@
             -fx-font-family: "Press Start 2P";
          </style>
       </Label>
-      <ListView fx:id="listviewScores" layoutX="480.0" layoutY="244.0" prefHeight="295.0" prefWidth="757.0">
+      <ListView fx:id="listviewScores" layoutX="342.0" layoutY="231.0" prefHeight="295.0" prefWidth="757.0">
          <style>
             -fx-font-family: "Press Start 2P";
          </style>

@@ -31,7 +31,7 @@ public class Controller  implements Initializable {
     @FXML public Button retourBChargerPartie;
     @FXML public Button validerBChargerPartie;
 
-    private final String[] scoresList = {"test1 : 123456","test2 : rAAAAAAh il est deja 3h du mat","test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14"};//a importer plus tard du txt
+    private final String[] scoresList = {"test1 : 123456","test2 : rAAAAAAh il est deja 3h du mat","test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14", "test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14", "test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14", "test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14"};//a importer plus tard du txt
 
     @FXML public Button validerBmdp;
     @FXML public Button retourBmdp;
