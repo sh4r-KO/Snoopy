@@ -1,5 +1,8 @@
 package snoopy.Controller;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 import snoopy.Model.Player;
 import snoopy.View.JeuView;
 
@@ -19,6 +23,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class JeuDeBaseController extends Controller implements EventHandler<KeyEvent> {
+    final private static double FRAMES_PER_SECOND = 15.0;
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
@@ -27,8 +32,26 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     //don't put any FXML changes in here, go to the initialize method pls
 
     public JeuDeBaseController() {
-        this.player = new Player();
+        player = new Player();
+        this.startTimer();
     }
+
+    private void startTimer() {
+        this.timer = new java.util.Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        JeuView.update();
+                    }
+                });
+            }
+        };
+
+        long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
+        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+    }
+
 
 
     public void initialize() {

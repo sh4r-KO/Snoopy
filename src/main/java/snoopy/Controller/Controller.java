@@ -1,6 +1,9 @@
 package snoopy.Controller;
 
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +17,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URL;
@@ -44,7 +48,11 @@ public class Controller  implements Initializable {
     @FXML public TextArea chargerUnePartieTextArea;
 
     //constructeur
-    public Controller(){}
+    public Controller(){
+
+
+
+    }
 
     public void retourClickedChargerPartie(ActionEvent actionEvent) throws IOException {
         changePane("MenuPane.fxml", chargerUnePartieAnchor);
@@ -92,10 +100,8 @@ public class Controller  implements Initializable {
         if(listviewScores != null){
             listviewScores.getItems().addAll(scoresList);
         }
-
-
-
     }
+
 
 
 }

@@ -21,6 +21,7 @@ public class Main extends Application {
     TODO: make all element in fxml responsive/relative to the size
     TODO: all modelView musst extends ImageView
     TODO: reduce title of the menu
+    TODO : in case of not enough number in int[][] use hexa to represent the number ABCDEF = 10 11 12 13 14 15
     */
     //******************************************************************************************************************
     //******************************************************************************************************************
