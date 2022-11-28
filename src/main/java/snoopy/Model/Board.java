@@ -1,27 +1,23 @@
 package snoopy.Model;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import snoopy.Controller.JeuDeBaseController;
-import java.lang.reflect.Field;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 
-public class Player {
-    protected int lives;
-    protected int score;
-    protected int level;
-    protected int x;
-    protected int y;
-
+public class Board {
     private int[][] board;
+    private Snoopy noop;
+
+
+    enum Direction {
+        NORD,
+        SUD,
+        OUEST,
+        EST;
+    }
 
     JeuDeBaseController JeuDeBaseControler;
     /*player has coordinates, lives, score, level, direction enum, current leve
@@ -41,10 +37,82 @@ public class Player {
     /**
     constructor of player, wich incarne snoopy in the game
      */
-    public Player() {
-        this.board = this.setBoardFromTextFile("level1.txt",12,22);
+    public Board() {
+
+        this.board = this.setBoardFromTextFile("test.txt",12,22);
+        for(int i=0; i<12; i++){
+            for(int j=0; j<22; j++){
+                if(board[i][j]==8){
+                    noop = new Snoopy(i, j, Snoopy.Direction.NORD);
+                    break;
+                }
+            }
+        }
+
+        System.out.println(noop.getX());
+        System.out.println(noop.getY());
+
         printBoard();
     }
+//set
+    public void moveUp() {
+        if(noop.getX() > 1){
+            int tmp=board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX()-1][noop.getY()];
+            board[noop.getX()-1][noop.getY()] = tmp;
+            noop.setX(noop.getX()-1);
+        }
+
+        //x = x - 1;
+        MVT();
+        System.out.println("up pressed");
+    }
+
+    public void moveDown() {
+        if (noop.getX() < 10){
+            int tmp = board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX() + 1][noop.getY()];
+            board[noop.getX() + 1][noop.getY()] = tmp;
+            noop.setX(noop.getX()+1);
+        }
+
+        //x = x+1
+        System.out.println("down pressed");
+        MVT();
+    }
+
+    public void moveRight() {
+        if(noop.getY() < 20) {
+            int tmp = board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY() + 1];
+            board[noop.getX()][noop.getY() + 1] = tmp;
+            noop.setY(noop.getY()+1);
+        }
+
+        System.out.println("Right pressed");
+        MVT();
+        //y =y +1
+    }
+
+    public void moveLeft() {
+        if(noop.getY() > 1){
+            int tmp=board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY()-1];
+            board[noop.getX()][noop.getY()-1] = tmp;
+            noop.setY(noop.getY()-1);
+        }
+
+        System.out.println("left pressed");
+        MVT();
+        //y = y-1;
+    }
+
+    private void MVT(){
+        printBoard();
+        System.out.println(noop.toString());
+    }
+
+
 
     private void init(){
     }
@@ -126,9 +194,15 @@ public class Player {
     }
 
     //getters of board
+
+
+    //1 bouger snoopy
+    //2 faire disparaitre un bloc
+    //3 faire bouger un bloc
+
+
+
     public int[][] getBoard() {
         return board;
     }
-
-
 }

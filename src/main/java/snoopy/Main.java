@@ -8,13 +8,13 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import snoopy.Model.Player;
+import snoopy.Model.Board;
 
 import java.io.IOException;
 
 public class Main extends Application {
     //******************************************************************************************************************
-    //---------------------------------A NE PAS SUPPRIMIER MEME SI YA EDS DOUBLONS OK ????------------------------------
+    //---------------------------------A NE PAS SUPPRIMER MEME SI IL Y A DES DOUBLONS OK ????------------------------------
     //******************************************************************************************************************
     /*
     TODO: reduce visibilty of all elements in contorllers like public button -> private
@@ -42,9 +42,8 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        Player player = new Player();
+        //Board player = new Board();
     }
-
     public static void main(String[] args) {
         launch(args);
     }

@@ -1,18 +1,21 @@
 package snoopy.View;
 
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.Group;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import snoopy.Model.Player;
+import snoopy.Model.Board;
 
 import java.io.File;
+import java.net.URL;
+import java.util.ResourceBundle;
 
 /**
  * this class is a view of the game, it's the game itself
  * it's a group element, so it can be added to a parent in this case JeuDeBase.fxml
  */
-public class JeuView extends Group {
+public class JeuView extends Group implements Initializable {
     public final static double CELL_WIDTH = 58.0;
     @FXML final int row =12;//TODO: use the variables defined in the fxml file
     @FXML final int column =22 ;
@@ -20,33 +23,42 @@ public class JeuView extends Group {
     private int time = 60;
 
 
-    private final String[] pathFiles = {
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-            "src/main/resources/img/.png",
-    };
-
     //set all images path to images object in constructor
     public JeuView() {
         super();
 
-        Player player = new Player();
+        //Board player = new Board();
         this.initialize();
-        this.update(player);
+        this.update(new Board());
     }
+
 
 
     Image Snoppy;
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
+        matrixImagesView = new ImageView[row][column];
+        for (int i = 0; i < row; i++) {//
+            for (int j = 0; j < column; j++) {
 
-    private void initialize(){
+                ImageView imageView = new ImageView();
+                //imageView = style(imageView);
+                imageView.setX((double)j * CELL_WIDTH);
+                imageView.setY((double)i * CELL_WIDTH);
+                imageView.setFitHeight(CELL_WIDTH);
+                imageView.setFitWidth(CELL_WIDTH);
+                imageView.setPreserveRatio(true);
+
+                matrixImagesView[i][j] = imageView;
+                this.getChildren().add(imageView);
+
+            }
+        }
+        System.out.println("initialize() done");
+    }
+    public void initialize(){
         this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
         matrixImagesView = new ImageView[row][column];
         for (int i = 0; i < row; i++) {//
@@ -81,9 +93,9 @@ public class JeuView extends Group {
     the choice pattern is described here :
     if nothing is specified, the upadte method will simply draw the png accordingly to the board
     concerning empty bloc, it will be a random grass png chosen beetween the 3 avaiblable
-
      */
-    public void update(Player p){
+
+    public void update(Board p){
         //System.out.print("update() started   ");
 
         for (int i = 0; i < row; i++) {
@@ -106,7 +118,7 @@ public class JeuView extends Group {
         }
 
         drawWall();
-        drawTime();
+       // drawTime();
         //System.out.println("update() done");
     }
 

@@ -1,24 +1,13 @@
 package snoopy.Controller;
 
-import javafx.animation.Animation;
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.util.Duration;
-import snoopy.Model.Player;
+import snoopy.Model.Board;
 import snoopy.View.JeuView;
 
-import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -26,14 +15,20 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
-    private final Player player;
+    private final Board board;
     private Timer timer;
     //don't put any FXML changes in here, go to the initialize method pls
 
     public JeuDeBaseController() {
-        player = new Player();
+        board = new Board();
         jeuView = new JeuView();
         this.startTimer();
+    }
+
+    public void initialize() {
+        //why initialize and not constructor :
+        //https://stackoverflow.com/a/34785707
+
     }
 
     //comment
@@ -44,7 +39,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        jeuView.update( JeuDeBaseController.this.player);
+                        jeuView.update( JeuDeBaseController.this.board);
                     }
                 });
             }
@@ -55,10 +50,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
 
 
-    public void initialize() {
-        //why initialize and not constructor :
-        //https://stackoverflow.com/a/34785707
-    }
+
 
     
     
@@ -70,19 +62,28 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         switch (ke.getCode()) {
 
             case UP -> {
+                board.moveUp();
                 System.out.println("Key Pressed: " + ke.getCode());
+
                 //ke.consume();
             }
             case DOWN -> {
+                board.moveDown();
                 System.out.println("Key Pressed: " + ke.getCode());
+
                 //ke.consume();
             }
             case LEFT -> {
+
+                board.moveLeft();
                 System.out.println("Key Pressed: " + ke.getCode());
+
                 //ke.consume();
             }
             case RIGHT -> {
+                board.moveRight();
                 System.out.println("Key Pressed: " + ke.getCode());
+
                 //ke.consume();
             }
             case S -> {
