@@ -1,5 +1,8 @@
 package snoopy.Controller;
 
+import javafx.animation.Animation;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -11,6 +14,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.util.Duration;
 import snoopy.Model.Player;
 import snoopy.View.JeuView;
 
@@ -27,8 +31,26 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     //don't put any FXML changes in here, go to the initialize method pls
 
     public JeuDeBaseController() {
-        this.player = new Player();
+        player = new Player();
+        jeuView = new JeuView();
+        this.startTimer();
     }
+    final private static double FRAMES_PER_SECOND = 1.0;//upadte()/ second
+    private void startTimer() {
+        this.timer = new java.util.Timer();
+        TimerTask timerTask = new TimerTask() {
+            public void run() {
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        jeuView.update( JeuDeBaseController.this.player);
+                    }
+                });
+            }
+        };
+        long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
+        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+    }
+
 
 
     public void initialize() {
@@ -47,23 +69,23 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
             case UP -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case DOWN -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case LEFT -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case RIGHT -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
             case S -> {
                 System.out.println("Key Pressed: " + ke.getCode());
-                ke.consume();
+                //ke.consume();
             }
         }
 

@@ -10,7 +10,7 @@ import java.io.File;
 
 /**
  * this class is a view of the game, it's the game itself
- * it's a groupd element, so it can be added to a parent in this case JeuDeBase.fxml
+ * it's a group element, so it can be added to a parent in this case JeuDeBase.fxml
  */
 public class JeuView extends Group {
     public final static double CELL_WIDTH = 58.0;
@@ -18,11 +18,35 @@ public class JeuView extends Group {
     @FXML final int column =22 ;
     private ImageView[][] matrixImagesView;
 
+
+    private final String[] pathFiles = {
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+            "src/main/resources/img/.png",
+    };
+
+    //set all images path to images object in constructor
+    public JeuView() {
+        super();
+
+        Player player = new Player();
+        this.initialize();
+        this.update(player);
+    }
+
+
     Image Snoppy;
 
+
     private void initialize(){
-        this.Snoppy = new Image(new File("src/main/resources/snoopy/Stickman_red.png").toURI().toString());
-        File file = new File("src/main/resources/snoopy/Snoopy.png");
+        this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
         matrixImagesView = new ImageView[row][column];
         for (int i = 0; i < row; i++) {//
             for (int j = 0; j < column; j++) {
@@ -42,14 +66,71 @@ public class JeuView extends Group {
         }
         System.out.println("initialize() done");
     }
+    /*
+    0 is empty bloc (aka grass : Herbe1.png/Herbe2.png/Herbe3.png)
+    1 is breakable bloc ( BlocCassable.png)
+    2 is pushable bloc
+    3 is trap bloc
+    4 is invincible bloc
+    5 is an appear/disappear bloc
+    6 is treadmill bloc
+    7 is ball
+    8 is snoopy
+    9 is a bird
+    the choice pattern is described here :
+    if nothing is specified, the upadte method will simply draw the png accordingly to the board
+    concerning empty bloc, it will be a random grass png chosen beetween the 3 avaiblable
 
-    public void update (Player p){
+     */
+    public void update(Player p){
+        System.out.print("update() started   ");
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-                this.matrixImagesView[i][j].setImage(this.Snoppy);
+                switch (p.getBoard()[i][j]){
+                    //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
+                    case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
+                    case 1 -> doThis(i,j,"BlocCassable.png");
+                    case 2 -> doThis(i,j,"BlocPoussable.png");
+                    case 3 -> doThis(i,j,"BlocPiege.png");
+                    case 4 -> doThis(i,j,"BlocInvincible.png");
+                    case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
+                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");//needs direction info
+                    case 7 -> doThis(i,j,"Balle.png");//needs velocity/direction info
+                    case 8 -> doThis(i,j,"SnoopyDroite.png");//needs direction info
+                    case 9 -> doThis(i,j,"OiseauDroite.png");
+                    default -> System.out.println("error in Modele.JeuView.update(Player p) method");
+                }
             }
         }
         System.out.println("update() done");
+    }
+    /*
+    public void update(Player p){
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                switch (p.getBoard()[i][j]){
+                    //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
+                    case 0 -> doThis(i,j, "Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
+                    case 1 -> doThis(i,j, "BlocCassable.png");
+                    case 2 -> doThis(i,j,"BlocPoussable.png");
+                    case 3 -> doThis(i,j, "BlocPiege.png");
+                    case 4 -> doThis(i,j,"BlocInvincible.png");
+                    case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
+                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");//needs direction info
+                    case 7 -> doThis(i,j,"Balle.png");//needs velocity/direction info
+                    case 8 -> doThis(i,j,"SnoopyDroite.png");//needs direction info
+                    case 9 -> doThis(i,j,"OiseauDroite.png");
+                    default -> System.out.println("error in update() method");
+                }
+            }
+        }
+        System.out.println("update() done");
+    }
+     */
+
+
+    private void doThis(int i, int j, String FileName){
+        matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/"+FileName).toURI().toString()));
     }
 
 
@@ -57,13 +138,6 @@ public class JeuView extends Group {
 
     //list of all types of ImageView possible(who shares properties)
 
-    //constructor
-    public JeuView() {
-        super();
-        this.initialize();
-        this.update(new Player());
-
-    }
 
     public ImageView style(ImageView i){
         String[] colorpossible = {"red", "blue", "green", "yellow"};
