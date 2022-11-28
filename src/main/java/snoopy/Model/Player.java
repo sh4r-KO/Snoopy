@@ -42,14 +42,11 @@ public class Player {
     constructor of player, wich incarne snoopy in the game
      */
     public Player() {
-        init();
+        this.board = this.setBoardFromTextFile("level1.txt",12,22);
+        printBoard();
     }
 
     private void init(){
-        this.board = setBoardManually();
-        System.out.println("Board = "+Arrays.deepToString(board));
-        this.setBoardFromTextFile("level1.txt",12,22);
-        printBoard();
     }
     /*
     files should be like this
@@ -120,12 +117,17 @@ public class Player {
     }
 
     private void printBoard(){
-        for(int i=0;i<board.length;i++){
-            for(int j=0;j<board[i].length;j++){
-                System.out.print(board[i][j]);
+        for (int[] ints : board) {
+            for (int anInt : ints) {
+                System.out.print(anInt);
             }
             System.out.println();
         }
+    }
+
+    //getters of board
+    public int[][] getBoard() {
+        return board;
     }
 
 

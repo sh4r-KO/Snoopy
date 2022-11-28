@@ -19,7 +19,9 @@ public class Main extends Application {
     /*
     TODO: reduce visibilty of all elements in contorllers like public button -> private
     TODO: make all element in fxml responsive/relative to the size
-    TODO: all modelView musst extends ImageView.
+    TODO: all modelView musst extends ImageView
+    TODO: reduce title of the menu
+    TODO : in case of not enough number in int[][] use hexa to represent the number ABCDEF = 10 11 12 13 14 15
     */
     //******************************************************************************************************************
     //******************************************************************************************************************
@@ -38,6 +40,7 @@ public class Main extends Application {
 
         stage.addEventFilter(KeyEvent.KEY_PRESSED, new JeuDeBaseController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
         stage.setScene(scene);
+        stage.setResizable(false);
         stage.show();
         Player player = new Player();
     }
