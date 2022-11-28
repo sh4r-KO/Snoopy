@@ -23,7 +23,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class JeuDeBaseController extends Controller implements EventHandler<KeyEvent> {
-    final private static double FRAMES_PER_SECOND = 15.0;
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
@@ -33,21 +32,21 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     public JeuDeBaseController() {
         player = new Player();
+        jeuView = new JeuView();
         this.startTimer();
     }
-
+    final private static double FRAMES_PER_SECOND = 1.0;//upadte()/ second
     private void startTimer() {
         this.timer = new java.util.Timer();
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 Platform.runLater(new Runnable() {
                     public void run() {
-                        JeuView.update();
+                        jeuView.update( JeuDeBaseController.this.player);
                     }
                 });
             }
         };
-
         long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
         this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
     }

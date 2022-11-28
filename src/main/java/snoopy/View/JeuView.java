@@ -44,9 +44,6 @@ public class JeuView extends Group {
 
     Image Snoppy;
 
-    public static void update() {
-        update(new Player());
-    }
 
     private void initialize(){
         this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
@@ -85,13 +82,35 @@ public class JeuView extends Group {
     concerning empty bloc, it will be a random grass png chosen beetween the 3 avaiblable
 
      */
-    public  void update(Player p){
+    public void update(Player p){
+        System.out.print("update() started   ");
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
-
                 switch (p.getBoard()[i][j]){
                     //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
-                    case 0 -> matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3-1+1)+1)+".png").toURI().toString()));
+                    case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
+                    case 1 -> doThis(i,j,"BlocCassable.png");
+                    case 2 -> doThis(i,j,"BlocPoussable.png");
+                    case 3 -> doThis(i,j,"BlocPiege.png");
+                    case 4 -> doThis(i,j,"BlocInvincible.png");
+                    case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
+                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");//needs direction info
+                    case 7 -> doThis(i,j,"Balle.png");//needs velocity/direction info
+                    case 8 -> doThis(i,j,"SnoopyDroite.png");//needs direction info
+                    case 9 -> doThis(i,j,"OiseauDroite.png");
+                    default -> System.out.println("error in Modele.JeuView.update(Player p) method");
+                }
+            }
+        }
+        System.out.println("update() done");
+    }
+    /*
+    public void update(Player p){
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                switch (p.getBoard()[i][j]){
+                    //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
+                    case 0 -> doThis(i,j, "Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
                     case 1 -> doThis(i,j, "BlocCassable.png");
                     case 2 -> doThis(i,j,"BlocPoussable.png");
                     case 3 -> doThis(i,j, "BlocPiege.png");
@@ -107,6 +126,7 @@ public class JeuView extends Group {
         }
         System.out.println("update() done");
     }
+     */
 
 
     private void doThis(int i, int j, String FileName){
