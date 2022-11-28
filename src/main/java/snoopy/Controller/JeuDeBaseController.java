@@ -35,6 +35,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         jeuView = new JeuView();
         this.startTimer();
     }
+
     //comment
     final private static double FRAMES_PER_SECOND = 1.0;//upadte()/ second
     private void startTimer() {

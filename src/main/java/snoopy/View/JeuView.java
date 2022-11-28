@@ -17,6 +17,7 @@ public class JeuView extends Group {
     @FXML final int row =12;//TODO: use the variables defined in the fxml file
     @FXML final int column =22 ;
     private ImageView[][] matrixImagesView;
+    private int time = 60;
 
 
     private final String[] pathFiles = {
@@ -83,7 +84,8 @@ public class JeuView extends Group {
 
      */
     public void update(Player p){
-        System.out.print("update() started   ");
+        //System.out.print("update() started   ");
+
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
                 switch (p.getBoard()[i][j]){
@@ -102,8 +104,64 @@ public class JeuView extends Group {
                 }
             }
         }
-        System.out.println("update() done");
+
+        drawWall();
+        drawTime();
+        //System.out.println("update() done");
     }
+
+    private void drawTime(){
+        doThis(0, 0, "MechepasCrameHaut.png");
+        doThis(row-1, column-1, "MurBasDroite.png");
+        doThis(row-1, 0, "MurBasGauche.png");
+        doThis(0, column-1, "MurHautDroite.png");
+
+        //walls
+        //left wall
+        for (int i = 1; i < row-1; i++) {
+            doThis(i, 0, "MechepasCrameGauche.png");
+        }
+        //right wall
+        for (int i = 1; i < row-1; i++) {
+            doThis(i, column-1, "MechepasCrameDroite.png");
+        }
+        //top wall
+        for (int i = 1; i < column-1; i++) {
+            doThis(0, i, "MechepasCrameHaut.png");
+        }
+        //bottom wall
+        for (int i = 1; i < column-1; i++) {
+            doThis(row-1, i, "MechepasCrameBas.png");
+        }
+    }
+
+    public void drawWall(){
+        //corner
+        doThis(0, 0, "MurHautGauche.png");
+        doThis(row-1, column-1, "MurBasDroite.png");
+        doThis(row-1, 0, "MurBasGauche.png");
+        doThis(0, column-1, "MurHautDroite.png");
+
+        //walls
+        //left wall
+        for (int i = 1; i < row-1; i++) {
+            doThis(i, 0, "MurGauche.png");
+        }
+        //right wall
+        for (int i = 1; i < row-1; i++) {
+            doThis(i, column-1, "MurDroite.png");
+        }
+        //top wall
+        for (int i = 1; i < column-1; i++) {
+            doThis(0, i, "MurHaut.png");
+        }
+        //bottom wall
+        for (int i = 1; i < column-1; i++) {
+            doThis(row-1, i, "MurBas.png");
+        }
+
+    }
+
     /*
     public void update(Player p){
         for (int i = 0; i < row; i++) {
@@ -132,10 +190,6 @@ public class JeuView extends Group {
     private void doThis(int i, int j, String FileName){
         matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/"+FileName).toURI().toString()));
     }
-
-
-
-
     //list of all types of ImageView possible(who shares properties)
 
 

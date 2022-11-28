@@ -47,9 +47,6 @@ public class Player {
     }
 
     private void init(){
-        //this.board = setBoardManually();
-        this.setBoardFromTextFile("level1.txt",12,22);
-        printBoard();
     }
     /*
     files should be like this
