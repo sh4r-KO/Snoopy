@@ -10,6 +10,9 @@ import java.nio.file.Files;
 public class Board {
     private int[][] board;
     private Snoopy noop;
+    private ShowFadeBlock showFadeBlock;
+
+    private PushingBlock pushingBlock;
 
 
     enum Direction {
@@ -18,6 +21,11 @@ public class Board {
         OUEST,
         EST;
     }
+    //1 bouger snoopy
+    //2 faire disparaitre un bloc
+    //3 faire bouger un bloc poussable
+    // tapis roulant
+
 
     JeuDeBaseController JeuDeBaseControler;
     /*player has coordinates, lives, score, level, direction enum, current leve
@@ -40,6 +48,7 @@ public class Board {
     public Board() {
 
         this.board = this.setBoardFromTextFile("test.txt",12,22);
+        //localisation Snoopy
         for(int i=0; i<12; i++){
             for(int j=0; j<22; j++){
                 if(board[i][j]==8){
@@ -48,6 +57,27 @@ public class Board {
                 }
             }
         }
+
+        //localisation Bloc Show/fade
+        for(int i=0; i<12; i++){
+            for(int j=0; j<22; j++){
+                if(board[i][j]==5){
+                    showFadeBlock = new ShowFadeBlock(i, j, ShowFadeBlock.Direction.NORD);
+                    break;
+                }
+            }
+        }
+
+        //localisation Bloc pushing block
+        for(int i=0; i<12; i++){
+            for(int j=0; j<22; j++){
+                if(board[i][j]==5){
+                    pushingBlock= new PushingBlock(i, j, PushingBlock.Direction.NORD);
+                    break;
+                }
+            }
+        }
+
 
         System.out.println(noop.getX());
         System.out.println(noop.getY());
@@ -62,7 +92,7 @@ public class Board {
             board[noop.getX()-1][noop.getY()] = tmp;
             noop.setX(noop.getX()-1);
         }
-
+        fade();
         //x = x - 1;
         MVT();
         System.out.println("up pressed");
@@ -75,7 +105,7 @@ public class Board {
             board[noop.getX() + 1][noop.getY()] = tmp;
             noop.setX(noop.getX()+1);
         }
-
+        fade();
         //x = x+1
         System.out.println("down pressed");
         MVT();
@@ -88,7 +118,7 @@ public class Board {
             board[noop.getX()][noop.getY() + 1] = tmp;
             noop.setY(noop.getY()+1);
         }
-
+        fade();
         System.out.println("Right pressed");
         MVT();
         //y =y +1
@@ -101,11 +131,38 @@ public class Board {
             board[noop.getX()][noop.getY()-1] = tmp;
             noop.setY(noop.getY()-1);
         }
-
+        fade();
         System.out.println("left pressed");
         MVT();
         //y = y-1;
     }
+
+    public void fade() {
+        if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() - 1][showFadeBlock.getY()]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        } if (board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() + 1][showFadeBlock.getY()]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        } if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX()][showFadeBlock.getY() - 1]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        } if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX()][showFadeBlock.getY() + 1]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        }
+
+        System.out.println("Fade Block");
+        MVT();
+
+    }
+
+    public void push() {
+        if(board[noop.getX()][noop.getY()] == board[pushingBlock.getX() - 1][pushingBlock.getY().getY()]) {
+            board[pushingBlock.getX()][pushingBlock.getY()] = 0;
+        }
+
+        System.out.println("Fade Block");
+        MVT();
+
+    }
+
 
     private void MVT(){
         printBoard();
@@ -196,9 +253,6 @@ public class Board {
     //getters of board
 
 
-    //1 bouger snoopy
-    //2 faire disparaitre un bloc
-    //3 faire bouger un bloc
 
 
 

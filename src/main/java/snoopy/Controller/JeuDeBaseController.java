@@ -57,7 +57,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @Override
     public void handle(KeyEvent ke) {
-        //differnet from usual switch which ends each case with break
+        //different from usual switch which ends each case with break
 
         switch (ke.getCode()) {
 
