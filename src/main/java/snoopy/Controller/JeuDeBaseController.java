@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import snoopy.Model.Board;
+import snoopy.Model.Snoopy;
 import snoopy.View.JeuView;
 
 import java.util.Timer;
@@ -18,9 +19,11 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     private final Board board;
     private Timer timer;
     //don't put any FXML changes in here, go to the initialize method pls
+    private Snoopy snoopy;
 
     public JeuDeBaseController() {
         board = new Board();
+        snoopy = new Snoopy();
         jeuView = new JeuView();
         this.startTimer();
     }
@@ -62,26 +65,26 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         switch (ke.getCode()) {
 
             case UP -> {
-                board.moveUp();
+                snoopy.moveUp();
                 System.out.println("Key Pressed: " + ke.getCode());
 
                 //ke.consume();
             }
             case DOWN -> {
-                board.moveDown();
+                snoopy.moveDown();
                 System.out.println("Key Pressed: " + ke.getCode());
 
                 //ke.consume();
             }
             case LEFT -> {
 
-                board.moveLeft();
+                snoopy.moveLeft();
                 System.out.println("Key Pressed: " + ke.getCode());
 
                 //ke.consume();
             }
             case RIGHT -> {
-                board.moveRight();
+                snoopy.moveRight();
                 System.out.println("Key Pressed: " + ke.getCode());
 
                 //ke.consume();

@@ -8,7 +8,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 
 public class Board {
-    private int[][] board;
+    public int[][] board;
     private Snoopy noop;
     private ShowFadeBlock showFadeBlock;
 
@@ -46,18 +46,10 @@ public class Board {
     constructor of player, wich incarne snoopy in the game
      */
     public Board() {
-
+        this.noop = new Snoopy();
         this.board = this.setBoardFromTextFile("test.txt",12,22);
-        //localisation Snoopy
-        for(int i=0; i<12; i++){
-            for(int j=0; j<22; j++){
-                if(board[i][j]==8){
-                    noop = new Snoopy(i, j, Snoopy.Direction.NORD);
-                    break;
-                }
-            }
-        }
 
+/*
         //localisation Bloc Show/fade
         for(int i=0; i<12; i++){
             for(int j=0; j<22; j++){
@@ -78,64 +70,24 @@ public class Board {
             }
         }
 
+ */
+
 
         System.out.println(noop.getX());
         System.out.println(noop.getY());
 
         printBoard();
     }
-//set
-    public void moveUp() {
-        if(noop.getX() > 1){
-            int tmp=board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX()-1][noop.getY()];
-            board[noop.getX()-1][noop.getY()] = tmp;
-            noop.setX(noop.getX()-1);
-        }
-        fade();
-        //x = x - 1;
-        MVT();
-        System.out.println("up pressed");
+
+    public Snoopy getNoop() {
+        return noop;
     }
 
-    public void moveDown() {
-        if (noop.getX() < 10){
-            int tmp = board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX() + 1][noop.getY()];
-            board[noop.getX() + 1][noop.getY()] = tmp;
-            noop.setX(noop.getX()+1);
-        }
-        fade();
-        //x = x+1
-        System.out.println("down pressed");
-        MVT();
+    public void setNoop(Snoopy noop) {
+        this.noop = noop;
     }
 
-    public void moveRight() {
-        if(noop.getY() < 20) {
-            int tmp = board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY() + 1];
-            board[noop.getX()][noop.getY() + 1] = tmp;
-            noop.setY(noop.getY()+1);
-        }
-        fade();
-        System.out.println("Right pressed");
-        MVT();
-        //y =y +1
-    }
 
-    public void moveLeft() {
-        if(noop.getY() > 1){
-            int tmp=board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY()-1];
-            board[noop.getX()][noop.getY()-1] = tmp;
-            noop.setY(noop.getY()-1);
-        }
-        fade();
-        System.out.println("left pressed");
-        MVT();
-        //y = y-1;
-    }
 
     public void fade() {
         if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() - 1][showFadeBlock.getY()]){
@@ -154,7 +106,7 @@ public class Board {
     }
 
     public void push() {
-        if(board[noop.getX()][noop.getY()] == board[pushingBlock.getX() - 1][pushingBlock.getY().getY()]) {
+        if(board[noop.getX()][noop.getY()] == board[pushingBlock.getX() - 1][pushingBlock.getY()]) {
             board[pushingBlock.getX()][pushingBlock.getY()] = 0;
         }
 
@@ -164,7 +116,7 @@ public class Board {
     }
 
 
-    private void MVT(){
+    public void MVT(){
         printBoard();
         System.out.println(noop.toString());
     }
@@ -188,7 +140,7 @@ public class Board {
         01234567890123456789012
      */
 
-    private int[][] setBoardFromTextFile(String NameFile, int x, int y){
+    public int[][] setBoardFromTextFile(String NameFile, int x, int y){
         String ret = null;
         int[][] t = new int[x][y];
         try {
