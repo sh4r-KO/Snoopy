@@ -32,7 +32,7 @@ public class Snoopy {
         //localisation Snoopy
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 22; j++) {
-                if (snoopyBoard.board[i][j] == 8) {
+                if (snoopyBoard!= null && snoopyBoard.board[i][j] == 8) {
                     snoopyBoard.setNoop(new Snoopy(i, j, Snoopy.Direction.NORD));
                     break;
                 }
@@ -50,16 +50,18 @@ public class Snoopy {
 
     //set
     public void moveUp() {
-        if(snoopyBoard.getNoop().getX() > 1){
-            int tmp=snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()];
-            snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()] = snoopyBoard.board[snoopyBoard.getNoop().getX()-1][snoopyBoard.getNoop().getY()];
-            snoopyBoard.board[snoopyBoard.getNoop().getX()-1][snoopyBoard.getNoop().getY()] = tmp;
-            snoopyBoard.getNoop().setX(snoopyBoard.getNoop().getX()-1);
+        if(snoopyBoard != null) {
+            if(snoopyBoard.getNoop().getX() > 1){
+                int tmp=snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()];
+                snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()] = snoopyBoard.board[snoopyBoard.getNoop().getX()-1][snoopyBoard.getNoop().getY()];
+                snoopyBoard.board[snoopyBoard.getNoop().getX()-1][snoopyBoard.getNoop().getY()] = tmp;
+                snoopyBoard.getNoop().setX(snoopyBoard.getNoop().getX()-1);
+            }
+            snoopyBoard.fade();
+            //x = x - 1;
+            snoopyBoard.MVT();
+            System.out.println("up pressed");
         }
-        snoopyBoard.fade();
-        //x = x - 1;
-        snoopyBoard.MVT();
-        System.out.println("up pressed");
     }
 
     public void moveDown() {

@@ -71,13 +71,13 @@ public class Board {
         }
 
  */
-
-
-        System.out.println(noop.getX());
-        System.out.println(noop.getY());
-
+        if(noop != null) {
+            System.out.println(noop.getX());
+            System.out.println(noop.getY());
+        }
         printBoard();
     }
+
 
     public Snoopy getNoop() {
         return noop;
