@@ -43,10 +43,10 @@ public class Board {
     */
 
     /**
-    constructor of player, wich incarne snoopy in the game
+    constructor of board, which incarne snoopy in the game
      */
     public Board() {
-        this.noop = new Snoopy();
+        //this.noop = new Snoopy();
         this.board = this.setBoardFromTextFile("test.txt",12,22);
 
 /*
@@ -86,7 +86,6 @@ public class Board {
     public void setNoop(Snoopy noop) {
         this.noop = noop;
     }
-
 
 
     public void fade() {

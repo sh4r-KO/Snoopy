@@ -1,11 +1,11 @@
 package snoopy.Model;
 
+import javax.net.ssl.SNIHostName;
+
 public class Snoopy {
     private int X;
     private int Y;
     private Board snoopyBoard ;
-
-
 
     public void setX(int X) {
         this.X = X;
@@ -14,6 +14,25 @@ public class Snoopy {
     public void setY(int Y) {
         this.Y = Y;
     }
+
+    public void setSnoopyBoard(Board snoopyBoard){
+        this.snoopyBoard = snoopyBoard;
+    }
+
+
+    public int getX() {
+        return X;
+    }
+
+    public int getY() {
+        return Y;
+    }
+
+    public Board getSnoopyBoard(){
+        return snoopyBoard;
+    }
+
+
 
     enum Direction {
         NORD,
@@ -25,7 +44,7 @@ public class Snoopy {
     public Snoopy(int X, int Y, Direction d) {
         this.X = X;
         this.Y = Y;
-        this.snoopyBoard = new Board();
+       // this.snoopyBoard = new Board();
     }
 
     public Snoopy(){
@@ -37,16 +56,11 @@ public class Snoopy {
                     break;
                 }
             }
-        }
+        }//new Snoopy(i, j, Snoopy.Direction.NORD)
     }
 
-    public int getX() {
-        return X;
-    }
 
-    public int getY() {
-        return Y;
-    }
+
 
     //set
     public void moveUp() {
