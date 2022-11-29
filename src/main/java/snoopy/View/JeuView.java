@@ -52,7 +52,7 @@ public class JeuView extends Group {
             for (int j = 0; j < column; j++) {
 
                 ImageView imageView = new ImageView();
-                //imageView = style(imageView);
+                imageView = style(imageView);
                 imageView.setX((double)j * CELL_WIDTH);
                 imageView.setY((double)i * CELL_WIDTH);
                 imageView.setFitHeight(CELL_WIDTH);
@@ -139,6 +139,12 @@ public class JeuView extends Group {
     //list of all types of ImageView possible(who shares properties)
 
 
-
+    public ImageView style(ImageView i){
+        String[] colorpossible = {"red", "blue", "green", "yellow"};
+        i.setStyle("-fx-background-color: "+colorpossible[(int)(Math.random()*4)]+
+                "; -fx-border-color: black" +
+                "; -fx-border-width: s5px;");
+        return i;
+    }
 
 }

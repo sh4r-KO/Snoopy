@@ -33,7 +33,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader loader = new FXMLLoader();
-        loader.setLocation(getClass().getResource("/ViewFmxl/FirstPane.fxml"));
+        loader.setLocation(getClass().getResource("FirstPane.fxml"));
 
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
