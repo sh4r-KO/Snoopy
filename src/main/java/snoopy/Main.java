@@ -8,18 +8,18 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
-import snoopy.Model.Player;
+import snoopy.Model.Board;
 
 import java.io.IOException;
 
 public class Main extends Application {
     //******************************************************************************************************************
-    //---------------------------------A NE PAS SUPPRIMIER MEME SI YA EDS DOUBLONS OK ????------------------------------
+    //---------------------------------A NE PAS SUPPRIMER MEME SI IL Y A DES DOUBLONS OK ????------------------------------
     //******************************************************************************************************************
     /*
-    TODO: reduce visibilty of all elements in contorllers like public button -> private
+    TODO: reduce visibilty of all elements in controllers like public button -> private
     TODO: make all element in fxml responsive/relative to the size
-    TODO: all modelView musst extends ImageView
+    TODO: all modelView must extends ImageView
     TODO: reduce title of the menu
     TODO : in case of not enough number in int[][] use hexa to represent the number ABCDEF = 10 11 12 13 14 15
     */
@@ -42,9 +42,8 @@ public class Main extends Application {
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
-        Player player = new Player();
+        //Board player = new Board();
     }
-
     public static void main(String[] args) {
         launch(args);
     }

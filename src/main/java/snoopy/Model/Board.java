@@ -1,27 +1,31 @@
 package snoopy.Model;
 
-import javafx.fxml.FXMLLoader;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
 import snoopy.Controller.JeuDeBaseController;
-import java.lang.reflect.Field;
 
 
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.Arrays;
 
-public class Player {
-    protected int lives;
-    protected int score;
-    protected int level;
-    protected int x;
-    protected int y;
+public class Board {
+    public int[][] board;
+    private Snoopy noop;
+    private ShowFadeBlock showFadeBlock;
 
-    private int[][] board;
+    private PushingBlock pushingBlock;
+
+
+    enum Direction {
+        NORD,
+        SUD,
+        OUEST,
+        EST;
+    }
+    //1 bouger snoopy
+    //2 faire disparaitre un bloc
+    //3 faire bouger un bloc poussable
+    // tapis roulant
+
 
     JeuDeBaseController JeuDeBaseControler;
     /*player has coordinates, lives, score, level, direction enum, current leve
@@ -39,17 +43,87 @@ public class Player {
     */
 
     /**
-    constructor of player, wich incarne snoopy in the game
+    constructor of board, which incarne snoopy in the game
      */
-    public Player() {
-        this.board = this.setBoardFromTextFile("level1.txt",12,22);
+    public Board() {
+        //this.noop = new Snoopy();
+        this.board = this.setBoardFromTextFile("test.txt",12,22);
+
+/*
+        //localisation Bloc Show/fade
+        for(int i=0; i<12; i++){
+            for(int j=0; j<22; j++){
+                if(board[i][j]==5){
+                    showFadeBlock = new ShowFadeBlock(i, j, ShowFadeBlock.Direction.NORD);
+                    break;
+                }
+            }
+        }
+
+        //localisation Bloc pushing block
+        for(int i=0; i<12; i++){
+            for(int j=0; j<22; j++){
+                if(board[i][j]==5){
+                    pushingBlock= new PushingBlock(i, j, PushingBlock.Direction.NORD);
+                    break;
+                }
+            }
+        }
+
+ */
+
+
+        System.out.println(noop.getX());
+        System.out.println(noop.getY());
+
         printBoard();
     }
 
-    private void init(){
-        //this.board = setBoardManually();
-        this.setBoardFromTextFile("level1.txt",12,22);
+
+    public Snoopy getNoop() {
+        return noop;
+    }
+
+    public void setNoop(Snoopy noop) {
+        this.noop = noop;
+    }
+
+
+    public void fade() {
+        if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() - 1][showFadeBlock.getY()]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        } if (board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() + 1][showFadeBlock.getY()]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        } if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX()][showFadeBlock.getY() - 1]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        } if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX()][showFadeBlock.getY() + 1]){
+            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
+        }
+
+        System.out.println("Fade Block");
+        MVT();
+
+    }
+
+    public void push() {
+        if(board[noop.getX()][noop.getY()] == board[pushingBlock.getX() - 1][pushingBlock.getY()]) {
+            board[pushingBlock.getX()][pushingBlock.getY()] = 0;
+        }
+
+        System.out.println("Fade Block");
+        MVT();
+
+    }
+
+
+    public void MVT(){
         printBoard();
+        System.out.println(noop.toString());
+    }
+
+
+
+    private void init(){
     }
     /*
     files should be like this
@@ -66,7 +140,7 @@ public class Player {
         01234567890123456789012
      */
 
-    private int[][] setBoardFromTextFile(String NameFile, int x, int y){
+    public int[][] setBoardFromTextFile(String NameFile, int x, int y){
         String ret = null;
         int[][] t = new int[x][y];
         try {
@@ -129,9 +203,12 @@ public class Player {
     }
 
     //getters of board
+
+
+
+
+
     public int[][] getBoard() {
         return board;
     }
-
-
 }
