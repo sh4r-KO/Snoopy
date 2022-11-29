@@ -46,7 +46,7 @@ public class Board {
     constructor of board, which incarne snoopy in the game
      */
     public Board() {
-        //this.noop = new Snoopy();
+        this.noop = new Snoopy();
         this.board = this.setBoardFromTextFile("test.txt",12,22);
 
 /*
@@ -68,13 +68,16 @@ public class Board {
                     break;
                 }
             }
+
         }
 
- */
+ */     if(noop != null) {
 
 
-        System.out.println(noop.getX());
-        System.out.println(noop.getY());
+            System.out.println(noop.getX());
+            System.out.println(noop.getY());
+
+        }
 
         printBoard();
     }

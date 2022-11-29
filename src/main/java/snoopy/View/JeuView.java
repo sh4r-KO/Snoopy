@@ -200,7 +200,7 @@ public class JeuView extends Group implements Initializable {
 
 
     private void doThis(int i, int j, String FileName){
-        matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/"+FileName).toURI().toString()));
+        matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/snoopy/"+FileName).toURI().toString()));
     }
     //list of all types of ImageView possible(who shares properties)
 

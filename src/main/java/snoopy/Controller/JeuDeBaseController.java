@@ -16,7 +16,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
-    private final Board board;
+    private static Board board;
     private Timer timer;
     //don't put any FXML changes in here, go to the initialize method pls
     private Snoopy snoopy;
