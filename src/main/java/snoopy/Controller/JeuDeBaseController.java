@@ -43,7 +43,6 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 jeuView.update(board);
-                System.out.print(".");
             }
         };
         this.timer.schedule(timerTask, 75, 75);

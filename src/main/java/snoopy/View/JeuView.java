@@ -80,6 +80,10 @@ public class JeuView extends Group {//implements Initializable {
             }
         }
         System.out.println("initialize() done");
+        //print things that should only be printed once
+        drawWall();
+        drawGreen();
+
     }
     /*
     0 is empty bloc (aka grass : Herbe1.png/Herbe2.png/Herbe3.png)
@@ -98,7 +102,6 @@ public class JeuView extends Group {//implements Initializable {
      */
 
     public void update(Board p) {
-        drawWall();
         if (p == null || p.getBoard() == null || p.getBoard().length == 0) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() : p or getBoard() is null or getBoard() empty");
         }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
@@ -123,9 +126,22 @@ public class JeuView extends Group {//implements Initializable {
                 }
             }
         }
+    }
 
-       // drawTime();
-        //System.out.println("update() done");
+    private void drawGreen() {
+        for (int i = 2; i < row-2; i++) {
+            for (int j = 2; j < column-2; j++) {
+                ImageView imageView = new ImageView();
+                //imageView = style(imageView);
+                imageView.setX((double)j * CELL_WIDTH);
+                imageView.setY((double)i * CELL_WIDTH);
+                imageView.setFitHeight(CELL_WIDTH);
+                imageView.setFitWidth(CELL_WIDTH);
+                imageView.setPreserveRatio(true);
+                imageView.setImage( new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));
+
+            }
+        }
     }
 
     private void drawTime(){
@@ -154,7 +170,7 @@ public class JeuView extends Group {//implements Initializable {
     }
 
     public void drawWall(){
-       /* //corner
+        //corner
         doThis(0, 0, "MurHautGauche.png");
         doThis(row-1, column-1, "MurBasDroite.png");
         doThis(row-1, 0, "MurBasGauche.png");
@@ -176,7 +192,7 @@ public class JeuView extends Group {//implements Initializable {
         //bottom wall
         for (int i = 1; i < column-1; i++) {
             doThis(row-1, i, "MurBas.png");
-        }*/
+        }
 
     }
 
