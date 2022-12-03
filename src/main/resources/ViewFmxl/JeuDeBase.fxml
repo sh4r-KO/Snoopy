@@ -25,7 +25,6 @@
         <JeuView fx:id="jeuView" />
     </center>
 
-
 </BorderPane>
 
 

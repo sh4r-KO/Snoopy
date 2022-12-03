@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  * this class is a view of the game, it's the game itself
  * it's a group element, so it can be added to a parent in this case JeuDeBase.fxml
  */
-public class JeuView extends Group implements Initializable {
+public class JeuView extends Group {//implements Initializable {
     public final static double CELL_WIDTH = 58.0;
     @FXML final int row =12;//TODO: use the variables defined in the fxml file
     @FXML final int column =22 ;
@@ -25,17 +25,13 @@ public class JeuView extends Group implements Initializable {
 
     //set all images path to images object in constructor
     public JeuView() {
-        super();
-
-        //Board player = new Board();
         this.initialize();
-        this.update(new Board());
     }
 
 
 
     Image Snoppy;
-
+    /*
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
@@ -58,8 +54,11 @@ public class JeuView extends Group implements Initializable {
         }
         System.out.println("initialize() done");
     }
+    */
     public void initialize(){
         this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
+        this.setFocusTraversable(false);
+
         matrixImagesView = new ImageView[row][column];
         for (int i = 0; i < row; i++) {//
             for (int j = 0; j < column; j++) {
@@ -73,6 +72,9 @@ public class JeuView extends Group implements Initializable {
                 imageView.setPreserveRatio(true);
 
                 matrixImagesView[i][j] = imageView;
+
+                this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
                 this.getChildren().add(imageView);
 
             }
@@ -95,11 +97,16 @@ public class JeuView extends Group implements Initializable {
     concerning empty bloc, it will be a random grass png chosen beetween the 3 avaiblable
      */
 
-    public void update(Board p){
-        //System.out.print("update() started   ");
+    public void update(Board p) {
+        drawWall();
+        if (p == null || p.getBoard() == null || p.getBoard().length == 0) {
+            throw new IllegalArgumentException("snoopy.Model.Board.update() : p or getBoard() is null or getBoard() empty");
+        }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
+            throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
+        }
 
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
+        for (int i = 1; i < row-1; i++) {
+            for (int j = 1; j < column-1; j++) {
                 switch (p.getBoard()[i][j]){
                     //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
                     case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
@@ -108,16 +115,15 @@ public class JeuView extends Group implements Initializable {
                     case 3 -> doThis(i,j,"BlocPiege.png");
                     case 4 -> doThis(i,j,"BlocInvincible.png");
                     case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
-                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");//needs direction info
-                    case 7 -> doThis(i,j,"Balle.png");//needs velocity/direction info
-                    case 8 -> doThis(i,j,"SnoopyDroite.png");//needs direction info
+                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");
+                    case 7 -> doThis(i,j,"Balle.png");
+                    case 8 -> doThis(i,j,"SnoopyDroite.png");//System.out.println("i:"+i+" j:"+j);//
                     case 9 -> doThis(i,j,"OiseauDroite.png");
                     default -> System.out.println("error in Modele.JeuView.update(Player p) method");
                 }
             }
         }
 
-        drawWall();
        // drawTime();
         //System.out.println("update() done");
     }
@@ -148,7 +154,7 @@ public class JeuView extends Group implements Initializable {
     }
 
     public void drawWall(){
-        //corner
+       /* //corner
         doThis(0, 0, "MurHautGauche.png");
         doThis(row-1, column-1, "MurBasDroite.png");
         doThis(row-1, 0, "MurBasGauche.png");
@@ -170,7 +176,7 @@ public class JeuView extends Group implements Initializable {
         //bottom wall
         for (int i = 1; i < column-1; i++) {
             doThis(row-1, i, "MurBas.png");
-        }
+        }*/
 
     }
 

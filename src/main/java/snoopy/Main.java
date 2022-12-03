@@ -41,6 +41,8 @@ public class Main extends Application {
         stage.addEventFilter(KeyEvent.KEY_PRESSED, new JeuDeBaseController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
         stage.setScene(scene);
         stage.setResizable(false);
+        stage.setTitle("Snoopy");
+
         stage.show();
         //Board player = new Board();
     }
