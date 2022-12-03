@@ -16,14 +16,13 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
-    private final Board board;
+    private static Board board;
     private Timer timer;
-    //don't put any FXML changes in here, go to the initialize method pls
     private Snoopy snoopy;
 
     public JeuDeBaseController() {
         board = new Board();
-        snoopy = new Snoopy();
+        snoopy = new Snoopy(board);//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
         this.startTimer();
     }
@@ -40,15 +39,10 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         this.timer = new java.util.Timer();
         TimerTask timerTask = new TimerTask() {
             public void run() {
-                Platform.runLater(new Runnable() {
-                    public void run() {
-                        jeuView.update( JeuDeBaseController.this.board);
-                    }
-                });
+                jeuView.update(board);
             }
         };
-        long frameTimeInMilliseconds = (long)(1000.0 / FRAMES_PER_SECOND);
-        this.timer.schedule(timerTask, 0, frameTimeInMilliseconds);
+        this.timer.schedule(timerTask, 75, 75);
     }
 
 
@@ -66,28 +60,48 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
             case UP -> {
                 snoopy.moveUp();
+                try {
+                    Thread.sleep(75);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Key Pressed: " + ke.getCode());
 
-                //ke.consume();
+                ke.consume();
             }
             case DOWN -> {
                 snoopy.moveDown();
+                try {
+                    Thread.sleep(75);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Key Pressed: " + ke.getCode());
 
-                //ke.consume();
+                ke.consume();
             }
             case LEFT -> {
 
                 snoopy.moveLeft();
+                try {
+                    Thread.sleep(75);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Key Pressed: " + ke.getCode());
 
-                //ke.consume();
+                ke.consume();
             }
             case RIGHT -> {
                 snoopy.moveRight();
+                try {
+                    Thread.sleep(75);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 System.out.println("Key Pressed: " + ke.getCode());
 
-                //ke.consume();
+                ke.consume();
             }
             case S -> {
                 System.out.println("Key Pressed: " + ke.getCode());

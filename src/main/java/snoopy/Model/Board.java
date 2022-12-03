@@ -1,17 +1,14 @@
+
 package snoopy.Model;
 
 import snoopy.Controller.JeuDeBaseController;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
 public class Board {
     public int[][] board;
-    private Snoopy noop;
     private ShowFadeBlock showFadeBlock;
-
     private PushingBlock pushingBlock;
 
 
@@ -43,51 +40,16 @@ public class Board {
     */
 
     /**
-    constructor of board, which incarne snoopy in the game
+     constructor of player, wich incarne snoopy in the game
      */
+
     public Board() {
-        //this.noop = new Snoopy();
         this.board = this.setBoardFromTextFile("test.txt",12,22);
-
+            //System.out.println(noop.getX());
+            //System.out.println(noop.getY());
+            printBoard();
+    }
 /*
-        //localisation Bloc Show/fade
-        for(int i=0; i<12; i++){
-            for(int j=0; j<22; j++){
-                if(board[i][j]==5){
-                    showFadeBlock = new ShowFadeBlock(i, j, ShowFadeBlock.Direction.NORD);
-                    break;
-                }
-            }
-        }
-
-        //localisation Bloc pushing block
-        for(int i=0; i<12; i++){
-            for(int j=0; j<22; j++){
-                if(board[i][j]==5){
-                    pushingBlock= new PushingBlock(i, j, PushingBlock.Direction.NORD);
-                    break;
-                }
-            }
-        }
-
- */
-        if(noop != null) {
-            System.out.println(noop.getX());
-            System.out.println(noop.getY());
-        }
-        printBoard();
-    }
-
-
-    public Snoopy getNoop() {
-        return noop;
-    }
-
-    public void setNoop(Snoopy noop) {
-        this.noop = noop;
-    }
-
-
     public void fade() {
         if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() - 1][showFadeBlock.getY()]){
             board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
@@ -114,10 +76,11 @@ public class Board {
 
     }
 
+ */
+
 
     public void MVT(){
         printBoard();
-        System.out.println(noop.toString());
     }
 
 
@@ -162,13 +125,7 @@ public class Board {
                 //System.out.println("i "+i+" columnCount="+columnCount+" rowCount="+rowCount+" chararray[i]=/"+tmp+" chararray.legnth"+chararray.length);
                 columnCount++;
             }
-
-
-
         }
-
-        //System.out.println("ret = \n"+ret);
-
         return t;
     }
 
@@ -202,9 +159,6 @@ public class Board {
     }
 
     //getters of board
-
-
-
 
 
     public int[][] getBoard() {
