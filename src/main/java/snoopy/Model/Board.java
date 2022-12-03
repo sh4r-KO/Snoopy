@@ -1,8 +1,6 @@
 package snoopy.Model;
 
 import snoopy.Controller.JeuDeBaseController;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,7 +9,6 @@ public class Board {
     public int[][] board;
     private Snoopy noop;
     private ShowFadeBlock showFadeBlock;
-
     private PushingBlock pushingBlock;
 
 
@@ -45,6 +42,7 @@ public class Board {
     /**
     constructor of board, which incarne snoopy in the game
      */
+
     public Board() {
         this.board = this.setBoardFromTextFile("test.txt",12,22);
         this.noop = new Snoopy(this);
@@ -224,10 +222,10 @@ public class Board {
 
     }
 
+ 
 
     public void MVT(){
         printBoard();
-        System.out.println(noop.toString());
     }
 
 

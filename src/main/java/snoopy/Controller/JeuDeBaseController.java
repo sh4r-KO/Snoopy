@@ -17,10 +17,11 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     @FXML JeuView jeuView;
     private static Board board;//static.............
     private Timer timer;
-    //don't put any FXML changes in here, go to the initialize method pls
+    private Snoopy snoopy;
 
     public JeuDeBaseController() {
         board = new Board();
+        snoopy = new Snoopy(board);//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
         Snoopy s = new Snoopy(board);
         //jeuView.update(board);

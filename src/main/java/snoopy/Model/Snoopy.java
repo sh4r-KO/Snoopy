@@ -23,7 +23,6 @@ public class Snoopy {
     public int getX() {
         return X;
     }
-
     public int getY() {
         return Y;
     }
@@ -77,3 +76,4 @@ public class Snoopy {
 
 
 }
+
