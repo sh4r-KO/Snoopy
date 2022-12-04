@@ -107,12 +107,8 @@ public class JeuView extends Group {//implements Initializable {
         }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
         }
-
-        for (int i = 1; i < row-1; i++) {
-            for (int j = 1; j < column-1; j++) {
-                switch (p.getBoard()[i][j]){
-                    //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
-                    case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
+/*
+case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
                     case 1 -> doThis(i,j,"BlocCassable.png");
                     case 2 -> doThis(i,j,"BlocPoussable.png");
                     case 3 -> doThis(i,j,"BlocPiege.png");
@@ -123,6 +119,47 @@ public class JeuView extends Group {//implements Initializable {
                     case 8 -> doThis(i,j,"SnoopyDroite.png");//System.out.println("i:"+i+" j:"+j);//
                     case 9 -> doThis(i,j,"OiseauDroite.png");
                     default -> System.out.println("error in Modele.JeuView.update(Player p) method");
+
+ */
+        for (int i = 1; i < row-1; i++) {
+            for (int j = 1; j < column-1; j++) {
+                switch (p.getBoard()[i][j]){
+                    //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
+                    case 0:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
+                        break;
+                    case 1:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocCassable.png").toURI().toString()));
+                        break;
+                    case 2:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPoussable.png").toURI().toString()));
+                        break;
+                    case 3:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiege.png").toURI().toString()));
+                        break;
+                    case 4:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocInvincible.png").toURI().toString()));
+                        break;
+                    case 5:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocApparitionDisparition.png").toURI().toString()));
+                        break;
+                    case 6:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocTapisRoulantBas.png").toURI().toString()));
+                        break;
+                    case 7:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
+                        break;
+                    case 8:
+                            matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/SnoopyDroite.png").toURI().toString()));
+
+                        break;
+                    case 9:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauDroite.png").toURI().toString()));
+                        break;
+                }
+                //cases outisde pf siwtch
+                if (p.getBoard()[i][j] >=700 && p.getBoard()[i][j] <=799){//for the ball
+                    matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Ball.png").toURI().toString()));
                 }
             }
         }

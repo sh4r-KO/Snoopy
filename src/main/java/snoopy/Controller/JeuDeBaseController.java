@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import snoopy.Model.Ball;
 import snoopy.Model.Board;
 import snoopy.Model.Snoopy;
 import snoopy.View.JeuView;
@@ -15,6 +16,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
+    private Ball b;
     private static Board board;//static.............
     private Timer timer;
     private Snoopy snoopy;
@@ -23,7 +25,9 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         board = new Board();
         snoopy = new Snoopy(board);//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
-        Snoopy s = new Snoopy(board);
+        this.b = new Ball(board);
+
+        //Snoopy s = new Snoopy(board);
         //jeuView.update(board);
         this.startTimer();
     }
@@ -44,6 +48,8 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 jeuView.update(board);
+                b.movement();
+
             }
         };
         this.timer.schedule(timerTask, 75, 75);

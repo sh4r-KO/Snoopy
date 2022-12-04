@@ -5,45 +5,15 @@ import javax.net.ssl.SNIHostName;
 public class Snoopy {
     private int X;
     private int Y;
+    private Direction direction;
     private Board snoopyBoard ;
 
-    public void setX(int X) {
-        this.X = X;
-    }
-
-    public void setY(int Y) {
-        this.Y = Y;
-    }
-
-    public void setSnoopyBoard(Board snoopyBoard){
-        this.snoopyBoard = snoopyBoard;
-    }
-
-
-    public int getX() {
-        return X;
-    }
-    public int getY() {
-        return Y;
-    }
-
-    public Board getSnoopyBoard(){
-        return snoopyBoard;
-    }
-
-
-
-    enum Direction {
-        NORD,
-        SUD,
-        OUEST,
-        EST;
-    }
 
     public Snoopy(int X, int Y, Direction d) {
         this.X = X;
         this.Y = Y;
-       // this.snoopyBoard = new Board();
+        this.direction = d;
+        // this.snoopyBoard = new Board();
     }
 
     public Snoopy(Board b){
@@ -53,8 +23,8 @@ public class Snoopy {
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 22; j++) {
                 if ( snoopyBoard.board[i][j] == 8) {
-                    System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-                    snoopyBoard.setNoop(new Snoopy(i, j, Direction.NORD));
+                    //System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+                    snoopyBoard.setNoop(new Snoopy(i, j, Direction.OUEST));
                     break;
                 }
             }
@@ -62,9 +32,25 @@ public class Snoopy {
     }
 
 
-
-
-    //set
+    //direction setter and getter
+    public void setDirection(Direction d) {
+        this.direction = d;
+    }
+    public Direction getDirection() {
+        return direction;
+    }
+    public void setX(int X) {
+        this.X = X;
+    }
+    public void setY(int Y) {
+        this.Y = Y;
+    }
+    public int getX() {
+        return X;
+    }
+    public int getY() {
+        return Y;
+    }
 
     
     @Override

@@ -26,7 +26,7 @@ public class PushingBlock {
     }
 
     public void pushingBlock(){
-      if((board.board[noop.getX()][noop.getY()]== board.board[X-1][Y]) )){
+      if((board.board[noop.getX()][noop.getY()]== board.board[X-1][Y]) ){
 
       }
     }
