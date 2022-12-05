@@ -16,6 +16,7 @@ public class Ball {
         for (int i = 0; i < 12 && !found; i++) {
             for (int j = 0; j < 22; j++) {
                 if (snoopyBoard != null && snoopyBoard.board[i][j] == 7){
+                    this.snoopyBoard.board[i][j] = 70;
                     this.setBall(i, j, snoopyBoard);
                     found = true;
                     break;
@@ -25,16 +26,116 @@ public class Ball {
         }
     }
 
-    public void setBall (int x, int y, Board b){//[12][22]
+    public void setBall (int x, int y,  Board b){//[12][22]
         this.xPosition = x;
         this.yPosition = y;
         this.d = Direction.SO;
         System.out.println(toString());
     }
 
-    //Board format : int[y][x] -- xMax = 22, yMax = 12
-    //Board format : int[x][y] -- xMax = 12, yMax = 22
 
+// the wall is at index x = 0, y = 0, so the max index is x = 21, y = 11
+    private boolean WallInFront(){// 80|
+        boolean ret = false;
+        if(this.d == Direction.SO){
+            if (xPosition == 20 || yPosition == 10){//direction SO, on peux toucher que les mur sud et ouest, y = 10 et x = 20
+                ret = true;
+            }
+        }else if(this.d == Direction.NO){
+            if (xPosition == 20 || yPosition == 1){
+                ret = true;
+            }
+        }else if(this.d == Direction.NE){
+            if (xPosition == 1 || yPosition == 1){
+                ret = true;
+            }
+        }else if(this.d == Direction.SE){
+            if (xPosition == 1 || yPosition == 10){
+                ret = true;
+            }
+        }
+
+
+        return ret;
+    }
+
+    public void movement() {
+        /*
+       advacing meaning : depending on the direction we will be facing, the coordinates shall changes or not accordingly.
+            SO : x = x +1 y = y +1	en bas a droite
+            SE : x = x -1 y =  y +1	en bas a gauche
+            NE : x = x -1 y = y -1  	en haut a dauche
+            NO : x = x +1 y = y -1	en haut a droite
+         */System.out.println("ball movement"+toString());
+            if (d == Direction.SO) {
+                if(yPosition == 20){
+                    d = Direction.SE;
+                } else if (xPosition == 10){
+                    d = Direction.NO;
+                }else{
+                    snoopyBoard.board[xPosition][yPosition] -= 70;
+                    xPosition += 1;
+                    yPosition += 1;
+                    snoopyBoard.board[xPosition][yPosition] += 70;
+                }
+
+            } else if (d == Direction.NO) {
+
+                if(yPosition == 20){
+                    d = Direction.NE;
+                } else if (xPosition == 1){
+                    d = Direction.SO;
+                }else{
+                    snoopyBoard.board[xPosition][yPosition] -= 70;
+                    yPosition += 1;
+                    xPosition -= 1;
+                    snoopyBoard.board[xPosition][yPosition] += 70;
+                }
+            } else if (d == Direction.NE) {
+
+                if(yPosition == 1){
+                    d = Direction.NO;
+                } else if (xPosition == 1){
+                    d = Direction.SE;
+                }else{
+                    snoopyBoard.board[xPosition][yPosition] -= 70;
+                    xPosition -= 1;
+                    yPosition -= 1;
+                    snoopyBoard.board[xPosition][yPosition] += 70;
+                }
+            } else if (d == Direction.SE) {
+
+                if(yPosition == 1){
+                    d = Direction.SO;
+                } else if (xPosition == 10){
+                    d = Direction.NE;
+                }else{
+                    snoopyBoard.board[xPosition][yPosition] -= 70;
+                    yPosition -= 1;
+                    xPosition += 1;
+                    snoopyBoard.board[xPosition][yPosition] += 70;
+                }
+            }
+        }
+        /*if(WallInFront()  && d == Direction.SO && yPosition == 20  ){
+            xPosition = xPosition +1;
+            yPosition = yPosition +1;
+
+            d = Direction.NO;
+        }else if(WallInFront() && d == Direction.NO) {
+
+            xPosition = xPosition + 1;
+            yPosition = yPosition - 1;
+            d = Direction.SE;
+        }else if(WallInFront() && d == Direction.NE) {
+            d = Direction.SO;
+            xPosition = xPosition - 1;
+            yPosition = yPosition - 1;
+        }
+
+         */
+
+    /*
     public void movement() {
                 System.out.println("x:" + xPosition + " y:" + yPosition);
                 System.out.println(toString());
@@ -100,8 +201,8 @@ public class Ball {
                 }
 
     }
+    //////////////////////////////////////////////////////////////////////////////////////
 
-    /*
     if (yPosition == 1  && xPosition != 1 && xPosition != 10) {
                     setyPosition(getyPosition() + 1);
                     setxPosition(getxPosition() + 1);
@@ -127,10 +228,7 @@ public class Ball {
                     setyPosition(getyPosition() - 1);
                     setxPosition(getxPosition() + 1);
                 }
-     */
 
-
-    /*
 
     public void movement() {
         //Ball is touching the left wall

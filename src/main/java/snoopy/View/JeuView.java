@@ -56,8 +56,8 @@ public class JeuView extends Group {//implements Initializable {
     }
     */
     public void initialize(){
-        this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
-        this.setFocusTraversable(false);
+        //this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
+       // this.setFocusTraversable(false);
 
         matrixImagesView = new ImageView[row][column];
         for (int i = 0; i < row; i++) {//
@@ -73,7 +73,7 @@ public class JeuView extends Group {//implements Initializable {
 
                 matrixImagesView[i][j] = imageView;
 
-                this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+                //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
 
                 this.getChildren().add(imageView);
 
@@ -145,8 +145,8 @@ public class JeuView extends Group {//implements Initializable {
                         break;
                 }
                 //cases outisde pf siwtch
-                if (p.getBoard()[i][j] >=700 && p.getBoard()[i][j] <=799){//for the ball
-                    matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Ball.png").toURI().toString()));
+                if (p.getBoard()[i][j] >=70 && p.getBoard()[i][j] <=79){//for the ball
+                    matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
                 }
             }
         }
