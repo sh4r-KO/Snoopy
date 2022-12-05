@@ -107,20 +107,7 @@ public class JeuView extends Group {//implements Initializable {
         }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
         }
-/*
-case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
-                    case 1 -> doThis(i,j,"BlocCassable.png");
-                    case 2 -> doThis(i,j,"BlocPoussable.png");
-                    case 3 -> doThis(i,j,"BlocPiege.png");
-                    case 4 -> doThis(i,j,"BlocInvincible.png");
-                    case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
-                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");
-                    case 7 -> doThis(i,j,"Balle.png");
-                    case 8 -> doThis(i,j,"SnoopyDroite.png");//System.out.println("i:"+i+" j:"+j);//
-                    case 9 -> doThis(i,j,"OiseauDroite.png");
-                    default -> System.out.println("error in Modele.JeuView.update(Player p) method");
-
- */
+        System.out.println(toString(p));
         for (int i = 1; i < row-1; i++) {
             for (int j = 1; j < column-1; j++) {
                 switch (p.getBoard()[i][j]){
@@ -147,7 +134,7 @@ case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocTapisRoulantBas.png").toURI().toString()));
                         break;
                     case 7:
-                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
+                        //matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
                         break;
                     case 8:
                             matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/SnoopyDroite.png").toURI().toString()));
@@ -164,7 +151,6 @@ case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(
             }
         }
     }
-
     private void drawGreen() {
         for (int i = 2; i < row-2; i++) {
             for (int j = 2; j < column-2; j++) {
@@ -205,7 +191,6 @@ case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(
             doThis(row-1, i, "MechepasCrameBas.png");
         }
     }
-
     public void drawWall(){
         //corner
         doThis(0, 0, "MurHautGauche.png");
@@ -232,8 +217,20 @@ case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(
         }
 
     }
+/*
+                    case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
+                    case 1 -> doThis(i,j,"BlocCassable.png");
+                    case 2 -> doThis(i,j,"BlocPoussable.png");
+                    case 3 -> doThis(i,j,"BlocPiege.png");
+                    case 4 -> doThis(i,j,"BlocInvincible.png");
+                    case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
+                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");
+                    case 7 -> doThis(i,j,"Balle.png");
+                    case 8 -> doThis(i,j,"SnoopyDroite.png");//System.out.println("i:"+i+" j:"+j);//
+                    case 9 -> doThis(i,j,"OiseauDroite.png");
+                    default -> System.out.println("error in Modele.JeuView.update(Player p) method");
 
-    /*
+
     public void update(Player p){
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
@@ -256,14 +253,21 @@ case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(
         System.out.println("update() done");
     }
      */
-
-
     private void doThis(int i, int j, String FileName){
         matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/"+FileName).toURI().toString()));
     }
     //list of all types of ImageView possible(who shares properties)
 
 
-
+    public String toString(Board p){
+        String ret = "";
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                ret += "\t"+p.getBoard()[i][j];
+            }
+            ret += "\n";
+        }
+        return ret;
+    }
 
 }

@@ -12,10 +12,12 @@ public class Ball {
 
     public Ball(Board b){
         this.snoopyBoard = b;
-        for (int i = 0; i < 12; i++) {
+        boolean found = false;
+        for (int i = 0; i < 12 && !found; i++) {
             for (int j = 0; j < 22; j++) {
                 if (snoopyBoard != null && snoopyBoard.board[i][j] == 7){
                     this.setBall(i, j, snoopyBoard);
+                    found = true;
                     break;
                     //TODO ajouter condition pour ne pas avoir plus que 2 balles
                 }
@@ -42,10 +44,8 @@ public class Ball {
                     yPosition = yPosition + 1;
                     xPosition = xPosition + 1;
 
-                    snoopyBoard.board[yPosition - 1][xPosition-1] = snoopyBoard.board[yPosition - 1][xPosition-1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
-
-
+                    snoopyBoard.board[yPosition - 1][xPosition-1] = snoopyBoard.board[yPosition - 1][xPosition-1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
 
 
                 } else if (yPosition == 20 && xPosition != 1 && xPosition != 10) {
@@ -54,51 +54,50 @@ public class Ball {
                     setxPosition(getxPosition() - 1);
 
 
-                    snoopyBoard.board[yPosition + 1][xPosition+1] = snoopyBoard.board[yPosition + 1][xPosition+1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
+                    snoopyBoard.board[yPosition + 1][xPosition+1] = snoopyBoard.board[yPosition + 1][xPosition+1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
 
                 } else if (xPosition == 1 && yPosition != 1 && yPosition != 20 ) {
                     setyPosition(getyPosition() + 1);
                     setxPosition(getxPosition() - 1);
-                    snoopyBoard.board[yPosition - 1][xPosition+1] = snoopyBoard.board[yPosition - 1][xPosition+1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
+                    snoopyBoard.board[yPosition - 1][xPosition+1] = snoopyBoard.board[yPosition - 1][xPosition+1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
 
                 } else if (xPosition == 10 && yPosition != 1 && yPosition != 20) {
                     setyPosition(getyPosition() - 1);
                     setxPosition(getxPosition() + 1);
 
-                    snoopyBoard.board[yPosition + 1][xPosition-1] = snoopyBoard.board[yPosition + 1][xPosition-1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
+                    snoopyBoard.board[yPosition + 1][xPosition-1] = snoopyBoard.board[yPosition + 1][xPosition-1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
 
                 } else if (xPosition == 1 && yPosition == 1) {
                     setyPosition(getyPosition() + 1);
                     setxPosition(getxPosition() - 1);
 
-                    snoopyBoard.board[yPosition - 1][xPosition+1] = snoopyBoard.board[yPosition - 1][xPosition+1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
+                    snoopyBoard.board[yPosition - 1][xPosition+1] = snoopyBoard.board[yPosition - 1][xPosition+1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
 
                 }else if (xPosition == 1 && yPosition == 20) {
                     setyPosition(getyPosition() - 1);
                     setxPosition(getxPosition() - 1);
 
-                    snoopyBoard.board[yPosition + 1][xPosition+1] = snoopyBoard.board[yPosition + 1][xPosition+1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
+                    snoopyBoard.board[yPosition + 1][xPosition+1] = snoopyBoard.board[yPosition + 1][xPosition+1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
                 }else if (xPosition == 10 && yPosition == 1) {
                     setyPosition(getyPosition() + 1);
                     setxPosition(getxPosition() + 1);
 
-                    snoopyBoard.board[yPosition - 1][xPosition-1] = snoopyBoard.board[yPosition - 1][xPosition-1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
+                    snoopyBoard.board[yPosition - 1][xPosition-1] = snoopyBoard.board[yPosition - 1][xPosition-1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
 
                 }else  if (xPosition == 10 && yPosition == 20) {
                     setyPosition(getyPosition() - 1);
                     setxPosition(getxPosition() + 1);
 
-                    snoopyBoard.board[yPosition + 1][xPosition-1] = snoopyBoard.board[yPosition + 1][xPosition-1]   - 700;
-                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 700;
+                    snoopyBoard.board[yPosition + 1][xPosition-1] = snoopyBoard.board[yPosition + 1][xPosition-1]   - 70;
+                    snoopyBoard.board[yPosition][xPosition] = snoopyBoard.board[yPosition][xPosition]               + 70;
 
                 }
-        System.out.println("x:" + xPosition + " y:" + yPosition);
 
     }
 

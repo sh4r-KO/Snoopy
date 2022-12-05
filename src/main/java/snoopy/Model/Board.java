@@ -159,14 +159,15 @@ public class Board {
     }
 
     public int[][] setBoardFromTextFile(String NameFile, int x, int y){
-
+        /*
+        TODO add more than number to be readable by this method
         char[] charArray = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
 
         for (char a : charArray) {
             int b = a;
             System.out.println("char "+a+" :"+b);
         }
-
+        */
         String ret = null;
         int[][] t = new int[x][y];
         try {
