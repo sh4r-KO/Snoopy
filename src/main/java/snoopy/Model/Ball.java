@@ -117,7 +117,77 @@ public class Ball {
                 }
             }
         }
-        /*if(WallInFront()  && d == Direction.SO && yPosition == 20  ){
+        /*
+
+
+
+        public void movement() {
+
+       advacing meaning : depending on the direction we will be facing, the coordinates shall changes or not accordingly.
+            SO : x = x +1 y = y +1	en bas a droite
+            SE : x = x -1 y =  y +1	en bas a gauche
+            NE : x = x -1 y = y -1  	en haut a dauche
+            NO : x = x +1 y = y -1	en haut a droite
+//         System.out.println("ball movement"+toString());
+            if (d == Direction.SO) {
+        if(yPosition == 20){
+            d = Direction.SE;
+        } else if (xPosition == 10){
+            d = Direction.NO;
+        }else{
+            snoopyBoard.board[xPosition][yPosition] -= 70;
+            xPosition += 1;
+            yPosition += 1;
+            snoopyBoard.board[xPosition][yPosition] += 70;
+        }
+
+    } else if (d == Direction.NO) {
+
+        if(yPosition == 20){
+            d = Direction.NE;
+        } else if (xPosition == 1){
+            d = Direction.SO;
+        }else{
+            snoopyBoard.board[xPosition][yPosition] -= 70;
+            yPosition += 1;
+            xPosition -= 1;
+            snoopyBoard.board[xPosition][yPosition] += 70;
+        }
+    } else if (d == Direction.NE) {
+
+        if(yPosition == 1){
+            d = Direction.NO;
+        } else if (xPosition == 1){
+            d = Direction.SE;
+        }else{
+            snoopyBoard.board[xPosition][yPosition] -= 70;
+            xPosition -= 1;
+            yPosition -= 1;
+            snoopyBoard.board[xPosition][yPosition] += 70;
+        }
+    } else if (d == Direction.SE) {
+
+        if(yPosition == 1){
+            d = Direction.SO;
+        } else if (xPosition == 10){
+            d = Direction.NE;
+        }else{
+            snoopyBoard.board[xPosition][yPosition] -= 70;
+            yPosition -= 1;
+            xPosition += 1;
+            snoopyBoard.board[xPosition][yPosition] += 70;
+        }
+
+
+
+
+
+
+
+
+
+
+        if(WallInFront()  && d == Direction.SO && yPosition == 20  ){
             xPosition = xPosition +1;
             yPosition = yPosition +1;
 
@@ -133,9 +203,7 @@ public class Ball {
             yPosition = yPosition - 1;
         }
 
-         */
 
-    /*
     public void movement() {
                 System.out.println("x:" + xPosition + " y:" + yPosition);
                 System.out.println(toString());

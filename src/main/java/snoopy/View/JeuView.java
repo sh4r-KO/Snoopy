@@ -25,11 +25,12 @@ public class JeuView extends Group {//implements Initializable {
 
     //set all images path to images object in constructor
     public JeuView() {
+        initialiseGrassBackGround();
         this.initialize();
     }
 
 
-
+    //TODO : faire une imageview[][] avec que des images d'herbes pour le background avec en bocnus la methoed  toBack() ou toFront()
     Image Snoppy;
     /*
     @Override
@@ -55,6 +56,28 @@ public class JeuView extends Group {//implements Initializable {
         System.out.println("initialize() done");
     }
     */
+    public void initialiseGrassBackGround(){
+        for (int i = 0; i < row; i++) {//
+            for (int j = 0; j < column; j++) {
+
+                ImageView imageView = new ImageView();
+                //imageView = style(imageView);
+                imageView.setX((double)j * CELL_WIDTH);
+                imageView.setY((double)i * CELL_WIDTH);
+                imageView.setFitHeight(CELL_WIDTH);
+                imageView.setFitWidth(CELL_WIDTH);
+                imageView.setPreserveRatio(true);
+                imageView.setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+
+
+                imageView.toBack();
+                //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
+                this.getChildren().add(imageView);
+
+            }
+        }
+    }
+
     public void initialize(){
         //this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
        // this.setFocusTraversable(false);
@@ -70,6 +93,7 @@ public class JeuView extends Group {//implements Initializable {
                 imageView.setFitHeight(CELL_WIDTH);
                 imageView.setFitWidth(CELL_WIDTH);
                 imageView.setPreserveRatio(true);
+                //imageView.setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
 
                 matrixImagesView[i][j] = imageView;
 
@@ -137,8 +161,7 @@ public class JeuView extends Group {//implements Initializable {
                         //matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
                         break;
                     case 8:
-                            matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/SnoopyDroite.png").toURI().toString()));
-
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/SnoopyDroite.png").toURI().toString()));
                         break;
                     case 9:
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauDroite.png").toURI().toString()));
@@ -151,6 +174,7 @@ public class JeuView extends Group {//implements Initializable {
             }
         }
     }
+
     private void drawGreen() {
         for (int i = 2; i < row-2; i++) {
             for (int j = 2; j < column-2; j++) {
