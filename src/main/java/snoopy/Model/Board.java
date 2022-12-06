@@ -10,14 +10,19 @@ public class Board {
     private Snoopy noop;
     private ShowFadeBlock showFadeBlock;
     private PushingBlock pushingBlock;
-
+    private BreakingBlock breakingBlock;
+    private TrappedBlock trappedBlock;
+    //TODO make an arraylist for each type of block
+    /*
+    idéalement on devrai avoir une seule méthode move, avec un parcours d'arraylist avec multi-types, et chaque block a une methode Execute/ do SMT qui est trèes spécifique à chaque type de block
+    ensuite, apres avoir checker le comportement de chaque block on bouge snoopy
+     */
     //1 bouger snoopy
     //2 faire disparaitre un bloc
     //3 faire bouger un bloc poussable
     // tapis roulant
 
 
-    JeuDeBaseController JeuDeBaseControler;
     /*player has coordinates, lives, score, level, direction enum, current leve
     player has a board, a board is a 2d array of int, each int is a type of block!
     0 (case vide)
@@ -38,10 +43,6 @@ public class Board {
 
     public Board() {
         this.board = this.setBoardFromTextFile("test.txt", 12, 22);
-        //System.out.println(noop.getX());
-        //System.out.println(noop.getY());
-
-        printBoard();
 
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 22; j++) {
@@ -59,45 +60,59 @@ public class Board {
                     showFadeBlock = new ShowFadeBlock(i, j, this, noop);
                 }else if (board[i][j] == 2) {        //localisation Bloc pushing block
                     pushingBlock = new PushingBlock(i, j,this,noop);
+                }else if(board[i][j] == 1){        //localisation Bloc breaking block
+                    breakingBlock = new BreakingBlock(i,j,this,noop);
+                }else if (board[i][j] == 3){        //localisation Bloc trapped block
+                    trappedBlock = new TrappedBlock(i,j,noop);
                 }
             }
         }
-
-
-
     }
 
 
 
     public void moveUp() {
+        trappedBlock.trappedBlock();
         if(noop.getX() > 1 && noop.getDirection() == Direction.NORD) {
             if(pushingBlock.isPushedToTheTop()){
-
-            }else{
-                int tmp=board[noop.getX()][noop.getY()];
-                this.board[noop.getX()][noop.getY()] = board[noop.getX()-1][noop.getY()];
-                board[noop.getX()-1][noop.getY()] = tmp;
+                board[noop.getX()][noop.getY()] -= 8;
                 noop.setX(noop.getX()-1);
-            }
+                board[noop.getX()][noop.getY()] += 8;
+            }else{
 
+                if(board[noop.getX()-1][noop.getY()] == 0||board[noop.getX()-1][noop.getY()] == 3){
+                    board[noop.getX()][noop.getY()] -= 8;
+                    noop.setX(noop.getX()-1);
+                    board[noop.getX()][noop.getY()] += 8;
+                }
+            }
         }else{
             noop.setDirection(Direction.NORD);
         }
 
         showFadeBlock.fade();
         //x = x - 1;
-        MVT();
     }
 
     public void moveDown() {
+        trappedBlock.trappedBlock();
         if (noop.getX() < 10 && noop.getDirection() == Direction.SUD) {
             if(pushingBlock.isPushedToTheBottom()){
-
+                board[noop.getX()][noop.getY()] -= 8;
+                noop.setX(noop.getX()+1);
+                board[noop.getX()][noop.getY()] += 8;
             }else{
+                /*
                 int tmp = board[noop.getX()][noop.getY()];
                 this.board[noop.getX()][noop.getY()] = board[noop.getX() + 1][noop.getY()];
                 board[noop.getX() + 1][noop.getY()] = tmp;
                 noop.setX(noop.getX()+1);
+                 */
+                if(board[noop.getX()+1][noop.getY()] == 0 || board[noop.getX()+1][noop.getY()] == 3){
+                    board[noop.getX()][noop.getY()] -= 8;
+                    noop.setX(noop.getX()+1);
+                    board[noop.getX()][noop.getY()] += 8;
+                }
             }
 
         }else {
@@ -105,17 +120,27 @@ public class Board {
         }
         showFadeBlock.fade();
         //x = x+1
-        MVT();
     }
     public void moveRight() {
+        trappedBlock.trappedBlock();
         if(noop.getY() < 20 && noop.getDirection() == Direction.EST) {
             if(pushingBlock.isPushedToTheRight()) {
+                board[noop.getX()][noop.getY()] -= 8;
+                noop.setY(noop.getY() + 1);
+                board[noop.getX()][noop.getY()] += 8;
 
             }else{
-                int tmp = board[noop.getX()][noop.getY()];
+                //TODO change le tmp method by a  =0 & = 8 ou un -8 + 8 dans ce cas faut rajouter des conditions en mode ya rien derriere == 0 en l'occurence a droite wich is logic reprend la version de Pushing block en cas de doute
+                /*int tmp = board[noop.getX()][noop.getY()];
                 this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY() + 1];
                 board[noop.getX()][noop.getY() + 1] = tmp;
                 noop.setY(noop.getY() + 1);
+                 */
+                if(board[noop.getX()][noop.getY()+1] == 0||board[noop.getX()][noop.getY()+1] == 3){
+                    board[noop.getX()][noop.getY()] -= 8;
+                    noop.setY(noop.getY() + 1);
+                    board[noop.getX()][noop.getY()] += 8;
+                }
             }
 
             System.out.println("movedright");
@@ -123,25 +148,38 @@ public class Board {
             noop.setDirection(Direction.EST);
         }
         showFadeBlock.fade();
-        MVT();
         //y =y +1
     }
     public void moveLeft() {
+        trappedBlock.trappedBlock();
         if(noop.getY() > 1 && noop.getDirection() == Direction.OUEST) {
             if(pushingBlock.isPushedToTheLeft()) {
 
+                board[noop.getX()][noop.getY()] -= 8;
+                noop.setY(noop.getY() -1);
+                board[noop.getX()][noop.getY()] += 8;
+
             }else{
-                int tmp=board[noop.getX()][noop.getY()];
+               /* int tmp=board[noop.getX()][noop.getY()];
                 this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY()-1];
                 board[noop.getX()][noop.getY()-1] = tmp;
                 noop.setY(noop.getY()-1);
+                */
+                if(board[noop.getX()][noop.getY()-1] == 0 || board[noop.getX()][noop.getY()-1] == 3){
+                    board[noop.getX()][noop.getY()] -= 8;
+                    noop.setY(noop.getY() -1);
+                    board[noop.getX()][noop.getY()] += 8;
+                }
             }
+
         } else {
             noop.setDirection(Direction.OUEST);
         }
         showFadeBlock.fade();
-        MVT();
         //y = y-1;
+    }
+    public void breakBlock(){
+        breakingBlock.breakBlock();
     }
 
     public void fade() {
@@ -157,26 +195,9 @@ public class Board {
         }
 
         System.out.println("Fade Block");
-        MVT();
         */
 
 
-    }
-
-    public void push() {
-        if(board[noop.getX()][noop.getY()] == board[pushingBlock.getX() - 1][pushingBlock.getY()]) {
-            board[pushingBlock.getX()][pushingBlock.getY()] = 0;
-        }
-
-        System.out.println("Fade Block");
-        //MVT();
-
-    }
-
- 
-
-    public void MVT(){
-        printBoard();
     }
 
     public int[][] setBoardFromTextFile(String NameFile, int x, int y){

@@ -145,7 +145,7 @@ public class JeuView extends Group {//implements Initializable {
             throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
         }
         drawTime(timeleft);
-        System.out.println(toString(p));
+        //System.out.println(toString(p));
         for (int i = 1; i < row-1; i++) {
             for (int j = 1; j < column-1; j++) {
                 switch (p.getBoard()[i][j]){
@@ -200,7 +200,6 @@ public class JeuView extends Group {//implements Initializable {
                 imageView.setFitWidth(CELL_WIDTH);
                 imageView.setPreserveRatio(true);
                 imageView.setImage( new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));
-
             }
         }
     }

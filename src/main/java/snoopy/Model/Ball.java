@@ -50,9 +50,10 @@ public class Ball {
                     d = Direction.NO;
                 }else{
                     snoopyBoard.board[xPosition][yPosition] -= 70;
+                    snoopyBoard.board[xPosition+1][yPosition+1] += 70;
+
                     xPosition += 1;
                     yPosition += 1;
-                    snoopyBoard.board[xPosition][yPosition] += 70;
                 }
 
             } else if (d == Direction.NO) {
@@ -63,9 +64,10 @@ public class Ball {
                     d = Direction.SO;
                 }else{
                     snoopyBoard.board[xPosition][yPosition] -= 70;
+                    snoopyBoard.board[xPosition-1][yPosition+1] += 70;
+
                     yPosition += 1;
                     xPosition -= 1;
-                    snoopyBoard.board[xPosition][yPosition] += 70;
                 }
             } else if (d == Direction.NE) {
 
@@ -75,9 +77,10 @@ public class Ball {
                     d = Direction.SE;
                 }else{
                     snoopyBoard.board[xPosition][yPosition] -= 70;
+                    snoopyBoard.board[xPosition-1][yPosition-1] += 70;
+
                     xPosition -= 1;
                     yPosition -= 1;
-                    snoopyBoard.board[xPosition][yPosition] += 70;
                 }
             } else if (d == Direction.SE) {
 
@@ -87,9 +90,10 @@ public class Ball {
                     d = Direction.NE;
                 }else{
                     snoopyBoard.board[xPosition][yPosition] -= 70;
+                    snoopyBoard.board[xPosition+1][yPosition-1] += 70;
+
                     yPosition -= 1;
                     xPosition += 1;
-                    snoopyBoard.board[xPosition][yPosition] += 70;
                 }
             }
         }

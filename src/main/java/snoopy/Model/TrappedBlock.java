@@ -1,33 +1,22 @@
 package snoopy.Model;
 
 public class TrappedBlock {
-
-    private int X;
-    private int Y;
-
-    private Board board;
+    private int x;
+    private int y;
     private Snoopy noop;
-    public TrappedBlock( Snoopy noop ){
-        //localisation du bloc
-        for(int i=0; i<12; i++){
-            for(int j=0; j<22; j++){
-                if(board.board[i][j]==3){
-                    this.X = X;
-                    this.Y = Y;
-                    break;
-                }
-            }
+
+    public TrappedBlock(int x, int y, Snoopy noop) {
+        this.x = x;
+        this.y = y;
+        this.noop = noop;
+    }
+
+    public void trappedBlock() {
+        //check if snoopy is on a trapped block
+        if (x == noop.getX() && y == noop.getY()) {
+            noop.LoseLife(1);
+            System.out.println("Snoopy is on a trapped block, x:"+x+" y:"+y+" , PV left"+noop.getPV());
         }
     }
 
-    public void setX(int X) {this.X=X;}
-    public void setY(int Y) {this.Y=Y;}
-    public int getX() {return X;}
-    public int getY() {return Y;}
-
-    @Override
-    public String toString() {
-        String r = "x:" + this.X + " y:" + this.Y + "d:";
-        return r;
-    }
 }

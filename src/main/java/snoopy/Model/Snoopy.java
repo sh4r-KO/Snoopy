@@ -3,6 +3,7 @@ package snoopy.Model;
 import javax.net.ssl.SNIHostName;
 
 public class Snoopy {
+    private int PV = 3;//when 0 game over
     private int X;
     private int Y;
     private Direction direction;
@@ -62,6 +63,12 @@ public class Snoopy {
     }
 
 
+    public void LoseLife(int i) {
+        this.PV -= i;
+    }
 
+    public int getPV() {
+        return PV;
+    }
 }
 

@@ -4,10 +4,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import snoopy.Model.Ball;
-import snoopy.Model.Board;
-import snoopy.Model.ShowFadeBlock;
-import snoopy.Model.Snoopy;
+import snoopy.Model.*;
 import snoopy.View.JeuView;
 
 import java.util.Timer;
@@ -22,12 +19,14 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     private Timer timer;
     private Snoopy snoopy;
     private ShowFadeBlock fadeBlock;
+    private  BreakingBlock breakingBlock;
 
     public JeuDeBaseController() {
         board = new Board();
         snoopy = board.getNoop();//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
         this.b = new Ball(board);
+
         //this.fadeBlock = new ShowFadeBlock(board, snoopy);
 
 
@@ -61,6 +60,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @Override
     public void handle(KeyEvent ke) {
+        System.out.println(jeuView.toString(board));
         //different from usual switch which ends each case with break
         switch (ke.getCode()) {
 
@@ -124,6 +124,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
             case SPACE ->{
                 System.out.println("Key Pressed: " + ke.getCode());
+                board.breakBlock();
             }
         }
     }

@@ -22,6 +22,7 @@ public class Main extends Application {
     TODO: all modelView must extends ImageView
     TODO: reduce title of the menu
     TODO : in case of not enough number in int[][] use hexa to represent the number ABCDEF = 10 11 12 13 14 15
+    TODO : https://stackoverflow.com/questions/49956551/save-data-as-binary-using-objectoutputstream pour le ssauvegardes en BINAIRE
     */
     //******************************************************************************************************************
     //******************************************************************************************************************
