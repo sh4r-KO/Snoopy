@@ -38,21 +38,20 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         //https://stackoverflow.com/a/34785707
 
     }
-
-    //comment
-    final private static double FRAMES_PER_SECOND = 1;//upadte()/ second
-
+    private final int DELAY = 100;
+    private int facteurDe200ms = 5;
     private void startTimer() {
-
         this.timer = new java.util.Timer();
         TimerTask timerTask = new TimerTask() {
             public void run() {
-                jeuView.update(board);
+
+                jeuView.update(board, facteurDe200ms%5);
                 b.movement();
+                facteurDe200ms+=1;
 
             }
         };
-        this.timer.schedule(timerTask, 75, 75);
+        this.timer.schedule(timerTask, DELAY, DELAY);
     }
 
     @Override
@@ -66,7 +65,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 board.moveUp();
 
                 try {
-                    Thread.sleep(75);
+                    Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -78,7 +77,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 board.moveDown();
                 //jeuView.update(board);
                 try {
-                    Thread.sleep(75);
+                    Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -91,7 +90,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 board.moveLeft();
                 //jeuView.update(board);
                 try {
-                    Thread.sleep(75);
+                    Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -103,7 +102,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 board.moveRight();
                 //jeuView.update(board);
                 try {
-                    Thread.sleep(75);
+                    Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
