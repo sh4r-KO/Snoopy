@@ -35,30 +35,6 @@ public class Ball {
 
 
 // the wall is at index x = 0, y = 0, so the max index is x = 21, y = 11
-    private boolean WallInFront(){// 80|
-        boolean ret = false;
-        if(this.d == Direction.SO){
-            if (xPosition == 20 || yPosition == 10){//direction SO, on peux toucher que les mur sud et ouest, y = 10 et x = 20
-                ret = true;
-            }
-        }else if(this.d == Direction.NO){
-            if (xPosition == 20 || yPosition == 1){
-                ret = true;
-            }
-        }else if(this.d == Direction.NE){
-            if (xPosition == 1 || yPosition == 1){
-                ret = true;
-            }
-        }else if(this.d == Direction.SE){
-            if (xPosition == 1 || yPosition == 10){
-                ret = true;
-            }
-        }
-
-
-        return ret;
-    }
-
     public void movement() {
         /*
        advacing meaning : depending on the direction we will be facing, the coordinates shall changes or not accordingly.
@@ -66,7 +42,7 @@ public class Ball {
             SE : x = x -1 y =  y +1	en bas a gauche
             NE : x = x -1 y = y -1  	en haut a dauche
             NO : x = x +1 y = y -1	en haut a droite
-         */System.out.println("ball movement"+toString());
+         *///System.out.println("ball movement"+toString());
             if (d == Direction.SO) {
                 if(yPosition == 20){
                     d = Direction.SE;

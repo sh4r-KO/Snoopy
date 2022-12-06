@@ -20,6 +20,10 @@ public class JeuView extends Group {//implements Initializable {
     @FXML final int row =12;//TODO: use the variables defined in the fxml file
     @FXML final int column =22 ;
     private ImageView[][] matrixImagesView;
+    private final int rowMeche = 58;
+    private final int columnMeche = 106;
+    private ImageView[][] MecheImageViewMatrix = new ImageView[rowMeche][columnMeche];//row for meche = 58/12*12 = 58 // column for meche = 58/12*22 = 116
+
     private int time = 60;
 
 
@@ -56,10 +60,15 @@ public class JeuView extends Group {//implements Initializable {
         System.out.println("initialize() done");
     }
     */
-    public void initialiseGrassBackGround(){
-        for (int i = 0; i < row; i++) {//
-            for (int j = 0; j < column; j++) {
 
+    public void doThis(int i, int j, double cell_width,double cell_height){
+
+
+    }
+
+    public void initialiseGrassBackGround(){
+        for(int i = 1; i<row-1;i++){
+            for(int j = 1; j<column-1;j++){
                 ImageView imageView = new ImageView();
                 //imageView = style(imageView);
                 imageView.setX((double)j * CELL_WIDTH);
@@ -70,13 +79,15 @@ public class JeuView extends Group {//implements Initializable {
                 imageView.setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+
 
                 imageView.toBack();
+                //BackGroundImageView[i][j] = imageView;
                 //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
 
                 this.getChildren().add(imageView);
-
             }
         }
     }
+
+
 
     public void initialize(){
         //this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
@@ -108,6 +119,8 @@ public class JeuView extends Group {//implements Initializable {
         drawWall();
         drawGreen();
 
+        //initMeche();
+
     }
     /*
     0 is empty bloc (aka grass : Herbe1.png/Herbe2.png/Herbe3.png)
@@ -125,12 +138,13 @@ public class JeuView extends Group {//implements Initializable {
     concerning empty bloc, it will be a random grass png chosen beetween the 3 avaiblable
      */
 
-    public void update(Board p) {
+    public void update(Board p, int timeleft) {
         if (p == null || p.getBoard() == null || p.getBoard().length == 0) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() : p or getBoard() is null or getBoard() empty");
         }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
         }
+        drawTime(timeleft);
         System.out.println(toString(p));
         for (int i = 1; i < row-1; i++) {
             for (int j = 1; j < column-1; j++) {
@@ -191,7 +205,86 @@ public class JeuView extends Group {//implements Initializable {
         }
     }
 
-    private void drawTime(){
+    private void initMeche(){
+        MecheImageViewMatrix = new ImageView[rowMeche][columnMeche];
+
+        for (int i = 0; i < rowMeche; i++) {//=58
+            for (int j = 0; j < columnMeche; j++) {//=116
+                //murHaut
+                if( i==0 ){
+                    ImageView imageView = new ImageView();
+                    //imageView = style(imageView);
+                    imageView.setX((double)j * 12);
+                    imageView.setY((double)i * 16);
+
+                    imageView.setFitHeight(16);
+                    imageView.setFitWidth(12);
+                    imageView.setPreserveRatio(true);
+                    imageView.setImage(new Image(new File("src/main/resources/img/MECHEHAUT_AGUIRRE.png").toURI().toString()));//"+
+
+                    imageView.toBack();
+                    //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
+                    this.getChildren().add(imageView);
+
+                }else if(i==rowMeche-1){//mur Bas
+                    ImageView imageView = new ImageView();
+                    //imageView = style(imageView);
+                    imageView.setX((double)j * 12);
+                    imageView.setY((double)i * 12);
+
+                    imageView.setFitHeight(16);
+                    imageView.setFitWidth(12);
+                    imageView.setPreserveRatio(true);
+                    imageView.setImage(new Image(new File("src/main/resources/img/MECHEBAS_AGUIRRE.png").toURI().toString()));//"+
+
+                    imageView.toBack();
+                    //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
+                    this.getChildren().add(imageView);
+
+                }else if(j==0){//mur gauche
+                    ImageView imageView = new ImageView();
+                    //imageView = style(imageView);
+                    imageView.setX((double)j * 12);
+                    imageView.setY((double)i * 12);
+
+                    imageView.setFitHeight(12);
+                    imageView.setFitWidth(16);
+                    imageView.setPreserveRatio(true);
+                    imageView.setImage(new Image(new File("src/main/resources/img/MECHEGAUCHE_AGUIRRE.png").toURI().toString()));//"+
+
+                    imageView.toBack();
+                    //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
+                    this.getChildren().add(imageView);
+
+                } else if (j == columnMeche-1) {//mur droit
+                    ImageView imageView = new ImageView();
+                    //imageView = style(imageView);
+                    imageView.setX((double)j * 12);
+                    imageView.setY((double)i * 12);
+
+                    imageView.setFitHeight(12);
+                    imageView.setFitWidth(16);
+                    imageView.setPreserveRatio(true);
+                    imageView.setImage(new Image(new File("src/main/resources/img/MECHEDROITE_AGUIRRE.png").toURI().toString()));//"+
+
+                    imageView.toBack();
+                    //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
+                    this.getChildren().add(imageView);
+
+                }
+            }
+        }
+    }
+
+    private void drawTime(int timeleft){
+
+
+
+/*
         doThis(0, 0, "MechepasCrameHaut.png");
         doThis(row-1, column-1, "MurBasDroite.png");
         doThis(row-1, 0, "MurBasGauche.png");
@@ -214,6 +307,8 @@ public class JeuView extends Group {//implements Initializable {
         for (int i = 1; i < column-1; i++) {
             doThis(row-1, i, "MechepasCrameBas.png");
         }
+
+ */
     }
     public void drawWall(){
         //corner
