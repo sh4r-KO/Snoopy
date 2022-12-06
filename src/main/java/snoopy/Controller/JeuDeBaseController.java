@@ -6,6 +6,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import snoopy.Model.Ball;
 import snoopy.Model.Board;
+import snoopy.Model.ShowFadeBlock;
 import snoopy.Model.Snoopy;
 import snoopy.View.JeuView;
 
@@ -20,12 +21,15 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     private static Board board;//static.............
     private Timer timer;
     private Snoopy snoopy;
+    private ShowFadeBlock fadeBlock;
 
     public JeuDeBaseController() {
         board = new Board();
-        snoopy = new Snoopy(board);//il faut absolument que ce soit la meme board que l'attribut board actuel
+        snoopy = board.getNoop();//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
         this.b = new Ball(board);
+        //this.fadeBlock = new ShowFadeBlock(board, snoopy);
+
 
         //Snoopy s = new Snoopy(board);
         //jeuView.update(board);
@@ -38,7 +42,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         //https://stackoverflow.com/a/34785707
 
     }
-    private final int DELAY = 100;
+    private final int DELAY = 100;//TODO doit absolument etre 100
     private int facteurDe200ms = 5;
     private void startTimer() {
         this.timer = new java.util.Timer();
@@ -47,6 +51,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
                 jeuView.update(board, facteurDe200ms%5);
                 b.movement();
+                //fadeBlock.fade();
                 facteurDe200ms+=1;
 
             }
@@ -63,7 +68,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 //jeuView.update(board);
 
                 board.moveUp();
-
+                //fadeBlock.fade();
                 try {
                     Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
@@ -76,6 +81,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case DOWN -> {
                 board.moveDown();
                 //jeuView.update(board);
+                //fadeBlock.fade();
                 try {
                     Thread.sleep(DELAY);
                 } catch (InterruptedException e) {
@@ -88,6 +94,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case LEFT -> {
 
                 board.moveLeft();
+                //fadeBlock.fade();
                 //jeuView.update(board);
                 try {
                     Thread.sleep(DELAY);
@@ -100,6 +107,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
             case RIGHT -> {
                 board.moveRight();
+                //fadeBlock.fade();
                 //jeuView.update(board);
                 try {
                     Thread.sleep(DELAY);
@@ -113,6 +121,9 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case S -> {
                 System.out.println("Key Pressed: " + ke.getCode());
                 //ke.consume();
+            }
+            case SPACE ->{
+                System.out.println("Key Pressed: " + ke.getCode());
             }
         }
     }

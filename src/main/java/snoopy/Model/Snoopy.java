@@ -9,16 +9,16 @@ public class Snoopy {
     private Board snoopyBoard ;
 
 
-    public Snoopy(int X, int Y, Direction d) {
+    public Snoopy(int X, int Y,Board b, Direction d) {
+        this.snoopyBoard = b;
         this.X = X;
         this.Y = Y;
         this.direction = d;
         // this.snoopyBoard = new Board();
     }
 
-    public Snoopy(Board b){
+    /*public Snoopy(Board b){
         //localisation Snoopy
-        snoopyBoard = b;
 
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 22; j++) {
@@ -30,6 +30,8 @@ public class Snoopy {
             }
         }//new Snoopy(i, j, Snoopy.Direction.NORD)
     }
+
+     */
 
 
     //direction setter and getter

@@ -30,7 +30,7 @@ public class Ball {
         this.xPosition = x;
         this.yPosition = y;
         this.d = Direction.SO;
-        System.out.println(toString());
+       // System.out.println(toString());
     }
 
 

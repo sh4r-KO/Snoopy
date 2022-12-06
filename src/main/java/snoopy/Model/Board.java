@@ -37,88 +37,109 @@ public class Board {
      */
 
     public Board() {
-        this.board = this.setBoardFromTextFile("test.txt",12,22);
-        this.noop = new Snoopy(this);
-            System.out.println(noop.getX());
-            System.out.println(noop.getY());
+        this.board = this.setBoardFromTextFile("test.txt", 12, 22);
+        //System.out.println(noop.getX());
+        //System.out.println(noop.getY());
 
         printBoard();
+
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 22; j++) {
+                if (board[i][j] == 8) {
+                    this.noop = new Snoopy(i, j, this, Direction.OUEST);
+                }
+            }
+        }
+
+
+        //localisation Bloc Show/fade
+        for (int i = 0; i < 12; i++) {
+            for (int j = 0; j < 22; j++) {
+                if (board[i][j] == 5) {//locatlisation showFadeBlock
+                    showFadeBlock = new ShowFadeBlock(i, j, this, noop);
+                }else if (board[i][j] == 2) {        //localisation Bloc pushing block
+                    pushingBlock = new PushingBlock(i, j,this,noop);
+                }
+            }
+        }
+
+
+
     }
 
-/*
-        //localisation Bloc Show/fade
-        for(int i=0; i<12; i++){
-            for(int j=0; j<22; j++){
-                if(board[i][j]==5){
-                    showFadeBlock = new ShowFadeBlock(i, j, ShowFadeBlock.Direction.NORD);
-                    break;
-                }
-            }
-        }
 
-        //localisation Bloc pushing block
-        for(int i=0; i<12; i++){
-            for(int j=0; j<22; j++){
-                if(board[i][j]==5){
-                    pushingBlock= new PushingBlock(i, j, PushingBlock.Direction.NORD);
-                    break;
-                }
-            }
-        }
-
- */
 
     public void moveUp() {
         if(noop.getX() > 1 && noop.getDirection() == Direction.NORD) {
-            int tmp=board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX()-1][noop.getY()];
-            board[noop.getX()-1][noop.getY()] = tmp;
-            noop.setX(noop.getX()-1);
+            if(pushingBlock.isPushedToTheTop()){
+
+            }else{
+                int tmp=board[noop.getX()][noop.getY()];
+                this.board[noop.getX()][noop.getY()] = board[noop.getX()-1][noop.getY()];
+                board[noop.getX()-1][noop.getY()] = tmp;
+                noop.setX(noop.getX()-1);
+            }
+
         }else{
             noop.setDirection(Direction.NORD);
         }
 
-        fade();
+        showFadeBlock.fade();
         //x = x - 1;
         MVT();
     }
+
     public void moveDown() {
         if (noop.getX() < 10 && noop.getDirection() == Direction.SUD) {
-            int tmp = board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX() + 1][noop.getY()];
-            board[noop.getX() + 1][noop.getY()] = tmp;
-            noop.setX(noop.getX()+1);
+            if(pushingBlock.isPushedToTheBottom()){
+
+            }else{
+                int tmp = board[noop.getX()][noop.getY()];
+                this.board[noop.getX()][noop.getY()] = board[noop.getX() + 1][noop.getY()];
+                board[noop.getX() + 1][noop.getY()] = tmp;
+                noop.setX(noop.getX()+1);
+            }
+
         }else {
             noop.setDirection(Direction.SUD);
         }
-        fade();
+        showFadeBlock.fade();
         //x = x+1
         MVT();
     }
     public void moveRight() {
         if(noop.getY() < 20 && noop.getDirection() == Direction.EST) {
-            int tmp = board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY() + 1];
-            board[noop.getX()][noop.getY() + 1] = tmp;
-            noop.setY(noop.getY()+1);
+            if(pushingBlock.isPushedToTheRight()) {
+
+            }else{
+                int tmp = board[noop.getX()][noop.getY()];
+                this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY() + 1];
+                board[noop.getX()][noop.getY() + 1] = tmp;
+                noop.setY(noop.getY() + 1);
+            }
+
             System.out.println("movedright");
         }else {
             noop.setDirection(Direction.EST);
         }
-        fade();
+        showFadeBlock.fade();
         MVT();
         //y =y +1
     }
     public void moveLeft() {
         if(noop.getY() > 1 && noop.getDirection() == Direction.OUEST) {
-            int tmp=board[noop.getX()][noop.getY()];
-            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY()-1];
-            board[noop.getX()][noop.getY()-1] = tmp;
-            noop.setY(noop.getY()-1);
+            if(pushingBlock.isPushedToTheLeft()) {
+
+            }else{
+                int tmp=board[noop.getX()][noop.getY()];
+                this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY()-1];
+                board[noop.getX()][noop.getY()-1] = tmp;
+                noop.setY(noop.getY()-1);
+            }
         } else {
             noop.setDirection(Direction.OUEST);
         }
-        fade();
+        showFadeBlock.fade();
         MVT();
         //y = y-1;
     }
