@@ -1,8 +1,6 @@
 package snoopy.Model;
 
 import snoopy.Controller.JeuDeBaseController;
-
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -11,16 +9,8 @@ public class Board {
     public int[][] board;
     private Snoopy noop;
     private ShowFadeBlock showFadeBlock;
-
     private PushingBlock pushingBlock;
 
-
-    enum Direction {
-        NORD,
-        SUD,
-        OUEST,
-        EST;
-    }
     //1 bouger snoopy
     //2 faire disparaitre un bloc
     //3 faire bouger un bloc poussable
@@ -45,9 +35,15 @@ public class Board {
     /**
     constructor of board, which incarne snoopy in the game
      */
+
     public Board() {
-        this.noop = new Snoopy();
         this.board = this.setBoardFromTextFile("test.txt",12,22);
+        this.noop = new Snoopy(this);
+            System.out.println(noop.getX());
+            System.out.println(noop.getY());
+
+        printBoard();
+    }
 
 /*
         //localisation Bloc Show/fade
@@ -68,31 +64,67 @@ public class Board {
                     break;
                 }
             }
-
         }
 
- */     if(noop != null) {
+ */
 
-
-            System.out.println(noop.getX());
-            System.out.println(noop.getY());
-
+    public void moveUp() {
+        if(noop.getX() > 1 && noop.getDirection() == Direction.NORD) {
+            int tmp=board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX()-1][noop.getY()];
+            board[noop.getX()-1][noop.getY()] = tmp;
+            noop.setX(noop.getX()-1);
+        }else{
+            noop.setDirection(Direction.NORD);
         }
 
-        printBoard();
+        fade();
+        //x = x - 1;
+        MVT();
     }
-
-
-    public Snoopy getNoop() {
-        return noop;
+    public void moveDown() {
+        if (noop.getX() < 10 && noop.getDirection() == Direction.SUD) {
+            int tmp = board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX() + 1][noop.getY()];
+            board[noop.getX() + 1][noop.getY()] = tmp;
+            noop.setX(noop.getX()+1);
+        }else {
+            noop.setDirection(Direction.SUD);
+        }
+        fade();
+        //x = x+1
+        MVT();
     }
-
-    public void setNoop(Snoopy noop) {
-        this.noop = noop;
+    public void moveRight() {
+        if(noop.getY() < 20 && noop.getDirection() == Direction.EST) {
+            int tmp = board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY() + 1];
+            board[noop.getX()][noop.getY() + 1] = tmp;
+            noop.setY(noop.getY()+1);
+            System.out.println("movedright");
+        }else {
+            noop.setDirection(Direction.EST);
+        }
+        fade();
+        MVT();
+        //y =y +1
     }
-
+    public void moveLeft() {
+        if(noop.getY() > 1 && noop.getDirection() == Direction.OUEST) {
+            int tmp=board[noop.getX()][noop.getY()];
+            this.board[noop.getX()][noop.getY()] = board[noop.getX()][noop.getY()-1];
+            board[noop.getX()][noop.getY()-1] = tmp;
+            noop.setY(noop.getY()-1);
+        } else {
+            noop.setDirection(Direction.OUEST);
+        }
+        fade();
+        MVT();
+        //y = y-1;
+    }
 
     public void fade() {
+        /*
         if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() - 1][showFadeBlock.getY()]){
             board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
         } if (board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() + 1][showFadeBlock.getY()]){
@@ -105,6 +137,8 @@ public class Board {
 
         System.out.println("Fade Block");
         MVT();
+        */
+
 
     }
 
@@ -114,36 +148,26 @@ public class Board {
         }
 
         System.out.println("Fade Block");
-        MVT();
+        //MVT();
 
     }
 
+ 
 
     public void MVT(){
         printBoard();
-        System.out.println(noop.toString());
     }
-
-
-
-    private void init(){
-    }
-    /*
-    files should be like this
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-        01234567890123456789012
-     */
 
     public int[][] setBoardFromTextFile(String NameFile, int x, int y){
+        /*
+        TODO add more than number to be readable by this method
+        char[] charArray = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
+
+        for (char a : charArray) {
+            int b = a;
+            System.out.println("char "+a+" :"+b);
+        }
+        */
         String ret = null;
         int[][] t = new int[x][y];
         try {
@@ -163,38 +187,22 @@ public class Board {
                 columnCount=0;
             }else if(tmp.equals('0') || tmp.equals('1') || tmp.equals('2') || tmp.equals('3') || tmp.equals('4') || tmp.equals('5') || tmp.equals('6') || tmp.equals('7') || tmp.equals('8') || tmp.equals('9')){
                 t[rowCount][columnCount] =Integer.parseInt(String.valueOf(tmp));
-                //System.out.println("i "+i+" columnCount="+columnCount+" rowCount="+rowCount+" chararray[i]=/"+tmp+" chararray.legnth"+chararray.length);
                 columnCount++;
             }
-
-
-
         }
 
-        //System.out.println("ret = \n"+ret);
 
         return t;
     }
 
-    //give value to board manually filling each cell with 0 without using loop
-    private int [][] setBoardManually(){
-
-         return board = new int[][]{
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            };
-
+    public Snoopy getNoop() {
+        return noop;
     }
+
+    public void setNoop(Snoopy noop) {
+        this.noop = noop;
+    }
+
 
     private void printBoard(){
         for (int[] ints : board) {
@@ -206,11 +214,6 @@ public class Board {
     }
 
     //getters of board
-
-
-
-
-
     public int[][] getBoard() {
         return board;
     }

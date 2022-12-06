@@ -5,54 +5,26 @@ import javax.net.ssl.SNIHostName;
 public class Snoopy {
     private int X;
     private int Y;
+    private Direction direction;
     private Board snoopyBoard ;
 
-    public void setX(int X) {
-        this.X = X;
-    }
-
-    public void setY(int Y) {
-        this.Y = Y;
-    }
-
-    public void setSnoopyBoard(Board snoopyBoard){
-        this.snoopyBoard = snoopyBoard;
-    }
-
-
-    public int getX() {
-        return X;
-    }
-
-    public int getY() {
-        return Y;
-    }
-
-    public Board getSnoopyBoard(){
-        return snoopyBoard;
-    }
-
-
-
-    enum Direction {
-        NORD,
-        SUD,
-        OUEST,
-        EST;
-    }
 
     public Snoopy(int X, int Y, Direction d) {
         this.X = X;
         this.Y = Y;
-        this.snoopyBoard = new Board();
+        this.direction = d;
+        // this.snoopyBoard = new Board();
     }
 
-    public Snoopy(){
+    public Snoopy(Board b){
         //localisation Snoopy
+        snoopyBoard = b;
+
         for (int i = 0; i < 12; i++) {
             for (int j = 0; j < 22; j++) {
-                if (snoopyBoard != null && snoopyBoard.board[i][j] == 8 ) {
-                    snoopyBoard.setNoop(new Snoopy(i, j, Snoopy.Direction.NORD));
+                if ( snoopyBoard.board[i][j] == 8) {
+                    //System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
+                    snoopyBoard.setNoop(new Snoopy(i, j, Direction.OUEST));
                     break;
                 }
             }
@@ -60,66 +32,26 @@ public class Snoopy {
     }
 
 
-
-
-    //set
-    public void moveUp() {
-        if(snoopyBoard != null){
-            if(snoopyBoard.getNoop().getX() > 1){
-                int tmp=snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()];
-                snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()] = snoopyBoard.board[snoopyBoard.getNoop().getX()-1][snoopyBoard.getNoop().getY()];
-                snoopyBoard.board[snoopyBoard.getNoop().getX()-1][snoopyBoard.getNoop().getY()] = tmp;
-                snoopyBoard.getNoop().setX(snoopyBoard.getNoop().getX()-1);
-            }
-            snoopyBoard.fade();
-            //x = x - 1;
-            snoopyBoard.MVT();
-            System.out.println("up pressed");
-        }
-
+    //direction setter and getter
+    public void setDirection(Direction d) {
+        this.direction = d;
+    }
+    public Direction getDirection() {
+        return direction;
+    }
+    public void setX(int X) {
+        this.X = X;
+    }
+    public void setY(int Y) {
+        this.Y = Y;
+    }
+    public int getX() {
+        return X;
+    }
+    public int getY() {
+        return Y;
     }
 
-    public void moveDown() {
-        if(snoopyBoard != null){
-        if (snoopyBoard.getNoop().getX() < 10){
-            int tmp = snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()];
-            snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()] = snoopyBoard.board[snoopyBoard.getNoop().getX() + 1][snoopyBoard.getNoop().getY()];
-            snoopyBoard.board[snoopyBoard.getNoop().getX() + 1][snoopyBoard.getNoop().getY()] = tmp;
-            snoopyBoard.getNoop().setX(snoopyBoard.getNoop().getX()+1);
-        }
-        snoopyBoard.fade();
-        //x = x+1
-        System.out.println("down pressed");
-        snoopyBoard.MVT();
-    }}
-
-    public void moveRight() {
-        if(snoopyBoard != null){
-       if( snoopyBoard.getNoop().getY() < 20) {
-            int tmp = snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()];
-            snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()] = snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY() + 1];
-            snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY() + 1] = tmp;
-            snoopyBoard.getNoop().setY(snoopyBoard.getNoop().getY()+1);
-        }
-        snoopyBoard.fade();
-        System.out.println("Right pressed");
-        snoopyBoard.MVT();
-        //y =y +1
-    }}
-
-    public void moveLeft() {
-        if(snoopyBoard != null){
-        if( snoopyBoard.getNoop().getY() > 1){
-            int tmp=snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()];
-            snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()] = snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()-1];
-            snoopyBoard.board[snoopyBoard.getNoop().getX()][snoopyBoard.getNoop().getY()-1] = tmp;
-            snoopyBoard.getNoop().setY(snoopyBoard.getNoop().getY()-1);
-        }
-        snoopyBoard.fade();
-        System.out.println("left pressed");
-        snoopyBoard.MVT();
-        //y = y-1;
-    }}
     
     @Override
     public String toString() {
@@ -130,3 +62,4 @@ public class Snoopy {
 
 
 }
+

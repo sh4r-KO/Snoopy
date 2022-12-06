@@ -15,7 +15,7 @@ import java.util.ResourceBundle;
  * this class is a view of the game, it's the game itself
  * it's a group element, so it can be added to a parent in this case JeuDeBase.fxml
  */
-public class JeuView extends Group implements Initializable {
+public class JeuView extends Group {//implements Initializable {
     public final static double CELL_WIDTH = 58.0;
     @FXML final int row =12;//TODO: use the variables defined in the fxml file
     @FXML final int column =22 ;
@@ -25,17 +25,14 @@ public class JeuView extends Group implements Initializable {
 
     //set all images path to images object in constructor
     public JeuView() {
-        super();
-
-        //Board player = new Board();
+        initialiseGrassBackGround();
         this.initialize();
-        this.update(new Board());
     }
 
 
-
+    //TODO : faire une imageview[][] avec que des images d'herbes pour le background avec en bocnus la methoed  toBack() ou toFront()
     Image Snoppy;
-
+    /*
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
@@ -58,26 +55,59 @@ public class JeuView extends Group implements Initializable {
         }
         System.out.println("initialize() done");
     }
-    public void initialize(){
-        this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
-        matrixImagesView = new ImageView[row][column];
+    */
+    public void initialiseGrassBackGround(){
         for (int i = 0; i < row; i++) {//
             for (int j = 0; j < column; j++) {
 
                 ImageView imageView = new ImageView();
-                imageView = style(imageView);
+                //imageView = style(imageView);
                 imageView.setX((double)j * CELL_WIDTH);
                 imageView.setY((double)i * CELL_WIDTH);
                 imageView.setFitHeight(CELL_WIDTH);
                 imageView.setFitWidth(CELL_WIDTH);
                 imageView.setPreserveRatio(true);
+                imageView.setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+
+
+                imageView.toBack();
+                //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
+                this.getChildren().add(imageView);
+
+            }
+        }
+    }
+
+    public void initialize(){
+        //this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
+       // this.setFocusTraversable(false);
+
+        matrixImagesView = new ImageView[row][column];
+        for (int i = 0; i < row; i++) {//
+            for (int j = 0; j < column; j++) {
+
+                ImageView imageView = new ImageView();
+                //imageView = style(imageView);
+                imageView.setX((double)j * CELL_WIDTH);
+                imageView.setY((double)i * CELL_WIDTH);
+                imageView.setFitHeight(CELL_WIDTH);
+                imageView.setFitWidth(CELL_WIDTH);
+                imageView.setPreserveRatio(true);
+                //imageView.setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
 
                 matrixImagesView[i][j] = imageView;
+
+                //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+
                 this.getChildren().add(imageView);
 
             }
         }
         System.out.println("initialize() done");
+        //print things that should only be printed once
+        drawWall();
+        drawGreen();
+
     }
     /*
     0 is empty bloc (aka grass : Herbe1.png/Herbe2.png/Herbe3.png)
@@ -95,31 +125,70 @@ public class JeuView extends Group implements Initializable {
     concerning empty bloc, it will be a random grass png chosen beetween the 3 avaiblable
      */
 
-    public void update(Board p){
-        //System.out.print("update() started   ");
-
-        for (int i = 0; i < row; i++) {
-            for (int j = 0; j < column; j++) {
+    public void update(Board p) {
+        if (p == null || p.getBoard() == null || p.getBoard().length == 0) {
+            throw new IllegalArgumentException("snoopy.Model.Board.update() : p or getBoard() is null or getBoard() empty");
+        }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
+            throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
+        }
+        System.out.println(toString(p));
+        for (int i = 1; i < row-1; i++) {
+            for (int j = 1; j < column-1; j++) {
                 switch (p.getBoard()[i][j]){
                     //floor is used to inclued min and max cf : https://www.educative.io/answers/how-to-generate-random-numbers-in-java
-                    case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
-                    case 1 -> doThis(i,j,"BlocCassable.png");
-                    case 2 -> doThis(i,j,"BlocPoussable.png");
-                    case 3 -> doThis(i,j,"BlocPiege.png");
-                    case 4 -> doThis(i,j,"BlocInvincible.png");
-                    case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
-                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");//needs direction info
-                    case 7 -> doThis(i,j,"Balle.png");//needs velocity/direction info
-                    case 8 -> doThis(i,j,"SnoopyDroite.png");//needs direction info
-                    case 9 -> doThis(i,j,"OiseauDroite.png");
-                    default -> System.out.println("error in Modele.JeuView.update(Player p) method");
+                    case 0:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
+                        break;
+                    case 1:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocCassable.png").toURI().toString()));
+                        break;
+                    case 2:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPoussable.png").toURI().toString()));
+                        break;
+                    case 3:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiege.png").toURI().toString()));
+                        break;
+                    case 4:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocInvincible.png").toURI().toString()));
+                        break;
+                    case 5:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocApparitionDisparition.png").toURI().toString()));
+                        break;
+                    case 6:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocTapisRoulantBas.png").toURI().toString()));
+                        break;
+                    case 7:
+                        //matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
+                        break;
+                    case 8:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/SnoopyDroite.png").toURI().toString()));
+                        break;
+                    case 9:
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauDroite.png").toURI().toString()));
+                        break;
+                }
+                //cases outisde pf siwtch
+                if (p.getBoard()[i][j] >=70 && p.getBoard()[i][j] <=79){//for the ball
+                    matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
                 }
             }
         }
+    }
 
-        drawWall();
-       // drawTime();
-        //System.out.println("update() done");
+    private void drawGreen() {
+        for (int i = 2; i < row-2; i++) {
+            for (int j = 2; j < column-2; j++) {
+                ImageView imageView = new ImageView();
+                //imageView = style(imageView);
+                imageView.setX((double)j * CELL_WIDTH);
+                imageView.setY((double)i * CELL_WIDTH);
+                imageView.setFitHeight(CELL_WIDTH);
+                imageView.setFitWidth(CELL_WIDTH);
+                imageView.setPreserveRatio(true);
+                imageView.setImage( new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));
+
+            }
+        }
     }
 
     private void drawTime(){
@@ -146,7 +215,6 @@ public class JeuView extends Group implements Initializable {
             doThis(row-1, i, "MechepasCrameBas.png");
         }
     }
-
     public void drawWall(){
         //corner
         doThis(0, 0, "MurHautGauche.png");
@@ -173,8 +241,20 @@ public class JeuView extends Group implements Initializable {
         }
 
     }
+/*
+                    case 0 -> doThis(i,j,"Herbe2.png");//matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/Herbe"+(int)Math.floor(Math.random()*(3)+1)+".png").toURI().toString()));
+                    case 1 -> doThis(i,j,"BlocCassable.png");
+                    case 2 -> doThis(i,j,"BlocPoussable.png");
+                    case 3 -> doThis(i,j,"BlocPiege.png");
+                    case 4 -> doThis(i,j,"BlocInvincible.png");
+                    case 5 -> doThis(i,j,"BlocApparitionDisparition.png");
+                    case 6 -> doThis(i,j,"BlocTapisRoulantBas.png");
+                    case 7 -> doThis(i,j,"Balle.png");
+                    case 8 -> doThis(i,j,"SnoopyDroite.png");//System.out.println("i:"+i+" j:"+j);//
+                    case 9 -> doThis(i,j,"OiseauDroite.png");
+                    default -> System.out.println("error in Modele.JeuView.update(Player p) method");
 
-    /*
+
     public void update(Player p){
         for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
@@ -197,20 +277,21 @@ public class JeuView extends Group implements Initializable {
         System.out.println("update() done");
     }
      */
-
-
     private void doThis(int i, int j, String FileName){
-        matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/snoopy/"+FileName).toURI().toString()));
+        matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/"+FileName).toURI().toString()));
     }
     //list of all types of ImageView possible(who shares properties)
 
 
-    public ImageView style(ImageView i){
-        String[] colorpossible = {"red", "blue", "green", "yellow"};
-        i.setStyle("-fx-background-color: "+colorpossible[(int)(Math.random()*4)]+
-                "; -fx-border-color: black" +
-                "; -fx-border-width: s5px;");
-        return i;
+    public String toString(Board p){
+        String ret = "";
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < column; j++) {
+                ret += "\t"+p.getBoard()[i][j];
+            }
+            ret += "\n";
+        }
+        return ret;
     }
 
 }
