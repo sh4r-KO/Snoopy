@@ -4,6 +4,7 @@ import snoopy.Controller.JeuDeBaseController;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 
 public class Board {
     public int[][] board;
@@ -69,8 +70,6 @@ public class Board {
         }
     }
 
-
-
     public void moveUp() {
         trappedBlock.trappedBlock();
         if(noop.getX() > 1 && noop.getDirection() == Direction.NORD) {
@@ -93,7 +92,6 @@ public class Board {
         showFadeBlock.fade();
         //x = x - 1;
     }
-
     public void moveDown() {
         trappedBlock.trappedBlock();
         if (noop.getX() < 10 && noop.getDirection() == Direction.SUD) {
@@ -182,24 +180,6 @@ public class Board {
         breakingBlock.breakBlock();
     }
 
-    public void fade() {
-        /*
-        if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() - 1][showFadeBlock.getY()]){
-            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
-        } if (board[noop.getX()][noop.getY()] == board[showFadeBlock.getX() + 1][showFadeBlock.getY()]){
-            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
-        } if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX()][showFadeBlock.getY() - 1]){
-            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
-        } if(board[noop.getX()][noop.getY()] == board[showFadeBlock.getX()][showFadeBlock.getY() + 1]){
-            board[showFadeBlock.getX()][showFadeBlock.getY()] = 0;
-        }
-
-        System.out.println("Fade Block");
-        */
-
-
-    }
-
     public int[][] setBoardFromTextFile(String NameFile, int x, int y){
         /*
         TODO add more than number to be readable by this method
@@ -222,6 +202,7 @@ public class Board {
 
         int rowCount = 0;
         int columnCount = 0;
+
         for(int i=0;i<chararray.length;i++){
             Character tmp = chararray[i];
             if(tmp.equals('\n')){
@@ -233,18 +214,75 @@ public class Board {
             }
         }
 
-
         return t;
     }
+    ArrayList<Entity> allEntityList  = new ArrayList<Entity>();
+    public int[][] setBoardFromTextFile2(String NameFile, int x, int y) {
+        int[][] t = new int[x][y];
+        String ret = null;
+        try {
+            ret = Files.readString(new File("src/main/resources/levels/" + NameFile).toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        char[] chararray = ret.toCharArray();
 
-    public Snoopy getNoop() {
+        int rowCount = 0;
+        int columnCount = 0;
+
+        for (int i = 0; i < chararray.length; i++) {
+            //if  char at i is a space increase column count
+            Character tmp = chararray[i];
+            if (chararray[i] == ' ') {
+                columnCount++;
+            } else if (tmp.equals('\n')) {
+                rowCount++;
+                columnCount = 0;
+            } else {
+
+                switch (tmp) {
+                    case '0':
+                        t[rowCount][columnCount] = 0;
+                        break;
+                    case '1':
+                        t[rowCount][columnCount] = 1;
+                        break;
+                    case '2':
+                        t[rowCount][columnCount] = 2;
+                        break;
+                    case '3':
+                        t[rowCount][columnCount] = 3;
+                        break;
+                    case '4':
+                        t[rowCount][columnCount] = 4;
+                        break;
+                    case '5':
+                        t[rowCount][columnCount] = 5;
+                        break;
+                    case '6':
+                        t[rowCount][columnCount] = 6;
+                        break;
+                    case '7':
+                        t[rowCount][columnCount] = 7;
+                        break;
+                    case '8':
+                        t[rowCount][columnCount] = 8;
+                        break;
+                    case '9':
+                        t[rowCount][columnCount] = 9;
+                        break;
+                }
+                //if not, check if it's a number, if it is :
+                //depending on the number, add the direction wich will always be the charactere at tehe right (i+1)
+                // if this number does not
+            }
+        }
+        return null;
+    }
+
+    public Snoopy getSnoopy() {
         return noop;
     }
-
-    public void setNoop(Snoopy noop) {
-        this.noop = noop;
-    }
-
 
     private void printBoard(){
         for (int[] ints : board) {
@@ -255,7 +293,6 @@ public class Board {
         }
     }
 
-    //getters of board
     public int[][] getBoard() {
         return board;
     }

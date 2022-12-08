@@ -1,22 +1,20 @@
 package snoopy.Model;
 
-public class TrappedBlock {
-    private int x;
-    private int y;
+public class TrappedBlock extends Entity {
     private Snoopy noop;
 
     public TrappedBlock(int x, int y, Snoopy noop) {
-        this.x = x;
-        this.y = y;
+        super(x, y);
         this.noop = noop;
     }
 
     public void trappedBlock() {
         //check if snoopy is on a trapped block
-        if (x == noop.getX() && y == noop.getY()) {
+        if (X == noop.getX() && Y == noop.getY()) {
             noop.LoseLife(1);
-            System.out.println("Snoopy is on a trapped block, x:"+x+" y:"+y+" , PV left"+noop.getPV());
+            System.out.println("Snoopy is on a trapped block, x:"+X+" y:"+Y+" , PV left"+noop.getPV());
         }
     }
+
 
 }

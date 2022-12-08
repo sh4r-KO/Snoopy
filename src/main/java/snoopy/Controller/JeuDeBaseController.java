@@ -23,7 +23,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     public JeuDeBaseController() {
         board = new Board();
-        snoopy = board.getNoop();//il faut absolument que ce soit la meme board que l'attribut board actuel
+        snoopy = board.getSnoopy();//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
         this.b = new Ball(board);
 

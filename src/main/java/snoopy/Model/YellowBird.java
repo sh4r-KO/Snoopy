@@ -21,5 +21,23 @@ public class YellowBird {
             System.out.println("Snoopy is on a yellow bird, x:"+x+" y:"+y+" , PV left"+noop.getPV());
         }
     }
-
+    //getter and setter
+    public int getX() {
+        return x;
+    }
+    public void setX(int x) {
+        this.x = x;
+    }
+    public int getY() {
+        return y;
+    }
+    public void setY(int y) {
+        this.y = y;
+    }
+    public boolean isBirdIsPickedUp() {
+        return birdIsPickedUp;
+    }
+    public void setBirdIsPickedUp(boolean birdIsPickedUp) {
+        this.birdIsPickedUp = birdIsPickedUp;
+    }
 }

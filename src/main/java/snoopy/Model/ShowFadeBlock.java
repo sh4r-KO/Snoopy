@@ -1,8 +1,6 @@
 package snoopy.Model;
 
-public class ShowFadeBlock {
-    private int X;
-    private int Y;
+public class ShowFadeBlock extends Entity {
 
     public Board board;
 
@@ -13,10 +11,9 @@ public class ShowFadeBlock {
 
 
     public ShowFadeBlock( int i, int j,Board b, Snoopy noop) {
+        super(i, j);
         this.board = b;
         this.noop = noop;
-        this.X = i;
-        this.Y = j;
         /*
         for(int i=0; i<12; i++){
             for(int j=0; j<22; j++){
@@ -78,20 +75,6 @@ public class ShowFadeBlock {
 
     }
      */
-
-    public void setX(int X) {
-        this.X=X;
-    }
-    public void setY(int Y) {
-        this.Y=Y;
-    }
-    public int getX() {
-        return X;
-    }
-    public int getY() {
-        return Y;
-    }
-
 
     @Override
     public String toString() {

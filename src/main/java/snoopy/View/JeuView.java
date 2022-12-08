@@ -281,8 +281,6 @@ public class JeuView extends Group {//implements Initializable {
 
     private void drawTime(int timeleft){
 
-
-
 /*
         doThis(0, 0, "MechepasCrameHaut.png");
         doThis(row-1, column-1, "MurBasDroite.png");
