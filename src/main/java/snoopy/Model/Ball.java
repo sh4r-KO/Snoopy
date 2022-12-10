@@ -1,6 +1,6 @@
 package snoopy.Model;
 
-public class Ball {
+public class Ball extends Entity {
 
     private final int speed = 4;
     private int xPosition;
@@ -11,25 +11,12 @@ public class Ball {
     private Direction d;
 
     public Ball(int x, int y, Board b, Direction d) {
+        super(x, y);
         this.snoopyBoard = b;
         this.xPosition = x;
         this.yPosition = y;
         this.d = d;
-        /*
-        boolean found = false;
-        for (int i = 0; i < 12 && !found; i++) {
-            for (int j = 0; j < 22; j++) {
-                if (snoopyBoard != null && snoopyBoard.getBoard()[i][j] == 7){
-                    this.snoopyBoard.getBoard()[i][j] = 70;
-                    this.setBall(i, j, snoopyBoard);
-                    found = true;
-                    break;
-                    //TODO ajouter condition pour ne pas avoir plus que 2 balles
-                }
-            }
-        }
 
-         */
     }
 
     public void setBall (int x, int y,  Board b){//[12][22]
@@ -48,7 +35,7 @@ public class Ball {
             NE : x = x -1 y = y -1  	en haut a dauche
             NO : x = x +1 y = y -1	en haut a droite
          *///System.out.println("ball movement"+toString());
-            if (d == Direction.SO && snoopyBoard.getBoard()[xPosition][yPosition].equals("7SO")) { // = 7A
+            if (d == Direction.SO && snoopyBoard.getBoard()[xPosition][yPosition].contains("7SO")) { // = 7A
                 if(yPosition == 20){
                     d = Direction.SE;
                     snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SO", "7SE");
@@ -65,7 +52,7 @@ public class Ball {
 
 
 
-            } else if (d == Direction.NO && snoopyBoard.getBoard()[xPosition][yPosition].equals("7NO")) {
+            } else if (d == Direction.NO && snoopyBoard.getBoard()[xPosition][yPosition].contains("7NO")) {
 
                 if(yPosition == 20){
                     d = Direction.NE;
@@ -81,7 +68,7 @@ public class Ball {
                 }
 
 
-            } else if (d == Direction.NE && snoopyBoard.getBoard()[xPosition][yPosition].equals("7NE")) {
+            } else if (d == Direction.NE && snoopyBoard.getBoard()[xPosition][yPosition].contains("7NE")) {
                 if(yPosition == 1){
                     d = Direction.NO;
                     snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7NE", "7NO");
@@ -96,7 +83,7 @@ public class Ball {
                 }
 
 
-            } else if (d == Direction.SE && snoopyBoard.getBoard()[xPosition][yPosition].equals("7SE")) {
+            } else if (d == Direction.SE && snoopyBoard.getBoard()[xPosition][yPosition].contains("7SE")) {
                 if(yPosition == 1){
                     d = Direction.SO;
                     snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SE", "7SO");
@@ -113,9 +100,6 @@ public class Ball {
             }
         }
         /*
-
-
-
         public void movement() {
 
        advacing meaning : depending on the direction we will be facing, the coordinates shall changes or not accordingly.

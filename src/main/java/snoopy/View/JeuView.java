@@ -91,7 +91,7 @@ public class JeuView extends Group {//implements Initializable {
        // this.setFocusTraversable(false);
 
         matrixImagesView = new ImageView[row][column];
-        for (int i = 0; i < row; i++) {//
+        for (int i = 0; i < row; i++) {
             for (int j = 0; j < column; j++) {
 
                 ImageView imageView = new ImageView();
@@ -111,6 +111,9 @@ public class JeuView extends Group {//implements Initializable {
 
             }
         }
+
+
+        initBallMatrix();
         System.out.println("initialize() done");
         //print things that should only be printed once
         drawGreen();
@@ -134,6 +137,32 @@ public class JeuView extends Group {//implements Initializable {
     if nothing is specified, the upadte method will simply draw the png accordingly to the board
     concerning empty bloc, it will be a random grass png chosen beetween the 3 avaiblable
      */
+
+    ImageView[][] matrixViewBall = new ImageView[row][column];
+    private void initBallMatrix(){
+        matrixViewBall = new ImageView[row][column];
+        for (int i = 0; i < row; i++) {//
+            for (int j = 0; j < column; j++) {
+
+                ImageView imageView = new ImageView();
+                //imageView = style(imageView);
+                imageView.setX((double)j * CELL_WIDTH);
+                imageView.setY((double)i * CELL_WIDTH);
+                imageView.setFitHeight(CELL_WIDTH);
+                imageView.setFitWidth(CELL_WIDTH);
+                imageView.setPreserveRatio(true);
+                //imageView.setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
+                imageView.toFront();
+                matrixViewBall[i][j] = imageView;
+                //this.setFocusTraversable(false);//je pense que yavait une erreur de focus (un null pointeur ) apres test : ben non mais on a qu'a le laisser
+                this.getChildren().add(imageView);
+            }
+        }
+        System.out.println("initialize() done");
+        //print things that should only be printed once
+        drawWall();
+        drawGreen();
+    }
 
     public void update(Board p, int timeleft) {/*
         if (p == null || p.getBoard() == null || p.getBoard().length == 0) {
@@ -333,9 +362,15 @@ public class JeuView extends Group {//implements Initializable {
                     case "9W": {
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauGauche.png").toURI().toString()));
                     }
-                     */         if(p.getBoard()[i][j].contains("7")){//for the ball
-                    //matrixViewBall[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
-                }
+                     */
+                System.out.println("T:"+T+".");
+                if(T.contains("7")) {
+                    if (T.contains("7SE") || T.contains("7SO") || T.contains("7NE") || T.contains("7NO")) {
+                        matrixViewBall[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
+                    }
+                }else {//empty
+                        matrixViewBall[i][j].setImage(new Image(new File("src/main/resources/img/empty.png").toURI().toString()));
+                    }
                 if (T.equals("0")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
                 } else if (T.equals("1")) {
@@ -377,8 +412,7 @@ public class JeuView extends Group {//implements Initializable {
                     } else if (T.equals("6W")) {
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocTapisRoulantGauche.png").toURI().toString()));
                     }
-                }
-                else if (T.contains("8")) {
+                } else if (T.contains("8")) {
                     if (T.contains("8N")) {
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/SnoopyHaut.png").toURI().toString()));
                     } else if (T.contains("8S")) {
@@ -389,8 +423,7 @@ public class JeuView extends Group {//implements Initializable {
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/SnoopyGauche.png").toURI().toString()));
                     }
 
-                }
-                else if(T.equals("9E")){
+                } else if(T.equals("9E")){
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauDroite.png").toURI().toString()));
                 }else if(T.equals("9O")){
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauGauche.png").toURI().toString()));
@@ -401,7 +434,7 @@ public class JeuView extends Group {//implements Initializable {
     }
 
 
-    private void drawGreen() {
+    private void drawGreen() {//matrixless?
         for (int i = 2; i < row-2; i++) {
             for (int j = 2; j < column-2; j++) {
                 ImageView imageView = new ImageView();
@@ -491,34 +524,7 @@ public class JeuView extends Group {//implements Initializable {
         }
     }
 
-    private void drawTime(int timeleft){
 
-/*
-        doThis(0, 0, "MechepasCrameHaut.png");
-        doThis(row-1, column-1, "MurBasDroite.png");
-        doThis(row-1, 0, "MurBasGauche.png");
-        doThis(0, column-1, "MurHautDroite.png");
-
-        //walls
-        //left wall
-        for (int i = 1; i < row-1; i++) {
-            doThis(i, 0, "MechepasCrameGauche.png");
-        }
-        //right wall
-        for (int i = 1; i < row-1; i++) {
-            doThis(i, column-1, "MechepasCrameDroite.png");
-        }
-        //top wall
-        for (int i = 1; i < column-1; i++) {
-            doThis(0, i, "MechepasCrameHaut.png");
-        }
-        //bottom wall
-        for (int i = 1; i < column-1; i++) {
-            doThis(row-1, i, "MechepasCrameBas.png");
-        }
-
- */
-    }
     public void drawWall(){
 
 

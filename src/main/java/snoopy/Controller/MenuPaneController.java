@@ -12,6 +12,8 @@ import java.io.IOException;
 public class MenuPaneController extends Controller{
     @FXML private AnchorPane menuPaneAnchor;
 
+
+
     public void JeuDeBaseCliked() throws IOException {
         //super.changePane("JeuDeBase.fxml", menuPaneAnchor);
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
@@ -27,7 +29,8 @@ public class MenuPaneController extends Controller{
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
 
-
+        JeuDeBaseController controller = loader.getController();
+        controller.Startgame();
     }
 
     public void chargerUnePartieCliked() throws IOException {

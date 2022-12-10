@@ -181,7 +181,12 @@ public class Board {
 
             if((noop.getY()<20 && pressedDirection==Direction.E )|| (noop.getY() > 1 && noop.getDirection() == Direction.O)|| (noop.getX() < 10 && noop.getDirection() == Direction.S)|| (noop.getX() > 1 && noop.getDirection() == Direction.N )){  //snoopy goes on a empty case
                 //normal or trap bloc
-                if(fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0") || fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("3")){
+                if(fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0")
+                        || fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("3")
+                        || fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("6E")
+                        || fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("6O")
+                        || fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("6S")
+                        || fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("6N")   ){
 
                     fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8"+pressedDirection , "");
                     noop.setX(noop.getX() + Xmodifier);
@@ -458,7 +463,7 @@ public class Board {
                         } else if (chararray[i + 1] == 'S') {
                             ret[rowCount][columnCount] = "6" + chararray[i + 1];
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.S));
-                        } else if (chararray[i + 1] == 'W') {
+                        } else if (chararray[i + 1] == 'O') {
                             ret[rowCount][columnCount] = "6" + chararray[i + 1];
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.O));
                         } else if (chararray[i + 1] == 'E') {
@@ -466,23 +471,23 @@ public class Board {
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.E));
                         }
                     }
-                    case '7' -> {/*if (chararray[i + 1] != 'A' && chararray[i + 1] != 'B' && chararray[i + 1] != 'C' && chararray[i + 1] != 'D') {// get the next char to find the direction
+                    case '7' -> {
+                        if (chararray[i + 1] != 'S' && chararray[i + 1] != 'N' && chararray[i + 2] != 'O' && chararray[i + 2] != 'E') {// get the next char to find the direction
                             throw new IllegalArgumentException("Snoopy.Model.setBoardFromText.334 : chararray[i+1] inst NSWE");
-                        } else if (chararray[i + 1] == 'A') {
+                        } else if (chararray[i + 1] == 'S' && chararray[i + 2] == 'O') {
                             ret[rowCount][columnCount] = '7' + "SO";
-                            allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.SO));
-                        } else if (chararray[i + 1] == 'B') {
+                            allEntityList.add(new Ball(rowCount, columnCount, this,  Direction.SO));
+                        } else if (chararray[i + 1] == 'S' && chararray[i + 2] == 'E') {
                             ret[rowCount][columnCount] = '7' + "SE";
-                            allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.SE));
-                        } else if (chararray[i + 1] == 'C') {
+                            allEntityList.add(new Ball(rowCount, columnCount, this,  Direction.SE));
+                        } else if (chararray[i + 1] == 'N' && chararray[i + 2] == 'O') {
                             ret[rowCount][columnCount] = '7' + "NO";
-                            allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.NO));
-                        } else if (chararray[i + 1] == 'D') {
+                            allEntityList.add(new Ball(rowCount, columnCount, this,  Direction.NO));
+                        } else if (chararray[i + 1] == 'N' && chararray[i + 2] == 'E') {
                             ret[rowCount][columnCount] = '7' + "NE";
-                            allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.NE));
+                            allEntityList.add(new Ball(rowCount, columnCount, this, Direction.NE));
                         }
-
-                         */}
+                    }
                     case '8' -> {}
                     //case '8' : pas besoin de case8, on l'a fait avec
                     case '9' -> {//player
@@ -537,5 +542,13 @@ public class Board {
             ret += "\n";
         }
         return ret;
+    }
+
+    public void moveBall() {
+        for (Entity e : allEntityList) {
+            if (e instanceof Ball) {
+                e.Action();
+            }
+        }
     }
 }

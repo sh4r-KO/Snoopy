@@ -59,7 +59,7 @@ bird                    : 2 states
 4 no direction
 5 no direction
 6 4 direction NSWE
-7 4 direction(diagonal)  ABCD (A=SO, B=SE, C=NO, D=NE)
+7 4 SO, B=SE, C=NO, D=NE)
 8 4 direction NSWE
 9 2 direction EW (E=EAST, W=WEST)
 

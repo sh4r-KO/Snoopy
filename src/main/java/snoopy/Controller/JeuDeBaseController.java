@@ -32,15 +32,17 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
         //Snoopy s = new Snoopy(board);
         //jeuView.update(board);
-        this.startTimer();
     }
 
 
     public void initialize() {
         //why initialize and not constructor :
         //https://stackoverflow.com/a/34785707
-
     }
+    public void Startgame(){
+        this.startTimer();
+    }
+
     private final int DELAY = 75;//TODO doit absolument etre 100
     private int facteurDe200ms = 5;
     private void startTimer() {
@@ -50,7 +52,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
                 jeuView.updateFrame(board);
                 //board.update();
-                //b.movement();
+                board.moveBall();
 
             }
         };
