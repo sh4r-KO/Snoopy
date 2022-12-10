@@ -1,29 +1,106 @@
 package snoopy.Model;
 
-public class PushingBlock {
-    private int X;
-    private int Y;
+public class PushingBlock extends Entity {
 
     private Board board;
     private Snoopy noop;
-    private ShowFadeBlock showFadeBlock;
-    private TreadMillBlock treadMillBlock;
+    private Direction direction;
+    private boolean pushed = false;
 
-
-
-
-    public PushingBlock(Snoopy noop){
+    public PushingBlock( int i, int j,Board b, Snoopy noop, Direction d){
         //localisation du bloc
-        for(int i=0; i<12; i++) {
-            for (int j = 0; j < 22; j++) {
-                if (board.board[i][j] == 5) {
-                    this.X = X;
-                    this.Y = Y;
-                    break;
+        super(i,j);
+        this.board = b;
+        this.noop = noop;
+        //direction du bloc
+        this.direction = d;
+    }
+
+    private void isPushedToTheRight(){
+
+                if(noop.getX() == X
+                        && noop.getY()==Y-1
+                        && board.getBoard()[X][Y+1].contains("0")
+                        && direction == noop.getDirection() && direction== Direction.E
+                        && Y != 20
+                ){
+
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2E", "0");
+                    board.getBoard()[X][Y+1] = board.getBoard()[X][Y+1].replace("0", "4");
+
+                    Y++;
+                    pushed = true;
+
+
                 }
-            }
+    }
+    private void isPushedToTheLeft(){
+                if(noop.getX() == X
+                        && noop.getY()==Y+1
+                        && board.getBoard()[X][Y-1].contains("0")
+                        && direction == noop.getDirection()
+                        && direction== Direction.O
+                        && Y!=1){//snoopy à droite && rien à gauche sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle a gauche
+
+
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2O", "0");
+                    board.getBoard()[X][Y-1] = board.getBoard()[X][Y-1].replace("0", "4");
+                    Y--;
+                    pushed = true;
+
+                }
+    }
+    private void isPushedToTheTop(){
+                if(noop.getX() == X+1
+                        && noop.getY()==Y
+                        && board.getBoard()[X-1][Y].contains("0")
+                        && direction == noop.getDirection() && direction== Direction.N
+                        &&X != 1){//snoopy en bas && rien en haut sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle en haut
+
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2N", "0");
+                    board.getBoard()[X-1][Y] = board.getBoard()[X-1][Y].replace("0", "4");
+                    X--;
+                    pushed = true;
+                }
+
+                //System.out.println("isPushedToTheTop : false"+ "(noop.getX() == X+1 ):"+(noop.getX() == X+1 )+"\n"+ "(noop.getX()):"+(noop.getX())+"\n"+ "(X+1):"+(X+1)+"\n"+ "(noop.getY()==Y ):"+(noop.getY()==Y  )+"\n"+ "(board.getBoard()[X-1][Y].contains(\"0\") ):"+(board.getBoard()[X-1][Y].contains("0"))+"\n"+ "(direction == noop.getDirection() && direction== Direction.N ):"+(direction == noop.getDirection() && direction== Direction.N)+"\n");
+    }
+    private void isPushedToTheBottom(){
+                if(noop.getX() == X-1
+                        && noop.getY()==Y
+                        && board.getBoard()[X-1][Y].contains("0")
+                        && direction == noop.getDirection() && direction== Direction.S
+                        && X != 10){//snoopy en haut && rien en bas sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle en bas
+
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2S", "0");
+                    board.getBoard()[X-1][Y] = board.getBoard()[X-1][Y].replace("0", "4");
+
+                    X++;
+                    pushed = true;
+                }
+    }
+
+    public void Action(){
+        //check if X,Y contains 2N,2S,2E,2O, if not throw illegal argument exception
+        if( ! board.getBoard()[X][Y].contains("2N") && ! board.getBoard()[X][Y].contains("2S") && ! board.getBoard()[X][Y].contains("2E") && ! board.getBoard()[X][Y].contains("2O")){
+            //throw new IllegalArgumentException("PushingBlock Action() : X,Y doesn't contain 2N,2S,2E,2O on board given");
+        } else if(direction == Direction.E && Y<20 && !pushed){
+            isPushedToTheRight();
+            //System.out.println("pushing block to the right "+toString());
+        } else if(direction == Direction.O && Y>1 && !pushed){
+            isPushedToTheLeft();
+            //System.out.println("pushing block to the left "+toString());
+        } else if(direction == Direction.N && X>1&& !pushed ){
+            //System.out.println("pushing block to the top "+toString()+"__");
+            isPushedToTheTop();
+        } else if(direction == Direction.S && X<10 && !pushed ){
+            isPushedToTheBottom();
+            //System.out.println("pushing block to the bot "+toString());
         }
     }
+
+
+    /*
 
     public void pushingBlock(){
       if((board.board[noop.getX()][noop.getY()]== board.board[X-1][Y]) ){
@@ -31,7 +108,6 @@ public class PushingBlock {
       }
     }
 
-    public void neirbourgh(){
         //ShowFadeBlock
         if((board.board[showFadeBlock.getX()][showFadeBlock.getY()] == board.board[X+1][Y]) && (board.board[noop.getX()][noop.getY()] == board.board[X-1][Y])){
             board.board[X][Y] = board.board[X][Y];
@@ -71,16 +147,19 @@ public class PushingBlock {
         if((board.board[treadMillBlock.getX()][treadMillBlock.getY()] == board.board[X][Y-1]) && (board.board[noop.getX()][noop.getY()] == board.board[X][Y+1])){
             board.board[X][Y] = board.board[X][Y];
         }
-    }
+
+
 
     public void setX(int X) {this.X=X;}
     public void setY(int Y) {this.Y=Y;}
     public int getX() {return X;}
     public int getY() {return Y;}
 
+     */
+
     @Override
     public String toString() {
-        String r = "x:"+this.X+" y:"+this.Y+"d:";
+        String r = "x:"+this.X+" y:"+this.Y;
         return r;
     }
 }
