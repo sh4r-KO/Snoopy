@@ -165,38 +165,40 @@ public class Board {
     }
     public void move(Direction pressedDirection,int Xmodifier,int Ymodifier) {
         for (Entity entity : allEntityList) {
-            if (entity instanceof PushingBlock pushB){
-                //pcushingBlock.setSpacePressed(true);
+            /*
+             if (!(entity instanceof PushingBlock pushB) && !(entity instanceof TrappedBlock tb && tb.triggered())){
+            }else if(entity instanceof TrappedBlock tb && tb.triggered()){
             }else{
                 entity.Action();
-
+            }
+             */
+            if (!(entity instanceof PushingBlock pushB) && !(entity instanceof TrappedBlock tb && tb.triggered())){
+                entity.Action();
             }
         }
         System.out.println("move"+noop.getX()+","+noop.getY());
         if(     noop.getDirection() == pressedDirection){
 
-            if(     (noop.getY()<20 && pressedDirection==Direction.E )||
-                    (noop.getY() > 1 && noop.getDirection() == Direction.O)||
-                    (noop.getX() < 10 && noop.getDirection() == Direction.S)||
-                    (noop.getX() > 1 && noop.getDirection() == Direction.N )
-            ){  //snoopy goes on a empty case
-                if(fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0")){
+            if((noop.getY()<20 && pressedDirection==Direction.E )|| (noop.getY() > 1 && noop.getDirection() == Direction.O)|| (noop.getX() < 10 && noop.getDirection() == Direction.S)|| (noop.getX() > 1 && noop.getDirection() == Direction.N )){  //snoopy goes on a empty case
+                //normal or trap bloc
+                if(fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0") || fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("3")){
+
+                    fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8"+pressedDirection , "");
+                    noop.setX(noop.getX() + Xmodifier);
+                    noop.setY(noop.getY() + Ymodifier);
+                    fullBoard[noop.getX()][noop.getY()] += ("8"+pressedDirection);
+                //Bird touched
+                }else if(fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("9")){
 
                     fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8"+pressedDirection , "");
                     noop.setX(noop.getX() + Xmodifier);
                     noop.setY(noop.getY() + Ymodifier);
                     fullBoard[noop.getX()][noop.getY()] += ("8"+pressedDirection);
 
-                }//pushing bloc in front/near snoopy
-                else if(((fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2N")&&pressedDirection==Direction.N)||
-                        (fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2S")&&pressedDirection==Direction.S)||
-                        (fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2E")&&pressedDirection==Direction.E)||
-                        (fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2O")&&pressedDirection==Direction.O))
-
-                        && 1<noop.getX()+Xmodifier
-                        && noop.getX()+Xmodifier < 10
-                        && 1< noop.getY()+Ymodifier
-                        && noop.getY()+Ymodifier < 20){//empty space behind the pushing block
+                }
+                //pushing bloc in front/near snoopy
+                //wnoopy pushes a block
+                else if(((fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2N")&&pressedDirection==Direction.N)|| (fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2S")&&pressedDirection==Direction.S)|| (fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2E")&&pressedDirection==Direction.E)|| (fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("2O")&&pressedDirection==Direction.O)) && 1<noop.getX()+Xmodifier && noop.getX()+Xmodifier < 10 && 1< noop.getY()+Ymodifier && noop.getY()+Ymodifier < 20){//empty space behind the pushing block
                     for (Entity entity : allEntityList) {
                         if (entity instanceof PushingBlock pushB){
                             pushB.Action();
@@ -209,7 +211,15 @@ public class Board {
                     noop.setY(noop.getY() + Ymodifier);
                     fullBoard[noop.getX()][noop.getY()] += ("8"+pressedDirection);
                 }
+                //snoopy walks on a trap
+                else if(fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].contains("3") && 1<noop.getX()+Xmodifier && noop.getX()+Xmodifier < 10 && 1< noop.getY()+Ymodifier && noop.getY()+Ymodifier < 20){
 
+                    fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8"+pressedDirection , "");
+                    noop.setX(noop.getX() + Xmodifier);
+                    noop.setY(noop.getY() + Ymodifier);
+                    fullBoard[noop.getX()][noop.getY()] += ("8"+pressedDirection);
+
+                }
             }
 
         }else if (  noop.getDirection() != pressedDirection){
@@ -219,9 +229,9 @@ public class Board {
         for (Entity entity : allEntityList) {
             if (entity instanceof PushingBlock pushB){
                 //pcushingBlock.setSpacePressed(true);
+                //dont do anything
             }else{
                 entity.Action();
-
             }
         }
     }
@@ -400,12 +410,9 @@ public class Board {
                 columnCount = 0;
             } else {
                 switch (tmp) {
-                    case '0' -> {//empty
-
-                        //no need to add a new entity, the absence of one is enough as intel
+                    case '0' -> {/*no need to add a new entity, the absence of one is enough as intel
                         //allEntityList.add(new Entity(rowCount, columnCount, 0));
-
-                    }
+                        */}
                     case '1' -> {//breakable
                         ret[rowCount][columnCount] = "1";
                         allEntityList.add(new BreakingBlock(rowCount, columnCount, this, noop));
@@ -430,8 +437,8 @@ public class Board {
 
                     }
                     case '3' -> {//trap block no direction
-                        ret[rowCount][columnCount] = "2";
-                        allEntityList.add(new TrappedBlock(rowCount, columnCount, noop));
+                        ret[rowCount][columnCount] = "3";
+                        allEntityList.add(new TrappedBlock(rowCount, columnCount,this, noop));
 
                     }
                     case '4' -> {//block invincible
@@ -446,21 +453,20 @@ public class Board {
                         if (chararray[i + 1] != 'N' && chararray[i + 1] != 'S' && chararray[i + 1] != 'W' && chararray[i + 1] != 'E') {// get the next char to find the direction
                             throw new IllegalArgumentException("Snoopy.Model.setBoardFromText.316 : chararray[i+1] inst NSWE");
                         } else if (chararray[i + 1] == 'N') {
-                            ret[rowCount][columnCount] = '6' + chararray[i + 1] + "";
+                            ret[rowCount][columnCount] = "6" + chararray[i + 1];
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.N));
                         } else if (chararray[i + 1] == 'S') {
-                            ret[rowCount][columnCount] = '6' + chararray[i + 1] + "";
+                            ret[rowCount][columnCount] = "6" + chararray[i + 1];
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.S));
                         } else if (chararray[i + 1] == 'W') {
-                            ret[rowCount][columnCount] = '6' + chararray[i + 1] + "";
+                            ret[rowCount][columnCount] = "6" + chararray[i + 1];
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.O));
                         } else if (chararray[i + 1] == 'E') {
-                            ret[rowCount][columnCount] = '6' + chararray[i + 1] + "";
+                            ret[rowCount][columnCount] = "6" + chararray[i + 1];
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.E));
                         }
                     }
-                    case '7' -> {//ball
-                        if (chararray[i + 1] != 'A' && chararray[i + 1] != 'B' && chararray[i + 1] != 'C' && chararray[i + 1] != 'D') {// get the next char to find the direction
+                    case '7' -> {/*if (chararray[i + 1] != 'A' && chararray[i + 1] != 'B' && chararray[i + 1] != 'C' && chararray[i + 1] != 'D') {// get the next char to find the direction
                             throw new IllegalArgumentException("Snoopy.Model.setBoardFromText.334 : chararray[i+1] inst NSWE");
                         } else if (chararray[i + 1] == 'A') {
                             ret[rowCount][columnCount] = '7' + "SO";
@@ -475,15 +481,21 @@ public class Board {
                             ret[rowCount][columnCount] = '7' + "NE";
                             allEntityList.add(new TreadMillBlock(rowCount, columnCount, this, noop, Direction.NE));
                         }
-                    }
-                    case '8' -> {
 
-                    }
+                         */}
+                    case '8' -> {}
                     //case '8' : pas besoin de case8, on l'a fait avec
                     case '9' -> {//player
                         //TODO add bird direction dumbass
-                        ret[rowCount][columnCount] = "9";
-                        allEntityList.add(new YellowBird(rowCount, columnCount, this, noop));
+                        if (chararray[i + 1] != 'O' && chararray[i + 1] != 'E') {// get the next char to find the direction
+                            throw new IllegalArgumentException("Snoopy.Model.setBoardFromText.316 : chararray[i+1] inst NSWE");
+                        } else if (chararray[i + 1] == 'E') {
+                            ret[rowCount][columnCount] = "9" + chararray[i + 1] + "";
+                            allEntityList.add(new YellowBird(rowCount, columnCount, this, noop));
+                        } else if (chararray[i + 1] == 'O') {
+                            ret[rowCount][columnCount] = "9" + chararray[i + 1] + "";
+                            allEntityList.add(new YellowBird(rowCount, columnCount, this, noop ));
+                        }
                     }
                     case 'N'-> {}
                     case 'S'-> {}

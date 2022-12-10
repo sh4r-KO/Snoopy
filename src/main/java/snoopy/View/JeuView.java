@@ -348,8 +348,21 @@ public class JeuView extends Group {//implements Initializable {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPoussableHaut.png").toURI().toString()));
                 } else if (T.equals("2S")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPoussableBas.png").toURI().toString()));
-                } else if (T.equals("3")) {
-                    matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiege.png").toURI().toString()));
+                } else if (T.contains("3")) {
+
+                    if(T.equals("3")){
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiege.png").toURI().toString()));
+                    }else if(T.equals("38N")){
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiegeSnoopyHaut.png").toURI().toString()));
+                    }else if(T.equals("38S")){
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiegeSnoopyBas.png").toURI().toString()));
+                    }else if(T.equals("38E")){
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiegeSnoopyDroite.png").toURI().toString()));
+                    }else if(T.equals("38O")){
+                        matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiegeSnoopyGauche.png").toURI().toString()));
+                    }
+
+                    //matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPiege.png").toURI().toString()));
                 } else if (T.equals("4")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocInvincible.png").toURI().toString()));
                 } else if (T.equals("5")) {
@@ -379,10 +392,9 @@ public class JeuView extends Group {//implements Initializable {
                 }
                 else if(T.equals("9E")){
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauDroite.png").toURI().toString()));
-                }else if(T.equals("9W")){
+                }else if(T.equals("9O")){
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauGauche.png").toURI().toString()));
                 }
-                //System.out.println(p.toString());
             }
         }
 

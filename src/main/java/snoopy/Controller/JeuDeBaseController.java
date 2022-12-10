@@ -41,7 +41,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         //https://stackoverflow.com/a/34785707
 
     }
-    private final int DELAY = 200;//TODO doit absolument etre 100
+    private final int DELAY = 75;//TODO doit absolument etre 100
     private int facteurDe200ms = 5;
     private void startTimer() {
         this.timer = new java.util.Timer();
