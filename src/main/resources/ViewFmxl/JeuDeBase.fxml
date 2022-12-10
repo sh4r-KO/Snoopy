@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<?import snoopy.View.*?>
+
+
+<?import java.lang.Integer?>
+<BorderPane prefHeight="810.0"
+            prefWidth="1440.0"
+            xmlns="http://javafx.com/javafx/11.0.14-internal"
+            fx:id="JeuBorderPane"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="snoopy.Controller.JeuDeBaseController">
+    <fx:define>
+        <Integer fx:id="row" fx:value="12"/>
+        <Integer fx:id="column" fx:value="22"/>
+
+    </fx:define>
+
+    <top>
+        <Label fx:id="scoreLabel" text="Score : 0" textFill="BLACK" BorderPane.alignment="CENTER" layoutY="20">
+            <style>
+                -fx-font-family: "Press Start 2P";
+                -fx-padding: 20 0 0 0;
+            </style>
+        </Label>
+
+    </top>
+
+    <center>
+        <JeuView fx:id="jeuView" />
+    </center>
+
+</BorderPane>
+
+

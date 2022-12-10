@@ -2,6 +2,7 @@ package snoopy.Controller;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import snoopy.Model.*;
@@ -14,6 +15,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
+    @FXML public Label scoreLabel;
     private Ball b;
     static Board board;//static.............
     private Timer timer;
@@ -57,6 +59,10 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
         };
         this.timer.schedule(timerTask, DELAY, DELAY);
+    }
+
+    public void setScoreLabel(int score){
+        this.scoreLabel.setText("Score : " + score);
     }
 
     @Override
