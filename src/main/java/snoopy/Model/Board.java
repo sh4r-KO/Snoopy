@@ -1,8 +1,11 @@
 package snoopy.Model;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -11,6 +14,10 @@ public class Board {
 
     private  ArrayList<Entity> allEntityList  = new ArrayList<Entity>();
     private String[][] fullBoard;
+    private int currentLevelNumber = 1;
+    private int LevelNumberMax = 3;//inclusive
+    private int score;
+    private int chrono;
     //TODO make an arraylist for each type of block
     /*
     idéalement on devrai avoir une seule méthode move, avec un parcours d'arraylist avec multi-types, et chaque block a une methode Execute/ do SMT qui est trèes spécifique à chaque type de block
@@ -22,42 +29,83 @@ public class Board {
         this.fullBoard = this.setBoardFromTextFile2("test.txt", 12, 22);
         System.out.println("board created:\n"+this.toString());
 
-
-        /*for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 22; j++) {
-                if (board[i][j] == 8) {
-                    this.noop = new Snoopy(i, j, this, Direction.OUEST);
-                }
-            }
-        }
-
-         */
-        //localisation Bloc Show/fade
-       /* for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 22; j++) {
-                if (board[i][j] == 5) {//locatlisation showFadeBlock
-                    showFadeBlock = new ShowFadeBlock(i, j, this, noop);
-                }else if (board[i][j] == 2) {        //localisation Bloc pushing block
-                    pushingBlock = new PushingBlock(i, j,this,noop, Direction.OUEST);
-                }else if(board[i][j] == 1){        //localisation Bloc breaking block
-                    breakingBlock = new BreakingBlock(i,j,this,noop);
-                }else if (board[i][j] == 3){        //localisation Bloc trapped block
-                    trappedBlock = new TrappedBlock(i,j,noop);
-                }
-            }
-        }
-
-        */
     }
     //TODO change le tmp method by a  =0 & = 8 ou un -8 + 8 dans ce cas faut rajouter des conditions en mode ya rien derriere == 0 en l'occurence a droite wich is logic reprend la version de Pushing block en cas de doute
+
+    public void levelFinished() {
+        //level finished ?
+         boolean levelFinished = true;
+        for( Entity e : allEntityList) {
+            if (e instanceof YellowBird Bird) {
+                if(!Bird.IsPickedUp()) {
+                    levelFinished= false;
+                }
+            }
+        }
+
+        if(levelFinished) {
+            System.out.println("level finished");
+        }
+        currentLevelNumber++;
+        if(currentLevelNumber > LevelNumberMax) {
+            gameWon();
+        } else {//load next level
+            this.setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
+        }
+
+    }
+    public void levelFailed(){
+        restartLevel();
+    }
+    public void restartLevel(){
+        setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
+    }
+    public void setChrono(int chrono) {
+        this.chrono = chrono;
+    }
+    public void gameWon(){
+
+        System.out.println("game finished");
+    }
+    public void gameLost(){
+        if(getSnoopy().getPV() == 0) {
+            System.out.println("Game lost");
+        }
+    }
+
+    public void SaveScore(String nom, int score) {
+        try
+        {
+            String filename= "Scores.txt";
+            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+            fw.write(nom+"___"+score+"\n");//appends the string to the file
+            fw.close();
+        }
+        catch(IOException ioe)
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+        }
+    }
+    public int setScore() {
+        return score+= 100*chrono;
+    }
+
+    public void moveBall() {
+        for (Entity e : allEntityList) {
+            if (e instanceof Ball) {
+                e.Action();
+            }
+        }
+    }
     public void spacePressed(){
+
         for (Entity entity : allEntityList) {
             if (entity instanceof BreakingBlock BrkBlk) {
                 BrkBlk.setSpacePressed(true);
             }
         }
-    }
 
+    }
     public void moveUp() {
         this.move(Direction.N,-1,0);
         /*
@@ -112,30 +160,7 @@ public class Board {
     }
     public void moveRight() {
         this.move(Direction.E,0,+1);
-        /*
-        trappedBlock.trappedBlock();
-        if(noop.getY() < 20 && noop.getDirection() == Direction.EST) {
-            if(pushingBlock.isPushedToTheRight()) {
-                board[noop.getX()][noop.getY()] -= 8;
-                noop.setY(noop.getY() + 1);
-                board[noop.getX()][noop.getY()] += 8;
 
-            }else{
-
-                if(board[noop.getX()][noop.getY()+1] == 0||board[noop.getX()][noop.getY()+1] == 3){
-                    board[noop.getX()][noop.getY()] -= 8;
-                    noop.setY(noop.getY() + 1);
-                    board[noop.getX()][noop.getY()] += 8;
-                }
-            }
-
-            System.out.println("movedright");
-        }else {
-            noop.setDirection(Direction.EST);
-        }
-        showFadeBlock.fade();
-        //y =y +1
-        */
     }
     public void moveLeft() {
         this.move(Direction.O,0,-1);
@@ -207,7 +232,7 @@ public class Board {
                     for (Entity entity : allEntityList) {
                         if (entity instanceof PushingBlock pushB){
                             pushB.Action();
-                            allEntityList.remove(pushB);
+                            //allEntityList.remove(pushB);
                         }
                     }
 
@@ -240,112 +265,10 @@ public class Board {
             }
         }
     }
-            /*
-            public void move(Direction pressedDirection,int Xmodifier,int Ymodifier) {
-        for (Entity entity : allEntityList) {
-            entity.Action();
-        }
-        System.out.println("move"+noop.getX()+","+noop.getY());
-        if(     noop.getDirection() == pressedDirection){
-
-
-            if(noop.getY()<20 && pressedDirection==Direction.E && fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0")){
-                fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8E" , "");
-                noop.setX(noop.getX() + Xmodifier);
-                noop.setY(noop.getY() + Ymodifier);
-                fullBoard[noop.getX()][noop.getY()] += ("8E");
-            }else if (noop.getY() > 1 && noop.getDirection() == Direction.O&& fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0")){
-                fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8O" , "");
-                noop.setX(noop.getX() + Xmodifier);
-                noop.setY(noop.getY() + Ymodifier);
-                fullBoard[noop.getX()][noop.getY()] += ("8O");
-            }else if (noop.getX() < 10 && noop.getDirection() == Direction.S&& fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0")){
-                fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8S" , "");
-                noop.setX(noop.getX() + Xmodifier);
-                noop.setY(noop.getY() + Ymodifier);
-                fullBoard[noop.getX()][noop.getY()] += ("8S");
-            }else if(noop.getX() > 1 && noop.getDirection() == Direction.N && fullBoard[noop.getX()+Xmodifier][noop.getY()+Ymodifier].equals("0")){
-                fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8N" , "");
-                noop.setX(noop.getX() + Xmodifier);
-                noop.setY(noop.getY() + Ymodifier);
-                fullBoard[noop.getX()][noop.getY()] += ("8N");
-            }
-            for (Entity entity : allEntityList) {
-                entity.Action();
-            }
-        }else if (  noop.getDirection() != pressedDirection){
-            fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8" + noop.getDirection(), "8"+pressedDirection);
-            noop.setDirection(pressedDirection);
-        }
-        for (Entity entity : allEntityList) {
-            //entity.Action();
-        }
-    }
-            ///////////////////////////////
-            if(noop.getX() > 0 && noop.getX()<12 && noop.getY()>0&& noop.getY()<22 &&  noop.getDirection() == pressedDirection) {// 8N
-            if(fullBoard[noop.getX()][noop.getY()].equals("0")){
-                fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8"+pressedDirection.toString(), "");
-                noop.setX(noop.getX()+Xmodifier);
-                noop.setY(noop.getY()+Ymodifier);
-                fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("0", "8"+pressedDirection.toString());
-            }else if(fullBoard[noop.getX()][noop.getY()].contains("6")){
-                fullBoard[noop.getX()][noop.getY()] = fullBoard[noop.getX()][noop.getY()].replace("8"+pressedDirection.toString(), "");
-                noop.setX(noop.getX()+Xmodifier);
-                noop.setY(noop.getY()+Ymodifier);
-                fullBoard[noop.getX()][noop.getY()]  +="8"+pressedDirection.toString();
-            }else if(fullBoard[noop.getX()][noop.getY()].contains("3")) {
-                //TODO walk on trap
-            }else if(fullBoard[noop.getX()][noop.getY()].contains("7")) {
-                //TODO touch ball
-            }else if(fullBoard[noop.getX()][noop.getY()].contains("9")) {
-                //TODO touch bird
-            }else {
-                throw new IllegalArgumentException("Snoopy cant walk on anything else than grass, trap or treadmill")
-            }
-            //////////////////////////::
-
-             */
-
-    public int[][] setBoardFromTextFile(String NameFile, int x, int y) {
-        /*
-        TODO add more than number to be readable by this method
-        char[] charArray = new char[]{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'};
-
-        for (char a : charArray) {
-            int b = a;
-            System.out.println("char "+a+" :"+b);
-        }
-        */
-        String ret = null;
-        int[][] t = new int[x][y];
-        try {
-            ret = Files.readString(new File("src/main/resources/levels/" + NameFile).toPath());
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-
-        char[] chararray = ret.toCharArray();
-
-        int rowCount = 0;
-        int columnCount = 0;
-
-        for (int i = 0; i < chararray.length; i++) {
-            Character tmp = chararray[i];
-            if (tmp.equals('\n')) {
-                rowCount++;
-                columnCount = 0;
-            } else if (tmp.equals('0') || tmp.equals('1') || tmp.equals('2') || tmp.equals('3') || tmp.equals('4') || tmp.equals('5') || tmp.equals('6') || tmp.equals('7') || tmp.equals('8') || tmp.equals('9')) {
-                t[rowCount][columnCount] = Integer.parseInt(String.valueOf(tmp));
-                columnCount++;
-            }
-        }
-
-        return t;
-    }
-
     public String[][] setBoardFromTextFile2(String NameFile, int x, int y) {
         //intialize somes variables
         String[][] ret = new String[x][y];
+        score = 0;
         //fille the matrix with "0" reason im doing this is because after we dont have to replace 08S with 0 when tmp find 0 because of the switch, its easier this way
         for (int i = 0; i < x; i++) {
             for (int j = 0; j < y; j++) {
@@ -519,14 +442,29 @@ public class Board {
         }
         return ret;
     }
+
+    public void setTxtFromBoard(String[][] board, String filename, String path) throws IOException {
+
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board[i].length; j++) {
+                sb.append(board[i][j]+" ");
+            }
+            //prehaprs sb.stripTrailing() ? or sb.strip() ?
+            sb.append("\n");
+        }
+        String txt = sb.toString();
+        //FileUtils.writeStringToFile(new File("test.txt"), "Hello File", forName("UTF-8"));
+        path = path + filename;
+        Files.write( Paths.get(path), txt.getBytes());
+    }
+
     public Snoopy getSnoopy() {
         return noop;
     }
-
     public String[][] getBoard() {
         return fullBoard;
     }
-
     public void update() {
         for (Entity e : allEntityList) {
             e.Action();
@@ -544,11 +482,4 @@ public class Board {
         return ret;
     }
 
-    public void moveBall() {
-        for (Entity e : allEntityList) {
-            if (e instanceof Ball) {
-                e.Action();
-            }
-        }
-    }
 }

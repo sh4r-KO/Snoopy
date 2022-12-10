@@ -43,17 +43,18 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         this.startTimer();
     }
 
-    private final int DELAY = 75;//TODO doit absolument etre 100
-    private int facteurDe200ms = 5;
+    private final int DELAY = 50;//1000 = 1s because there is delay before and after, we double it so 1s = 10* 2 * 50ms
+    private int facteurDedelay = 0;
     private void startTimer() {
         this.timer = new java.util.Timer();
         TimerTask timerTask = new TimerTask() {
             public void run() {
-
+                facteurDedelay++;
+                if(facteurDedelay%10 == 0){
+                    board.setChrono(60 -facteurDedelay*DELAY);
+                }
                 jeuView.updateFrame(board);
-                //board.update();
                 board.moveBall();
-
             }
         };
         this.timer.schedule(timerTask, DELAY, DELAY);
@@ -83,7 +84,6 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
             case DOWN -> {
                 board.moveDown();
-                jeuView.updateFrame(board);
 
                 //jeuView.update(board);
                 //fadeBlock.fade();
@@ -99,7 +99,6 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case LEFT -> {
 
                 board.moveLeft();
-                jeuView.updateFrame(board);
 
                 //fadeBlock.fade();
                 //jeuView.update(board);
@@ -114,7 +113,6 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
             case RIGHT -> {
                 board.moveRight();
-                jeuView.updateFrame(board);
 
                 //fadeBlock.fade();
                 //jeuView.update(board);
@@ -134,7 +132,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case SPACE ->{
                 System.out.println("Key Pressed: " + ke.getCode());
                 board.spacePressed();
-                jeuView.updateFrame(board);
+                //jeuView.updateFrame(board);
             }
         }
     }
