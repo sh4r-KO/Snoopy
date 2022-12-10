@@ -16,9 +16,6 @@ public class YellowBird extends Entity{
 
     }
 
-    public boolean isBirdIsPickedUp() {
-        return birdIsPickedUp;
-    }
     public void setBirdIsPickedUp(boolean birdIsPickedUp) {
         this.birdIsPickedUp = birdIsPickedUp;
     }
@@ -30,5 +27,9 @@ public class YellowBird extends Entity{
             birdIsPickedUp = true;
             System.out.println("Snoopy is on a yellow bird, x:"+X+" y:"+Y+" , PV left"+noop.getPV());
         }
+    }
+
+    public boolean IsPickedUp() {
+        return birdIsPickedUp;
     }
 }
