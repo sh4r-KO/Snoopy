@@ -14,7 +14,7 @@ public class BreakingBlock extends Entity {
 
     }
 
-    protected void Action() {
+    public void Action() {
         /*
         if ( X ==noop.getX() + 1 && Y== noop.getY() && noop.getDirection() == Direction.S) {//si le bloc est en dessous de snoopy, et que snoopy regarde en bas
             board.getBoard()[X][Y] = 0;
@@ -26,15 +26,20 @@ public class BreakingBlock extends Entity {
             board.getBoard()[X][Y] = 0;
         }
         */
-        if(( X ==noop.getX() + 1 && Y== noop.getY() && noop.getDirection() == Direction.S) || (X ==noop.getX() - 1 && Y== noop.getY()  && noop.getDirection()==Direction.N) || (X ==noop.getX()  && Y== noop.getY() +1 && noop.getDirection() == Direction.E) || (X ==noop.getX()  && Y== noop.getY() -1 && noop.getDirection() == Direction.O)){
+        if(( X ==noop.getX() + 1 && Y== noop.getY() && noop.getDirection() == Direction.S)
+                || (X ==noop.getX() - 1 && Y== noop.getY()  && noop.getDirection()==Direction.N)
+                || (X ==noop.getX()  && Y== noop.getY() +1 && noop.getDirection() == Direction.E)
+                || (X ==noop.getX()  && Y== noop.getY() -1 && noop.getDirection() == Direction.O)){
             if(spacePressed ){
-                board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("1", "0");
+                board.getBoard()[X][Y] =board.getBoard()[X][Y].replace("1", "0");// "0";
             }
         }
     }
 
     public void setSpacePressed(boolean b){
         this.spacePressed = b;
+        this.Action();
+
     }
 
 }

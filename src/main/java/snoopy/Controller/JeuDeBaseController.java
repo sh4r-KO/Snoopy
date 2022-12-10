@@ -41,7 +41,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         //https://stackoverflow.com/a/34785707
 
     }
-    private final int DELAY = 100;//TODO doit absolument etre 100
+    private final int DELAY = 200;//TODO doit absolument etre 100
     private int facteurDe200ms = 5;
     private void startTimer() {
         this.timer = new java.util.Timer();
@@ -67,6 +67,8 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 //jeuView.update(board);
 
                 board.moveUp();
+                jeuView.updateFrame(board);
+
                 //fadeBlock.fade();
                 try {
                     Thread.sleep(DELAY);
@@ -79,6 +81,8 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
             case DOWN -> {
                 board.moveDown();
+                jeuView.updateFrame(board);
+
                 //jeuView.update(board);
                 //fadeBlock.fade();
                 try {
@@ -93,6 +97,8 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case LEFT -> {
 
                 board.moveLeft();
+                jeuView.updateFrame(board);
+
                 //fadeBlock.fade();
                 //jeuView.update(board);
                 try {
@@ -106,6 +112,8 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
             case RIGHT -> {
                 board.moveRight();
+                jeuView.updateFrame(board);
+
                 //fadeBlock.fade();
                 //jeuView.update(board);
                 try {

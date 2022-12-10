@@ -336,13 +336,13 @@ public class JeuView extends Group {//implements Initializable {
                      */         if(p.getBoard()[i][j].contains("7")){//for the ball
                     //matrixViewBall[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
                 }
-                if (T.equals("0") || T.equals("")) {
+                if (T.equals("0")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
                 } else if (T.equals("1")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocCassable.png").toURI().toString()));
                 } else if (T.equals("2E")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPoussableDroite.png").toURI().toString()));
-                } else if (T.equals("2W")) {
+                } else if (T.equals("2O")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPoussableGauche.png").toURI().toString()));
                 } else if (T.equals("2N")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocPoussableHaut.png").toURI().toString()));
@@ -382,7 +382,7 @@ public class JeuView extends Group {//implements Initializable {
                 }else if(T.equals("9W")){
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauGauche.png").toURI().toString()));
                 }
-                System.out.println(p.toString());
+                //System.out.println(p.toString());
             }
         }
 

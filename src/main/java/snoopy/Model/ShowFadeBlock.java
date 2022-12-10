@@ -16,18 +16,6 @@ public class ShowFadeBlock extends Entity {
         this.board = b;
         this.noop = noop;
         this.disappeared = false;
-
-        /*
-        for(int i=0; i<12; i++){
-            for(int j=0; j<22; j++){
-                if(board.board[i][j]==5){
-                    this.X = i;
-                    this.Y = j;
-                    break;
-                 }
-            }
-        }
-         */
     }
 
 
