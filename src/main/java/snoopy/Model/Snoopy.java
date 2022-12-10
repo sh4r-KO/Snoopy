@@ -36,11 +36,12 @@ public class Snoopy extends Entity {
     public void setDirection(Direction d) {
         this.direction = d;
     }
+
     public Direction getDirection() {
         return direction;
     }
 
-    
+
     @Override
     public String toString() {
         String r = "x:" + this.X + " y:" + this.Y + "d:";
@@ -54,6 +55,14 @@ public class Snoopy extends Entity {
 
     public int getPV() {
         return PV;
+    }
+
+    public void Action() {
+
+        //touch trap
+        //touch ball
+        //touch bird
+
     }
 }
 

@@ -19,5 +19,5 @@ public abstract class Entity {
     public void setY(int y) {
         this.Y = y;
     }
-    //public abstract void onAction();
+    protected abstract void Action();
 }

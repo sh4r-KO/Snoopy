@@ -16,5 +16,6 @@ public class TrappedBlock extends Entity {
         }
     }
 
-
+    protected void Action() {
+    }
 }

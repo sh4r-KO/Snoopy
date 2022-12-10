@@ -1,10 +1,10 @@
 package snoopy.Model;
 
-enum Direction {
-    NORD,
-    SUD,
-    OUEST,
-    EST,
+public enum Direction {
+    N,
+    S,
+    O,
+    E,
     NO,
     NE,
     SO,

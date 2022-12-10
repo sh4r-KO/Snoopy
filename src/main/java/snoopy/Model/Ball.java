@@ -10,13 +10,17 @@ public class Ball {
     private Board snoopyBoard;
     private Direction d;
 
-    public Ball(Board b){
+    public Ball(int x, int y, Board b, Direction d) {
         this.snoopyBoard = b;
+        this.xPosition = x;
+        this.yPosition = y;
+        this.d = d;
+        /*
         boolean found = false;
         for (int i = 0; i < 12 && !found; i++) {
             for (int j = 0; j < 22; j++) {
-                if (snoopyBoard != null && snoopyBoard.board[i][j] == 7){
-                    this.snoopyBoard.board[i][j] = 70;
+                if (snoopyBoard != null && snoopyBoard.getBoard()[i][j] == 7){
+                    this.snoopyBoard.getBoard()[i][j] = 70;
                     this.setBall(i, j, snoopyBoard);
                     found = true;
                     break;
@@ -24,6 +28,8 @@ public class Ball {
                 }
             }
         }
+
+         */
     }
 
     public void setBall (int x, int y,  Board b){//[12][22]
@@ -33,9 +39,8 @@ public class Ball {
        // System.out.println(toString());
     }
 
-
 // the wall is at index x = 0, y = 0, so the max index is x = 21, y = 11
-    public void movement() {
+    public void Action() {
         /*
        advacing meaning : depending on the direction we will be facing, the coordinates shall changes or not accordingly.
             SO : x = x +1 y = y +1	en bas a droite
@@ -43,54 +48,64 @@ public class Ball {
             NE : x = x -1 y = y -1  	en haut a dauche
             NO : x = x +1 y = y -1	en haut a droite
          *///System.out.println("ball movement"+toString());
-            if (d == Direction.SO) {
+            if (d == Direction.SO && snoopyBoard.getBoard()[xPosition][yPosition].equals("7SO")) { // = 7A
                 if(yPosition == 20){
                     d = Direction.SE;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SO", "7SE");
                 } else if (xPosition == 10){
                     d = Direction.NO;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SO", "7NO");
                 }else{
-                    snoopyBoard.board[xPosition][yPosition] -= 70;
-                    snoopyBoard.board[xPosition+1][yPosition+1] += 70;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SO", "");
+                    snoopyBoard.getBoard()[xPosition+1][yPosition+1] += "7SO";
 
                     xPosition += 1;
                     yPosition += 1;
                 }
 
-            } else if (d == Direction.NO) {
+
+
+            } else if (d == Direction.NO && snoopyBoard.getBoard()[xPosition][yPosition].equals("7NO")) {
 
                 if(yPosition == 20){
                     d = Direction.NE;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7NO", "7NE");
                 } else if (xPosition == 1){
                     d = Direction.SO;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7NO", "7SO");
                 }else{
-                    snoopyBoard.board[xPosition][yPosition] -= 70;
-                    snoopyBoard.board[xPosition-1][yPosition+1] += 70;
-
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7NO", "");
+                    snoopyBoard.getBoard()[xPosition-1][yPosition+1] += "7NO";
                     yPosition += 1;
                     xPosition -= 1;
                 }
-            } else if (d == Direction.NE) {
 
+
+            } else if (d == Direction.NE && snoopyBoard.getBoard()[xPosition][yPosition].equals("7NE")) {
                 if(yPosition == 1){
                     d = Direction.NO;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7NE", "7NO");
                 } else if (xPosition == 1){
                     d = Direction.SE;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7NE", "7SE");
                 }else{
-                    snoopyBoard.board[xPosition][yPosition] -= 70;
-                    snoopyBoard.board[xPosition-1][yPosition-1] += 70;
-
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7NE", "");
+                    snoopyBoard.getBoard()[xPosition-1][yPosition-1] += "7NE";
                     xPosition -= 1;
                     yPosition -= 1;
                 }
-            } else if (d == Direction.SE) {
 
+
+            } else if (d == Direction.SE && snoopyBoard.getBoard()[xPosition][yPosition].equals("7SE")) {
                 if(yPosition == 1){
                     d = Direction.SO;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SE", "7SO");
                 } else if (xPosition == 10){
                     d = Direction.NE;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SE", "7NE");
                 }else{
-                    snoopyBoard.board[xPosition][yPosition] -= 70;
-                    snoopyBoard.board[xPosition+1][yPosition-1] += 70;
+                    snoopyBoard.getBoard()[xPosition][yPosition] = snoopyBoard.getBoard()[xPosition][yPosition].replace("7SE", "");
+                    snoopyBoard.getBoard()[xPosition+1][yPosition-1] += "7SE";
 
                     yPosition -= 1;
                     xPosition += 1;

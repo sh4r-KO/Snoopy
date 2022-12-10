@@ -15,7 +15,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
     private Ball b;
-    private static Board board;//static.............
+    static Board board;//static.............
     private Timer timer;
     private Snoopy snoopy;
     private ShowFadeBlock fadeBlock;
@@ -23,9 +23,9 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     public JeuDeBaseController() {
         board = new Board();
-        snoopy = board.getSnoopy();//il faut absolument que ce soit la meme board que l'attribut board actuel
+        //snoopy = board.getSnoopy();//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
-        this.b = new Ball(board);
+        //this.b = board.getBall();
 
         //this.fadeBlock = new ShowFadeBlock(board, snoopy);
 
@@ -48,10 +48,9 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         TimerTask timerTask = new TimerTask() {
             public void run() {
 
-                jeuView.update(board, facteurDe200ms%5);
-                b.movement();
-                //fadeBlock.fade();
-                facteurDe200ms+=1;
+                jeuView.updateFrame(board);
+                //board.update();
+                //b.movement();
 
             }
         };
@@ -60,7 +59,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     @Override
     public void handle(KeyEvent ke) {
-        System.out.println(jeuView.toString(board));
+        System.out.println(board.toString());
         //different from usual switch which ends each case with break
         switch (ke.getCode()) {
 
@@ -124,7 +123,8 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             }
             case SPACE ->{
                 System.out.println("Key Pressed: " + ke.getCode());
-                board.breakBlock();
+                board.spacePressed();
+                jeuView.updateFrame(board);
             }
         }
     }

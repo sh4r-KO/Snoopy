@@ -5,7 +5,7 @@ public class TreadMillBlock extends Entity {
     private Snoopy noop;
     private Direction direction;
 
-    public TreadMillBlock( Snoopy noop , int X, int Y,Board b , Direction d) {
+    public TreadMillBlock(int X, int Y,Board b , Snoopy noop , Direction d) {
         //localisation du bloc
         super(X, Y);
         this.noop = noop;
@@ -13,7 +13,8 @@ public class TreadMillBlock extends Entity {
         this.board = b;
     }
 
-    public void treadMillBlock(){
+    public void Action(){
+        /*
         if (X == noop.getX() && Y == noop.getY() && direction == Direction.EST) {//move noop to the right
             noop.setDirection(direction);
             board.getBoard()[X][Y] -= 8;
@@ -35,6 +36,8 @@ public class TreadMillBlock extends Entity {
             board.getBoard()[X + 1][Y] += 8;
             noop.setX(noop.getX() + 1);
         }
+
+         */
     }
 
     @Override

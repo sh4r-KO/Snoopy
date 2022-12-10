@@ -4,68 +4,87 @@ public class PushingBlock extends Entity {
 
     private Board board;
     private Snoopy noop;
+    private Direction direction;
 
-    public PushingBlock( int i, int j,Board b, Snoopy noop){
+    public PushingBlock( int i, int j,Board b, Snoopy noop, Direction d){
         //localisation du bloc
         super(i,j);
         this.board = b;
         this.noop = noop;
+        //direction du bloc
+        this.direction = d;
     }
 
-    public boolean isPushedToTheRight(){
-                if(noop.getX() == X && noop.getY()==Y-1  && board.getBoard()[X][Y+1] == 0 ){//snoopy à gauche && rien à droite sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle a droite
+    private boolean isPushedToTheRight(){
+                if(noop.getX() == X && noop.getY()==Y-1  && board.getBoard()[X][Y+1].contains("0") && direction == noop.getDirection() && direction== Direction.E){//snoopy à gauche && rien à droite sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle a droite
                     if( Y == 20){return false;}
 
-                    board.getBoard()[X][Y] = 0;
-                    board.getBoard()[X][Y+1] = 2;
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2E", "0");
+                    board.getBoard()[X][Y+1] = board.getBoard()[X][Y+1].replace("0", "2E");
+
                     Y++;
-                    System.out.println("pushing block to the right "+toString());
+
 
                     return true;
 
                 }
                 return false;
     }
-    public boolean isPushedToTheLeft(){
-                if(noop.getX() == X && noop.getY()==Y+1 && board.getBoard()[X][Y-1] == 0){//snoopy à droite && rien à gauche sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle a gauche
+    private boolean isPushedToTheLeft(){
+                if(noop.getX() == X && noop.getY()==Y+1 && board.getBoard()[X][Y-1].contains("0") && direction == noop.getDirection() && direction== Direction.O){//snoopy à droite && rien à gauche sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle a gauche
                     if(Y == 1){return false;}
 
-                    board.getBoard()[X][Y] = 0;
-                    board.getBoard()[X][Y-1] = 2;
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2E", "0");
+                    board.getBoard()[X][Y-1] = board.getBoard()[X][Y-1].replace("0", "2E");
                     Y--;
-                    System.out.println("pushing block to the left "+toString());
+
 
                     return true;
 
                 }
                 return false;
     }
-    public boolean isPushedToTheTop(){
-                if(noop.getX() == X+1 && noop.getY()==Y && board.getBoard()[X-1][Y] == 0 ){//snoopy en bas && rien en haut sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle en haut
+    private boolean isPushedToTheTop(){
+                if(noop.getX() == X+1 && noop.getY()==Y && board.getBoard()[X-1][Y].contains("0") && direction == noop.getDirection() && direction== Direction.N){//snoopy en bas && rien en haut sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle en haut
                     if(  X == 1){return false;}
 
-                    board.getBoard()[X][Y] = 0;
-                    board.getBoard()[X-1][Y] = 2;
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2N", "0");
+                    board.getBoard()[X-1][Y] = board.getBoard()[X-1][Y].replace("0", "2N");
                     X--;
-                    System.out.println("pushing block to the top "+toString());
                     return true;
-
                 }
                 return false;
     }
-    public boolean isPushedToTheBottom(){
-                if(noop.getX() == X-1 && noop.getY()==Y && board.getBoard()[X+1][Y] == 0){//snoopy en haut && rien en bas sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle en bas
+    private boolean isPushedToTheBottom(){
+                if(noop.getX() == X-1 && noop.getY()==Y && board.getBoard()[X-1][Y].contains("0") && direction == noop.getDirection() && direction== Direction.S){//snoopy en haut && rien en bas sauf ptet la balle? non j'ai décidé que on pourrait pas push le bloc si ya la balle en bas
                     if(  X == 10){return false;}
 
-                    board.getBoard()[X][Y] = 0;
-                    board.getBoard()[X+1][Y] = 2;
+                    board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("2S", "0");
+                    board.getBoard()[X-1][Y] = board.getBoard()[X-1][Y].replace("0", "2S");
+
                     X++;
-                    System.out.println("pushing block to the bottom "+toString());
-
                     return true;
-
                 }
                 return false;
+    }
+
+    public void Action(){
+        //check if X,Y contains 2N,2S,2E,2O, if not throw illegal argument exception
+        if( ! board.getBoard()[X][Y].contains("2N") && ! board.getBoard()[X][Y].contains("2S") && ! board.getBoard()[X][Y].contains("2E") && ! board.getBoard()[X][Y].contains("2O")){
+            throw new IllegalArgumentException("PushingBlock Action() : X,Y doesn't contain 2N,2S,2E,2O on board given");
+        } else if(direction == Direction.E){
+            isPushedToTheRight();
+            System.out.println("pushing block to the right "+toString());
+        } else if(direction == Direction.O){
+            isPushedToTheLeft();
+            System.out.println("pushing block to the right "+toString());
+        } else if(direction == Direction.N){
+            isPushedToTheTop();
+            System.out.println("pushing block to the right "+toString());
+        } else if(direction == Direction.S){
+            isPushedToTheBottom();
+            System.out.println("pushing block to the right "+toString());
+        }
     }
 
 

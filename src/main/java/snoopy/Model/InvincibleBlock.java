@@ -11,7 +11,7 @@ public class InvincibleBlock extends Entity {
         this.noop = noop;
     }
 
-    public void invincibleBlock() {
+    protected void Action() {
     }
 
 }
