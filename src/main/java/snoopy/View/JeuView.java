@@ -7,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import snoopy.Model.Board;
 
+import java.awt.*;
 import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -22,9 +23,7 @@ public class JeuView extends Group {//implements Initializable {
     private ImageView[][] matrixImagesView;
     private final int rowMeche = 58;
     private final int columnMeche = 106;
-    private ImageView[][] MecheImageViewMatrix = new ImageView[rowMeche][columnMeche];//row for meche = 58/12*12 = 58 // column for meche = 58/12*22 = 116
-
-    private int time = 60;
+    //private ImageView[][] MecheImageViewMatrix = new ImageView[rowMeche][columnMeche];//row for meche = 58/12*12 = 58 // column for meche = 58/12*22 = 116
 
 
     //set all images path to images object in constructor
@@ -342,8 +341,6 @@ public class JeuView extends Group {//implements Initializable {
                 }
             }
         }
-
-
     }
 
 
@@ -363,6 +360,7 @@ public class JeuView extends Group {//implements Initializable {
     }
 
     private void initMeche(){
+        /*
         MecheImageViewMatrix = new ImageView[rowMeche][columnMeche];
 
         for (int i = 0; i < rowMeche; i++) {//=58
@@ -435,6 +433,8 @@ public class JeuView extends Group {//implements Initializable {
                 }
             }
         }
+
+         */
     }
 
     public void drawWall(){
