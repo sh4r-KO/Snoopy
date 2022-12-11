@@ -26,7 +26,7 @@
     </center>
     <bottom>
         <Label fx:id="chronoLabel" text="60" />
-
+        <Label fx:id="vieLabel" text="60" />
 
     </bottom>
 

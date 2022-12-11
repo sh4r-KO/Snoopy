@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -30,7 +31,6 @@ public class Board {
         currentLevelNumber++;
         if(currentLevelNumber > LevelNumberMax) {
             gameWon();
-
         } else {//load next level
             allEntityList = new ArrayList<Entity>();
             this.fullBoard  = this.setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
@@ -43,8 +43,20 @@ public class Board {
     public void setChrono(int chrono) {
         this.chrono = chrono;
     }
+    public int getChrono() {
+        notifyAll();
+        return this.chrono;
+    }
     public void gameWon(){
         System.out.println("Game won"+score);
+        //TODO need a name
+        String ret = score +"\n";
+        try {
+            Files.write(Paths.get("src/main/resources/Scores.txt"), ret.getBytes(), StandardOpenOption.APPEND);
+        }catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
+        throw new UnsupportedOperationException("Game won, not coded yet");
     }
     public void gameLost(){
         if(getSnoopy().getLife() == 0) {
@@ -105,7 +117,7 @@ public class Board {
     }
     public void move(Direction pressedDirection,int Xmodifier,int Ymodifier) {
         for (Entity entity : allEntityList) {
-            if (!(entity instanceof PushingBlock pushB) && !(entity instanceof TrappedBlock tb && tb.triggered())){
+            if (!(entity instanceof PushingBlock pushB) && !(entity instanceof TrappedBlock tb && tb.triggered()) && !(entity instanceof Ball )){
                 entity.Action();
             }
 
@@ -168,10 +180,10 @@ public class Board {
             noop.setDirection(pressedDirection);
         }
         for (Entity entity : allEntityList) {
-            if (entity instanceof PushingBlock pushB){
+            if (entity instanceof PushingBlock pushB ){
                 //pcushingBlock.setSpacePressed(true);
                 //dont do anything
-            }else{
+            }else if(!(entity instanceof Ball )){
                 entity.Action();
             }
         }
@@ -375,11 +387,13 @@ public class Board {
     public String[][] getBoard() {
         return fullBoard;
     }
-    public void update() {
+
+    /*public void update() {
         for (Entity e : allEntityList) {
             e.Action();
         }
     }
+    */
     @Override
     public String toString(){
         String ret = "";
