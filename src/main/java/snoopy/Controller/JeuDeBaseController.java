@@ -1,16 +1,12 @@
 package snoopy.Controller;
 
 import javafx.animation.*;
-import javafx.application.Platform;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
 import javafx.util.Duration;
 import snoopy.Model.*;
 import snoopy.View.JeuView;
@@ -31,14 +27,11 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         jeuView = new JeuView();
     }
 
-
     public void initialize() {
         //why initialize and not constructor :
         //https://stackoverflow.com/a/34785707
         this.timerLabel.setText("#### : "+board.getChrono());
     }
-
-
 
     static Timeline timeline = null;
     //https://stackoverflow.com/questions/54963023/java-how-to-cancel-the-timer-immediately-when-some-condition-is-met
@@ -56,8 +49,8 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             if(t%2==0){
                 board.moveBall();
             }
-
             board.setChrono(t);
+            System.out.println("t = " + t);
             jeuView.updateFrame(board);
             setLife(board.getSnoopy().getLife());
             setScoreLabel(board.getScore());

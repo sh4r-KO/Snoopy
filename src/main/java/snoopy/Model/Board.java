@@ -30,6 +30,7 @@ public class Board {
         if(currentLevelNumber > LevelNumberMax) {
             gameWon();
         } else {//load next level
+
             allEntityList = new ArrayList<Entity>();
             this.fullBoard  = this.setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
         }
@@ -56,7 +57,6 @@ public class Board {
         return this.chrono;
     }
 
-
     public void gameWon(){
         System.out.println("Game won"+score);
         //TODO need a name
@@ -66,6 +66,7 @@ public class Board {
         }catch (IOException e) {
             //exception handling left as an exercise for the reader
         }
+        //save score
     }
     public void gameLost(){
         if(getSnoopy().getLife() == 0) {
@@ -86,7 +87,7 @@ public class Board {
         }
     }
     public int setScore() {
-        return score+= 100*chrono;
+        return score = 100*chrono;
     }
     public int getScore() {
         score = setScore();
@@ -109,8 +110,8 @@ public class Board {
                 BrkBlk.setSpacePressed(true);
             }
         }
-
     }
+
     public void moveUp() {
         this.move(Direction.N,-1,0);
     }

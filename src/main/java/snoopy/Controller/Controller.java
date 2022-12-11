@@ -66,6 +66,9 @@ public class Controller  implements Initializable {
     }
     public void validerClickedmdp(ActionEvent actionEvent) {
         String s = motdepasseTextArea.getText();
+        if(s.equals("MotDePasse.5")){
+
+        }
         System.out.println(s);
     }
     public void JouerCliked() throws IOException {

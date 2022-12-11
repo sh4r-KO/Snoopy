@@ -78,6 +78,7 @@ public class JeuView extends Group {//implements Initializable {
 
         initTime();
         initLife();
+        initScore();
         initBallMatrix();
         drawGreen();
         drawWall();
@@ -136,21 +137,22 @@ public class JeuView extends Group {//implements Initializable {
     }
     Label score = new Label();
     private void initScore(){
-        time = new Label();
-        time.setText("Score : ");
-        time.setLayoutX(0);
-        time.setLayoutY(800);
-        time.setAlignment(Pos.CENTER);
-        time.toFront();
-        //timazere.setStyle("-fx-background-color: #000000;");
-        this.getChildren().add(time);
+        score = new Label();
+        score.setText("Score : ");
+        score.setLayoutX(0);
+        score.setLayoutY(800);
+        score.toFront();
+        score.setStyle("-fx-font-size: 32px;"
+                + "-fx-text-fill: #000000;"
+                + "-fx-font-weight: bold;");
+        this.getChildren().add(score);
     }
 
     private void drawTime(int timeleft){
         time.setText("Time left : "+timeleft);
     }
     private void drawScore(int score){
-        time.setText("Current Score : "+score);
+        this.score.setText("Current Score : "+score);
     }
 
     public void updateExtra(int timeleft, int score , int lifeLeft){
