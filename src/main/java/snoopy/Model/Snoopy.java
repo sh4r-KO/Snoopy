@@ -49,11 +49,11 @@ public class Snoopy extends Entity {
     }
 
 
-    public void LoseLife(int i) {
+    public void loseLife(int i) {
         this.PV -= i;
     }
 
-    public int getPV() {
+    public int getLife() {
         return PV;
     }
 
@@ -65,4 +65,3 @@ public class Snoopy extends Entity {
 
     }
 }
-

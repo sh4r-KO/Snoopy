@@ -1,70 +1,111 @@
 package snoopy.Controller;
 
+import javafx.animation.*;
+import javafx.application.Platform;
+import javafx.concurrent.ScheduledService;
+import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
+import javafx.util.Duration;
 import snoopy.Model.*;
 import snoopy.View.JeuView;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class JeuDeBaseController extends Controller implements EventHandler<KeyEvent> {
 
     @FXML public BorderPane JeuBorderPane;
     @FXML JeuView jeuView;
     @FXML public Label scoreLabel;
+    @FXML public ImageView vie1;
+    @FXML public ImageView vie2;
+    @FXML public ImageView vie3;
+    @FXML public Label timerLabel;
+
     private Ball b;
-    static Board board;//static.............
-    private Timer timer;
-    private Snoopy snoopy;
-    private ShowFadeBlock fadeBlock;
-    private  BreakingBlock breakingBlock;
+    static Board board;//static.............cant be changed
 
     public JeuDeBaseController() {
         board = new Board();
-        //snoopy = board.getSnoopy();//il faut absolument que ce soit la meme board que l'attribut board actuel
         jeuView = new JeuView();
-        //this.b = board.getBall();
-
-        //this.fadeBlock = new ShowFadeBlock(board, snoopy);
-
-
-        //Snoopy s = new Snoopy(board);
-        //jeuView.update(board);
     }
 
 
     public void initialize() {
         //why initialize and not constructor :
         //https://stackoverflow.com/a/34785707
+        this.timerLabel.setText("#### : "+board.getChrono());
+
     }
+
     public void Startgame(){
         this.startTimer();
     }
+    String ret = "";
+    int t = 60000;
+    static Timeline timeline = null;
+    String TIME = "###"+t;
+    //https://stackoverflow.com/questions/54963023/java-how-to-cancel-the-timer-immediately-when-some-condition-is-met
+    //https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
+    public void setTime(int t){
 
-    private final int DELAY = 50;//1000 = 1s because there is delay before and after, we double it so 1s = 10* 2 * 50ms
-    private int facteurDedelay = 0;
+        ret= t/1000+" : "+t%1000;
+    }
     private void startTimer() {
-        this.timer = new java.util.Timer();
-        TimerTask timerTask = new TimerTask() {
-            public void run() {
-                facteurDedelay++;
-                if(facteurDedelay%10 == 0){
-                    board.setChrono(60 -facteurDedelay*DELAY);
-                }
-                jeuView.updateFrame(board);
+
+        timeline = new Timeline(new KeyFrame(Duration.millis(100), e ->{
+            if(t%400==0){
                 board.moveBall();
             }
-        };
-        this.timer.schedule(timerTask, DELAY, DELAY);
+            if(t<0){
+                t=0;
+                board.setChrono(0);
+            }else if(t%1000==0){
+                board.setChrono(t/1000);
+            }
+            jeuView.updateFrame(board, t);
+            t=t-100;
+        }));
+
+
+        timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+        timeline.play();
+
+         /*
+         PauseTransition pause = new PauseTransition(Duration.millis(100));
+         pause.setOnFinished(
+                 e -> {
+                     jeuView.updateFrame(board);
+                     board.moveBall();
+                     pause.playFromStart(); // loop again
+                 });
+         pause.play();
+         */
+
+        //https://stackoverflow.com/questions/41779093/timer-in-java-fx
+
     }
 
     public void setScoreLabel(int score){
         this.scoreLabel.setText("Score : " + score);
     }
+
+    public void setLife(int life){
+        if(life == 2){
+            this.vie3.setVisible(false);
+        }
+        if(life == 1){
+            this.vie2.setVisible(false);
+        }
+        if(life == 0){
+            this.vie1.setVisible(false);
+        }
+    }
+
+
 
     @Override
     public void handle(KeyEvent ke) {
@@ -73,73 +114,44 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         switch (ke.getCode()) {
 
             case UP -> {
-                //jeuView.update(board);
-
-                board.moveUp();
-                jeuView.updateFrame(board);
-
-                //fadeBlock.fade();
-                try {
-                    Thread.sleep(DELAY);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(timeline.getStatus()== Animation.Status.RUNNING) {
+                    board.moveUp();
                 }
-                System.out.println("Key Pressed: " + ke.getCode());
-
                 ke.consume();
             }
             case DOWN -> {
-                board.moveDown();
-
-                //jeuView.update(board);
-                //fadeBlock.fade();
-                try {
-                    Thread.sleep(DELAY);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(timeline.getStatus()== Animation.Status.RUNNING) {
+                    board.moveDown();
                 }
-                System.out.println("Key Pressed: " + ke.getCode());
-
                 ke.consume();
             }
             case LEFT -> {
-
-                board.moveLeft();
-
-                //fadeBlock.fade();
-                //jeuView.update(board);
-                try {
-                    Thread.sleep(DELAY);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(timeline.getStatus()== Animation.Status.RUNNING) {
+                    board.moveLeft();
                 }
-                System.out.println("Key Pressed: " + ke.getCode());
-
                 ke.consume();
             }
             case RIGHT -> {
-                board.moveRight();
-
-                //fadeBlock.fade();
-                //jeuView.update(board);
-                try {
-                    Thread.sleep(DELAY);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
+                if(timeline.getStatus()== Animation.Status.RUNNING) {
+                    board.moveRight();
                 }
-                System.out.println("Key Pressed: " + ke.getCode());
-
                 ke.consume();
             }
             case S -> {
-                System.out.println("Key Pressed: " + ke.getCode());
+                if(timeline.getStatus()== Animation.Status.RUNNING){
+                    timeline.pause();
+                }else{
+                    timeline.play();
+                }
                 //ke.consume();
             }
             case SPACE ->{
-                System.out.println("Key Pressed: " + ke.getCode());
-                board.spacePressed();
+                if(timeline.getStatus()== Animation.Status.RUNNING) {
+                    board.spacePressed();
+                }
                 //jeuView.updateFrame(board);
             }
         }
     }
+
 }

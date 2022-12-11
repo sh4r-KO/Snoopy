@@ -15,8 +15,8 @@ public class TrappedBlock extends Entity {
     protected void Action() {
         //check if snoopy is on a trapped block
         if (X == noop.getX() && Y == noop.getY() && !triggered) {
-            noop.LoseLife(1);
-            System.out.println("Snoopy is on a trapped block, x:"+X+" y:"+Y+" , PV left"+noop.getPV());
+            noop.loseLife(1);
+            System.out.println("Snoopy is on a trapped block, x:"+X+" y:"+Y+" , PV left"+noop.getLife());
             board.getBoard()[X][Y] = board.getBoard()[X][Y].replace("3", "0");
             triggered = true;
         }

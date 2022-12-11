@@ -9,6 +9,7 @@
 
 
 <?import java.lang.Integer?>
+<?import javafx.geometry.Insets?>
 <BorderPane prefHeight="810.0"
             prefWidth="1440.0"
             xmlns="http://javafx.com/javafx/11.0.14-internal"
@@ -21,16 +22,44 @@
 
     </fx:define>
 
-    <top>
-        <Label fx:id="scoreLabel" text="Score : 0" textFill="BLACK" BorderPane.alignment="CENTER" layoutY="20">
+        <Label fx:id="scoreLabel" text="Score : 0" textFill="BLACK" layoutY="20" BorderPane.alignment="TOP_CENTER">
+            <BorderPane.margin>
+                <Insets top="25.0" />
+            </BorderPane.margin>
             <style>
                 -fx-font-family: "Press Start 2P";
                 -fx-padding: 20 0 0 0;
             </style>
         </Label>
-        
+        <Label fx:id="timerLabel" text="60" textFill="black" layoutY="20" layoutX="200" >
+            <BorderPane.margin>
+                <Insets top="25.0" />
+            </BorderPane.margin>
+            <style>
+                -fx-font-family: "Press Start 2P";
+                -fx-padding: 20 0 0 0;
+            </style>
+        </Label>
 
-    </top>
+
+        <ImageView fx:id="vie1" fitHeight="50.0" fitWidth="50.0" layoutX="140.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/heart.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="vie2" fitHeight="50.0" fitWidth="50.0" layoutX="190.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/heart.png" />
+            </image>
+        </ImageView>
+        <ImageView fx:id="vie3" fitHeight="50.0" fitWidth="50.0" layoutX="240.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
+            <image>
+                <Image url="@../img/heart.png" />
+            </image>
+        </ImageView>
+
+        <Label fx:id="chronoLabel" text="60" />
+
 
 
     <center>
