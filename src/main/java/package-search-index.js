@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","u":"allpackages-index.html"},{"l":"snoopy"},{"l":"snoopy.Controller"},{"l":"snoopy.Model"},{"l":"snoopy.View"}];updateSearchResults();
