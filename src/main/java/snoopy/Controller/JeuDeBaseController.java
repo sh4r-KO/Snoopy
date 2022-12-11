@@ -2,8 +2,10 @@ package snoopy.Controller;
 
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.text.Text;
 import snoopy.Model.*;
 import snoopy.View.JeuView;
 
@@ -38,26 +40,54 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     public void initialize() {
         //why initialize and not constructor :
         //https://stackoverflow.com/a/34785707
+
     }
     public void Startgame(){
         this.startTimer();
-    }
 
+    }
+    int t = 60;
     private final int DELAY = 50;//1000 = 1s because there is delay before and after, we double it so 1s = 10* 2 * 50ms
     private int facteurDedelay = 0;
+
+    @FXML Label chronoLabel;
+    String TIME = new String("#################");
+    //https://stackoverflow.com/questions/54963023/java-how-to-cancel-the-timer-immediately-when-some-condition-is-met
     private void startTimer() {
         this.timer = new java.util.Timer();
+
         TimerTask timerTask = new TimerTask() {
             public void run() {
                 facteurDedelay++;
-                if(facteurDedelay%10 == 0){
-                    board.setChrono(60 -facteurDedelay*DELAY);
-                }
+
                 jeuView.updateFrame(board);
                 board.moveBall();
             }
         };
-        this.timer.schedule(timerTask, DELAY, DELAY);
+        timer.schedule(timerTask,0, DELAY);
+
+        chronoLabel.setText(TIME);
+
+
+        /////////////////////////////
+        Timer timer2 = new java.util.Timer();
+        TimerTask timerTask2 = new TimerTask() {
+            public void run() {
+                TIME =("###"+t);
+                System.out.println(TIME);
+
+                t--;
+                /*if(t<=0){
+                    timer2.cancel();
+                    board.timerPassed();
+                }
+
+                 */
+            }
+        };
+        chronoLabel.setText(TIME);
+
+        timer2.schedule(timerTask2,1000L, 1000L);
     }
 
     @Override

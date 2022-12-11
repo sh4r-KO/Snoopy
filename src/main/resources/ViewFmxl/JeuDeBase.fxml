@@ -24,6 +24,11 @@
     <center>
         <JeuView fx:id="jeuView" />
     </center>
+    <bottom>
+        <Label fx:id="chronoLabel" text="60" />
+
+
+    </bottom>
 
 </BorderPane>
 

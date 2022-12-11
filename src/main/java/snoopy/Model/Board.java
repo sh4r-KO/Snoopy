@@ -19,7 +19,6 @@ public class Board {
     public int score;
     private int chrono;
 
-
     public Board() {
         allEntityList = new ArrayList<Entity>();
         this.fullBoard = this.setBoardFromTextFile2("level1.txt", 12, 22);
@@ -31,6 +30,7 @@ public class Board {
         currentLevelNumber++;
         if(currentLevelNumber > LevelNumberMax) {
             gameWon();
+
         } else {//load next level
             allEntityList = new ArrayList<Entity>();
             this.fullBoard  = this.setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
@@ -44,12 +44,10 @@ public class Board {
         this.chrono = chrono;
     }
     public void gameWon(){
-
         System.out.println("Game won"+score);
-
     }
     public void gameLost(){
-        if(getSnoopy().getPV() == 0) {
+        if(getSnoopy().getLife() == 0) {
             System.out.println("Game lost");
         }
     }
@@ -179,7 +177,6 @@ public class Board {
         }
     }
     public String[][] setBoardFromTextFile2(String NameFile, int x, int y) {
-
 
         //intialize somes variables
         String[][] ret = new String[x][y];
@@ -412,5 +409,17 @@ public class Board {
             }
         }
         return yes;
+    }
+
+    public void timerPassed() {
+        getSnoopy().loseLife(1);
+        if(getSnoopy().getLife() <= 0){
+            System.out.println(" Snoopy is dead");
+            gameLost();
+        }else{
+            restartLevel();
+        }
+
+
     }
 }
