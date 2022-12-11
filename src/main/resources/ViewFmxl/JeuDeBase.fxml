@@ -21,50 +21,50 @@
         <Integer fx:id="column" fx:value="22"/>
 
     </fx:define>
-    <!--
-        <top>
-        <Label fx:id="scoreLabel" text="Score : 0" textFill="BLACK" layoutY="20" layoutX="-200" BorderPane.alignment="TOP_CENTER">
-            <BorderPane.margin>
-                <Insets top="25.0" />
-            </BorderPane.margin>
-            <style>
-                -fx-font-family: "Press Start 2P";
-                -fx-padding: 20 0 0 0;
-            </style>
-        </Label>
-        <Label fx:id="timerLabel" text="60" textFill="black" layoutY="20" layoutX="200" >
-            <BorderPane.margin>
-                <Insets top="25.0" />
-            </BorderPane.margin>
-            <style>
-                -fx-font-family: "Press Start 2P";
-                -fx-padding: 20 0 0 0;
-            </style>
-        </Label>
-        </top>
--->
-        <ImageView fx:id="vie1" fitHeight="50.0" fitWidth="50.0" layoutX="140.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../img/heart.png" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="vie2" fitHeight="50.0" fitWidth="50.0" layoutX="190.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../img/heart.png" />
-            </image>
-        </ImageView>
-        <ImageView fx:id="vie3" fitHeight="50.0" fitWidth="50.0" layoutX="240.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
-            <image>
-                <Image url="@../img/heart.png" />
-            </image>
-        </ImageView>
 
-    <Label fx:id="chronoLabel" text="60" />
-    <Label fx:id="scoreLabel" text="60" />
+        <top>
+            <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="1440.0">
+                <menus>
+                    <Menu mnemonicParsing="false" text="Menu">
+                        <items>
+                            <MenuItem mnemonicParsing="false" text="Nouvelle Partie" onAction="#restartGame"/>
+                            <MenuItem mnemonicParsing="false" text="Quitter" onAction="#quitGame"/>
+                        </items>
+                        <style>
+                            -fx-font-family: "Press Start 2P";
+                            -fx-padding: 15 15 15 15;
+                        </style>
+                    </Menu>
+                </menus>
+            </MenuBar>
+        </top>
+
+
+
+
 
     <center>
         <JeuView fx:id="jeuView" />
     </center>
+
+
+    <Label fx:id="timerLabel" text="60" />
+    <Label fx:id="scoreLabel" text="60" />
+    <ImageView fx:id="vie1" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="52" preserveRatio="true">
+        <image>
+            <Image url="@../img/heart.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="vie2" fitHeight="50.0" fitWidth="50.0" layoutX="690.0" layoutY="52" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../img/heart.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="vie3" fitHeight="50.0" fitWidth="50.0" layoutX="740.0" layoutY="52" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../img/heart.png" />
+        </image>
+    </ImageView>
 
 </BorderPane>
 

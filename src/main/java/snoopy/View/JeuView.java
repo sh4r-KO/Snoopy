@@ -126,39 +126,49 @@ public class JeuView extends Group {//implements Initializable {
     Label time = new Label();
     private void initTime(){
         time = new Label();
-        time.setText("Time : ");
-        time.setLayoutX(0);
-        time.setLayoutY(670);
+        time.setText("Temps : ");
+        time.setLayoutX(290);
+        time.setLayoutY(680);
         time.setAlignment(Pos.CENTER);
         time.toFront();
 
         //timazere.setStyle("-fx-background-color: #000000;");
+
         this.getChildren().add(time);
     }
     Label score = new Label();
     private void initScore(){
         score = new Label();
-        score.setText("Score : ");
-        score.setLayoutX(0);
-        score.setLayoutY(800);
+        score.setAlignment(Pos.CENTER);
+        score.setLayoutX(790);
+        score.setLayoutY(680);
         score.toFront();
         score.setStyle("-fx-font-size: 32px;"
                 + "-fx-text-fill: #000000;"
                 + "-fx-font-weight: bold;");
+        score.setText("Score : ");
         this.getChildren().add(score);
     }
 
     private void drawTime(int timeleft){
-        time.setText("Time left : "+timeleft);
+        time.setStyle("-fx-font-size: 16px;"
+                + "-fx-text-fill: #000000;" +
+                "-fx-font-family: \"Press Start 2P\";"
+                + "-fx-font-weight: bold;");
+        time.setText("Temps : "+timeleft);
     }
     private void drawScore(int score){
-        this.score.setText("Current Score : "+score);
+        this.score.setText("Score : "+score);
+        this.score.setStyle("-fx-font-size: 16px;"
+                + "-fx-text-fill: #000000;" +
+                "-fx-font-family: \"Press Start 2P\";"
+                + "-fx-font-weight: bold;");
     }
 
     public void updateExtra(int timeleft, int score , int lifeLeft){
         drawTime(timeleft);
         drawScore(score);
-        drawLife(lifeLeft);
+        //drawLife(lifeLeft);
     }
 
     public void updateFrame(Board p) {

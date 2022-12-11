@@ -40,8 +40,11 @@ public class Board {
         setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
     }
     public boolean timerPassed() {
+        if (getSnoopy() == null || getSnoopy().getLife() < 0) {
+            throw new IllegalArgumentException("snoopy.Model.Board.timerPassed() : getSnoopy() is null or getSnoopy().getLife() < 0 empty");
+        }
         getSnoopy().loseLife(1);
-        if(getSnoopy().getLife() <= 0){
+        if(getSnoopy().getLife() == 0){
             System.out.println(" Snoopy is dead");
             gameLost();
         }else{

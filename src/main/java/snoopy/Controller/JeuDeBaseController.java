@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import snoopy.Model.*;
 import snoopy.View.JeuView;
@@ -20,6 +21,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     @FXML public ImageView vie2;
     @FXML public ImageView vie3;
     @FXML public Label timerLabel;
+    @FXML
     static Board board;//static.............cant be changed
 
     public JeuDeBaseController() {
@@ -44,6 +46,10 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     int t = 60;
     private void startTimer() {
+
+        if (board == null || board.getBoard() == null || board.getBoard().length == 0) {
+            throw new IllegalArgumentException("snoopy.Model.Board.startTimer() : board or getBoard() is null or getBoard() empty");
+        }
 
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e ->{
             if(t%2==0){
@@ -100,10 +106,24 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         }
     }
 
+    public void restartGame(){
+        board = new Board();
+        jeuView = new JeuView();
+        t = 60;
+        timeline.stop();
+        startTimer();
+    }
 
+    public void quitGame(){
+        Stage stage = (Stage) JeuBorderPane.getScene().getWindow();
+        stage.close();
+    }
 
     @Override
     public void handle(KeyEvent ke) {
+        if (board == null || board.getBoard() == null || board.getBoard().length == 0) {
+            throw new IllegalArgumentException("snoopy.Model.Board.handle() : board or getBoard() is null or getBoard() empty");
+        }
         System.out.println(board.toString());
         //different from usual switch which ends each case with break
         switch (ke.getCode()) {

@@ -37,7 +37,7 @@ public class MenuPaneController extends Controller{
         super.changePane("ChargerUnePartie.fxml", menuPaneAnchor);
     }
     public void JeuAvanceCliked(){
-
+        System.out.println("JeuAvanceCliked");
     }
 
     public void quitterCliked(){
