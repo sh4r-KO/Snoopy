@@ -16,10 +16,6 @@ import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-/**
- * this class is a view of the game, it's the game itself
- * it's a group element, so it can be added to a parent in this case JeuDeBase.fxml
- */
 public class JeuView extends Group {//implements Initializable {
     public final static double CELL_WIDTH = 58.0;
     @FXML final int row =12;//TODO: use the variables defined in the fxml file
@@ -54,8 +50,9 @@ public class JeuView extends Group {//implements Initializable {
     }
 
     public void initialize(){
+
         //this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
-       // this.setFocusTraversable(false);
+        // this.setFocusTraversable(false);
 
         matrixImagesView = new ImageView[row][column];
         for (int i = 0; i < row; i++) {
@@ -81,8 +78,8 @@ public class JeuView extends Group {//implements Initializable {
 
         initTime();
         initLife();
+        initScore();
         initBallMatrix();
-        System.out.println("initialize() done");
         drawGreen();
         drawWall();
 
@@ -121,7 +118,6 @@ public class JeuView extends Group {//implements Initializable {
                 this.getChildren().add(imageView);
             }
         }
-        System.out.println("initialize() done");
         //print things that should only be printed once
         drawWall();
         drawGreen();
@@ -130,29 +126,58 @@ public class JeuView extends Group {//implements Initializable {
     Label time = new Label();
     private void initTime(){
         time = new Label();
-        time.setText("Time : ");
-        time.setLayoutX(0);
-        time.setLayoutY(670);
+        time.setText("Temps : ");
+        time.setLayoutX(290);
+        time.setLayoutY(680);
         time.setAlignment(Pos.CENTER);
         time.toFront();
 
         //timazere.setStyle("-fx-background-color: #000000;");
+
         this.getChildren().add(time);
+    }
+    Label score = new Label();
+    private void initScore(){
+        score = new Label();
+        score.setAlignment(Pos.CENTER);
+        score.setLayoutX(790);
+        score.setLayoutY(680);
+        score.toFront();
+        score.setStyle("-fx-font-size: 32px;"
+                + "-fx-text-fill: #000000;"
+                + "-fx-font-weight: bold;");
+        score.setText("Score : ");
+        this.getChildren().add(score);
     }
 
     private void drawTime(int timeleft){
-        time.setText("Time left : "+timeleft);
+        time.setStyle("-fx-font-size: 16px;"
+                + "-fx-text-fill: #000000;" +
+                "-fx-font-family: \"Press Start 2P\";"
+                + "-fx-font-weight: bold;");
+        time.setText("Temps : "+timeleft);
+    }
+    private void drawScore(int score){
+        this.score.setText("Score : "+score);
+        this.score.setStyle("-fx-font-size: 16px;"
+                + "-fx-text-fill: #000000;" +
+                "-fx-font-family: \"Press Start 2P\";"
+                + "-fx-font-weight: bold;");
     }
 
-    public void updateFrame(Board p, int timeleft) {
+    public void updateExtra(int timeleft, int score , int lifeLeft){
+        drawTime(timeleft);
+        drawScore(score);
+        //drawLife(lifeLeft);
+    }
 
-        if (p == null || p.getBoard() == null || p.getBoard().length == 0|| p.getBoard()[0].length == 0) {
+    public void updateFrame(Board p) {
+
+        /*if (p == null || p.getBoard() == null || p.getBoard().length == 0|| p.getBoard()[0].length == 0) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() : p or getBoard() is null or getBoard() empty");
         }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
-        }
-        drawTime(timeleft);
-        drawLife(p.getSnoopy().getLife());
+        }*/
         //System.out.println(toString(p));
         for (int i = 1; i < row-1; i++) {
             for (int j = 1; j < column - 1; j++) {
@@ -167,8 +192,9 @@ public class JeuView extends Group {//implements Initializable {
                         matrixViewBall[i][j].setImage(new Image(new File("src/main/resources/img/Balle.png").toURI().toString()));
                     }
                 }else {//empty
-                        matrixViewBall[i][j].setImage(new Image(new File("src/main/resources/img/empty.png").toURI().toString()));
-                    }
+                    matrixViewBall[i][j].setImage(new Image(new File("src/main/resources/img/empty.png").toURI().toString()));
+                }
+
                 if (T.equals("0")) {
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/Herbe1.png").toURI().toString()));//"+(int)(Math.random()*(3-1+1)+1)+
                 } else if (T.equals("1")) {
@@ -226,6 +252,8 @@ public class JeuView extends Group {//implements Initializable {
                 }else if(T.equals("9O")){
                     matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/OiseauGauche.png").toURI().toString()));
                 }
+
+
             }
         }
     }

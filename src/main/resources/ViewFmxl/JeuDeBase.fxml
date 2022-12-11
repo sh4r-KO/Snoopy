@@ -9,6 +9,7 @@
 
 
 <?import java.lang.Integer?>
+<?import javafx.geometry.Insets?>
 <BorderPane prefHeight="810.0"
             prefWidth="1440.0"
             xmlns="http://javafx.com/javafx/11.0.14-internal"
@@ -21,14 +22,49 @@
 
     </fx:define>
 
+    <top>
+        <MenuBar fx:id="menuBar" prefHeight="25.0" prefWidth="1440.0">
+            <menus>
+                <Menu mnemonicParsing="false" text="Menu">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="Nouvelle Partie" onAction="#restartGame"/>
+                        <MenuItem mnemonicParsing="false" text="Quitter" onAction="#quitGame"/>
+                    </items>
+                    <style>
+                        -fx-font-family: "Press Start 2P";
+                        -fx-padding: 15 15 15 15;
+                    </style>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </top>
+
+
+
+
+
     <center>
         <JeuView fx:id="jeuView" />
     </center>
-    <bottom>
-        <Label fx:id="chronoLabel" text="60" />
-        <Label fx:id="vieLabel" text="60" />
 
-    </bottom>
+
+    <Label fx:id="timerLabel" text="60" />
+    <Label fx:id="scoreLabel" text="60" />
+    <ImageView fx:id="vie1" fitHeight="50.0" fitWidth="50.0" layoutX="640.0" layoutY="52" preserveRatio="true">
+        <image>
+            <Image url="@../img/heart.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="vie2" fitHeight="50.0" fitWidth="50.0" layoutX="690.0" layoutY="52" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../img/heart.png" />
+        </image>
+    </ImageView>
+    <ImageView fx:id="vie3" fitHeight="50.0" fitWidth="50.0" layoutX="740.0" layoutY="52" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../img/heart.png" />
+        </image>
+    </ImageView>
 
 </BorderPane>
 

@@ -15,26 +15,30 @@ public class BreakingBlock extends Entity {
     }
 
     public void Action() {
-
+        /*
+        if ( X ==noop.getX() + 1 && Y== noop.getY() && noop.getDirection() == Direction.S) {//si le bloc est en dessous de snoopy, et que snoopy regarde en bas
+            board.getBoard()[X][Y] = 0;
+        }else if (X ==noop.getX() - 1 && Y== noop.getY()  && noop.getDirection()==Direction.N) {// si le bloc est au dessus de snoopy, et que snoopy regarde en haut
+            board.getBoard()[X][Y] = 0;
+        }else if (X ==noop.getX()  && Y== noop.getY() +1 && noop.getDirection() == Direction.E) {//si le bloc est à droite de snoopy, et que snoopy regarde à droite
+            board.getBoard()[X][Y] =0;
+        }else if (X ==noop.getX()  && Y== noop.getY() -1 && noop.getDirection() == Direction.O) {// si le bloc est à gauche de snoopy, et que snoopy regarde à gauche
+            board.getBoard()[X][Y] = 0;
+        }
+        */
         if(( X ==noop.getX() + 1 && Y== noop.getY() && noop.getDirection() == Direction.S)
                 || (X ==noop.getX() - 1 && Y== noop.getY()  && noop.getDirection()==Direction.N)
                 || (X ==noop.getX()  && Y== noop.getY() +1 && noop.getDirection() == Direction.E)
                 || (X ==noop.getX()  && Y== noop.getY() -1 && noop.getDirection() == Direction.O)){
-            if(spacePressed){
+            if(spacePressed ){
                 board.getBoard()[X][Y] =board.getBoard()[X][Y].replace("1", "0");// "0";
             }
         }
     }
 
     public void setSpacePressed(boolean b){
-
-        if (( X ==noop.getX() + 1 && Y== noop.getY() && noop.getDirection() == Direction.S)
-                || (X ==noop.getX() - 1 && Y== noop.getY()  && noop.getDirection()==Direction.N)
-                || (X ==noop.getX()  && Y== noop.getY() +1 && noop.getDirection() == Direction.E)
-                || (X ==noop.getX()  && Y== noop.getY() -1 && noop.getDirection() == Direction.O)){
-            this.spacePressed = b;
-            this.Action();
-        }
+        this.spacePressed = b;
+        this.Action();
 
     }
 

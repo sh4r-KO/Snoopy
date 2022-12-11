@@ -1,28 +1,27 @@
 package snoopy.Controller;
 
 import javafx.animation.*;
-import javafx.application.Platform;
-import javafx.concurrent.ScheduledService;
-import javafx.concurrent.Task;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import javafx.util.Duration;
 import snoopy.Model.*;
 import snoopy.View.JeuView;
 
-import java.util.Timer;
-import java.util.TimerTask;
-
 public class JeuDeBaseController extends Controller implements EventHandler<KeyEvent> {
 
     @FXML public BorderPane JeuBorderPane;
-    @FXML public Label vieLabel;
     @FXML JeuView jeuView;
-    private Ball b;
+    @FXML public Label scoreLabel;
+    @FXML public ImageView vie1;
+    @FXML public ImageView vie2;
+    @FXML public ImageView vie3;
+    @FXML public Label timerLabel;
+    @FXML
     static Board board;//static.............cant be changed
 
     public JeuDeBaseController() {
@@ -30,67 +29,101 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         jeuView = new JeuView();
     }
 
-
     public void initialize() {
         //why initialize and not constructor :
         //https://stackoverflow.com/a/34785707
-        this.chronoLabel.setText("#### : "+board.getChrono());
-
+        this.timerLabel.setText("#### : "+board.getChrono());
     }
 
-    public void Startgame(){
-        this.startTimer();
-    }
-    String ret = "";
-    int t = 60000;
-    @FXML public Label chronoLabel;
     static Timeline timeline = null;
-    String TIME = "###"+t;
     //https://stackoverflow.com/questions/54963023/java-how-to-cancel-the-timer-immediately-when-some-condition-is-met
     //https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
-    public void setTime(int t){
 
-        ret= t/1000+" : "+t%1000;
+    public void startGame(){
+        startTimer();
     }
+
+
+    int t = 60;
     private void startTimer() {
 
-        timeline = new Timeline(new KeyFrame(Duration.millis(100), e ->{
-                    if(t%400==0){
-                        board.moveBall();
-                    }
-                    if(t<0){
-                        t=0;
-                        board.setChrono(0);
-                    }else if(t%1000==0){
-                        board.setChrono(t/1000);
-                    }
-                    jeuView.updateFrame(board, t);
-                    t=t-100;
-                }));
+        if (board == null || board.getBoard() == null || board.getBoard().length == 0) {
+            throw new IllegalArgumentException("snoopy.Model.Board.startTimer() : board or getBoard() is null or getBoard() empty");
+        }
 
-
-        timeline.setCycleCount(Animation.INDEFINITE); // loop forever
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e ->{
+            if(t%2==0){
+                board.moveBall();
+            }
+            board.setChrono(t);
+            System.out.println("t = " + t);
+            jeuView.updateFrame(board);
+            setLife(board.getSnoopy().getLife());
+            setScoreLabel(board.getScore());
+            jeuView.updateExtra(t, board.getScore(), board.getSnoopy().getLife());
+            t-=1;
+        }));
+        timeline.setCycleCount(60);
         timeline.play();
 
-        /*
+         /*
+         PauseTransition pause = new PauseTransition(Duration.millis(100));
+         pause.setOnFinished( e -> {
+                     if(t%400==0){
+                board.moveBall();
+            }
+            if(t<0){
+                t=0;
+                board.setChrono(0);
+            }else if(t%1000==0){
+                board.setChrono(t/1000);
+                jeuView.updateFrame(board, t);
 
-        PauseTransition pause = new PauseTransition(Duration.millis(100));
-        pause.setOnFinished(
-                e -> {
-                    jeuView.updateFrame(board);
-                    board.moveBall();
-                    pause.playFromStart(); // loop again
-                });
-        pause.play();
-        */
+            }
 
-//https://stackoverflow.com/questions/41779093/timer-in-java-fx
+            t=t-100;
+                 });
+         pause.play();
+         */
+
+        //https://stackoverflow.com/questions/41779093/timer-in-java-fx
 
     }
 
+    public void setScoreLabel(int score) {
+        this.scoreLabel.setText("Score : " + score);
+    }
+
+    public void setLife(int life){
+        if(life == 2){
+            this.vie3.setVisible(false);
+        }
+        if(life == 1){
+            this.vie2.setVisible(false);
+        }
+        if(life == 0){
+            this.vie1.setVisible(false);
+        }
+    }
+
+    public void restartGame(){
+        board = new Board();
+        jeuView = new JeuView();
+        t = 60;
+        timeline.stop();
+        startTimer();
+    }
+
+    public void quitGame(){
+        Stage stage = (Stage) JeuBorderPane.getScene().getWindow();
+        stage.close();
+    }
 
     @Override
     public void handle(KeyEvent ke) {
+        if (board == null || board.getBoard() == null || board.getBoard().length == 0) {
+            throw new IllegalArgumentException("snoopy.Model.Board.handle() : board or getBoard() is null or getBoard() empty");
+        }
         System.out.println(board.toString());
         //different from usual switch which ends each case with break
         switch (ke.getCode()) {
@@ -98,6 +131,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case UP -> {
                 if(timeline.getStatus()== Animation.Status.RUNNING) {
                     board.moveUp();
+
                 }
                 ke.consume();
             }
@@ -116,6 +150,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case RIGHT -> {
                 if(timeline.getStatus()== Animation.Status.RUNNING) {
                     board.moveRight();
+                    jeuView.updateFrame(board);
                 }
                 ke.consume();
             }
@@ -125,7 +160,9 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 }else{
                     timeline.play();
                 }
-                //ke.consume();
+
+
+                ke.consume();
             }
             case SPACE ->{
                 if(timeline.getStatus()== Animation.Status.RUNNING) {

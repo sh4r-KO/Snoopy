@@ -19,9 +19,9 @@ public class MenuPaneController extends Controller{
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("/ViewFmxl/JeuDeBase.fxml"));
-            BorderPane borderPane = null;
+        BorderPane borderPane = null;
         try{
-             borderPane = loader.load();
+            borderPane = loader.load();
 
         }catch (IOException e) {
             throw new RuntimeException(e);
@@ -30,17 +30,18 @@ public class MenuPaneController extends Controller{
         stage.setScene(scene);
 
         JeuDeBaseController controller = loader.getController();
-        controller.Startgame();
+        controller.startGame();
     }
 
     public void chargerUnePartieCliked() throws IOException {
         super.changePane("ChargerUnePartie.fxml", menuPaneAnchor);
     }
     public void JeuAvanceCliked(){
-
+        System.out.println("JeuAvanceCliked");
     }
 
     public void quitterCliked(){
+        System.out.println("FirstPaneController.quitterCliked()");
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
         stage.close();
     }

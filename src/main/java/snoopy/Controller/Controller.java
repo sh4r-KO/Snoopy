@@ -19,8 +19,11 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class Controller  implements Initializable {
@@ -31,12 +34,9 @@ public class Controller  implements Initializable {
 
     @FXML public AnchorPane scoresAnchorPane;
     @FXML public ListView<String> listviewScores;
-    @FXML public Label LabelScore;
-    @FXML public Button retourBChargerPartie;
-    @FXML public Button validerBChargerPartie;
+    @FXML JeuDeBaseController jeuDeBaseController;
 
-    private final String[] scoresList = {"test1 : 123456","test2 : rAAAAAAh il est deja 3h du mat","test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14", "test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14", "test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14", "test3 : dfghnbv","4","5","6","7","8","9","10","11","12","13","14"};//a importer plus tard du txt
-
+    private ArrayList<String> scoresList ;
     @FXML public Button validerBmdp;
     @FXML public Button retourBmdp;
     @FXML public TextArea motdepasseTextArea;
@@ -48,17 +48,14 @@ public class Controller  implements Initializable {
     @FXML public TextArea chargerUnePartieTextArea;
 
     //constructeur
-    public Controller(){
-
-
-
-    }
+    public Controller(){}
 
     public void retourClickedChargerPartie(ActionEvent actionEvent) throws IOException {
         changePane("MenuPane.fxml", chargerUnePartieAnchor);
     }
     public void validerClickedChargerPartie(ActionEvent actionEvent) {
         String s = chargerUnePartieTextArea.getText();
+
         System.out.println(s);
     }
     public void retourClickedmdp(ActionEvent actionEvent) throws IOException {
@@ -66,6 +63,9 @@ public class Controller  implements Initializable {
     }
     public void validerClickedmdp(ActionEvent actionEvent) {
         String s = motdepasseTextArea.getText();
+        if(s.equals("MotDePasse.5")){
+
+        }
         System.out.println(s);
     }
     public void JouerCliked() throws IOException {
@@ -97,11 +97,26 @@ public class Controller  implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //add score to the list only when the window is opened (not when the button is clicked)
+        String file = null;
+        try {
+            file = Files.readString(new File("src/main/resources/Scores.txt").toPath());
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        char[] chararray = file.toCharArray();
+        scoresList = new ArrayList<String>();
+        String r = "";
+        for (int i = 0; i < chararray.length; i++) {
+            if(chararray[i] == '\n'){
+                scoresList.add(r);
+                r = "";
+            }else{
+                r = r + ""+chararray[i];
+            }
+        }
+
         if(listviewScores != null){
             listviewScores.getItems().addAll(scoresList);
         }
     }
-
-
-
 }

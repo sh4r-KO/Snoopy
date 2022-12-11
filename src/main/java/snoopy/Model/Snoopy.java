@@ -15,23 +15,6 @@ public class Snoopy extends Entity {
         // this.snoopyBoard = new Board();
     }
 
-    /*public Snoopy(Board b){
-        //localisation Snoopy
-
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 22; j++) {
-                if ( snoopyBoard.board[i][j] == 8) {
-                    //System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-                    snoopyBoard.setNoop(new Snoopy(i, j, Direction.OUEST));
-                    break;
-                }
-            }
-        }//new Snoopy(i, j, Snoopy.Direction.NORD)
-    }
-
-     */
-
-
     //direction setter and getter
     public void setDirection(Direction d) {
         this.direction = d;
@@ -41,28 +24,22 @@ public class Snoopy extends Entity {
         return direction;
     }
 
-
     @Override
     public String toString() {
         String r = "x:" + this.X + " y:" + this.Y + "d:";
         return r;
     }
 
-
     public void loseLife(int i) {
         this.PV -= i;
     }
-
     public int getLife() {
         return PV;
     }
-
+    public void setLife(int i) {
+        this.PV = i;
+    }
     public void Action() {
-
-        //touch trap
-        //touch ball
-        //touch bird
 
     }
 }
-
