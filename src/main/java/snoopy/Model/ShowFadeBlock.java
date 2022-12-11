@@ -9,16 +9,22 @@ public class ShowFadeBlock extends Entity {
     
     private Snoopy noop;
 
-
-
+    /**
+     * Constructor of ShowFadeBlock
+     * @param i position of the block on the axis up to down
+     * @param j position of the block on the axis left to right
+     * @param b the board of the game
+     * @param noop snoopy
+     */
     public ShowFadeBlock( int i, int j,Board b, Snoopy noop) {
         super(i, j);
         this.board = b;
         this.noop = noop;
         this.disappeared = false;
     }
-
-
+    /**
+     * This method manages the actions of the ShowFade block and its interactions with snoopy
+     */
     protected void Action() {
         System.out.println("fade "+toString());
         /*

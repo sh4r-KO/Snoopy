@@ -5,6 +5,13 @@ public class TreadMillBlock extends Entity {
     private Snoopy noop;
     private Direction direction;
 
+    /**
+     * Constructor of TreadMillBlock
+     * @param X position of the block on the axis up to down
+     * @param Y position of the block on the axis left to right
+     * @param b the board of the game
+     * @param noop snoopy
+     */
     public TreadMillBlock(int X, int Y,Board b , Snoopy noop , Direction d) {
         //localisation du bloc
         super(X, Y);
@@ -13,6 +20,9 @@ public class TreadMillBlock extends Entity {
         this.board = b;
     }
 
+    /**
+     * This method manages the actions of the TreadMill block and its interactions with snoopy
+     */
     public void Action(){
 
         if (X == noop.getX() && Y == noop.getY() && direction == Direction.E) {//move noop to the right

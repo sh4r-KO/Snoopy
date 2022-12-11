@@ -26,12 +26,17 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     @FXML public Label timerLabel;
     static Board board;//static.............cant be changed
 
+    /**
+     * JeuDeBaseController constructor
+     */
     public JeuDeBaseController() {
         board = new Board();
         jeuView = new JeuView();
     }
 
-
+    /**
+     * This method allows us to change the value of time according to the board
+     */
     public void initialize() {
         //why initialize and not constructor :
         //https://stackoverflow.com/a/34785707
@@ -44,12 +49,19 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     //https://stackoverflow.com/questions/54963023/java-how-to-cancel-the-timer-immediately-when-some-condition-is-met
     //https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
 
+    /**
+     * This method allows us to launch the first level of the game
+     */
     public void startGame(){
         startTimer();
     }
 
 
     int t = 60;
+
+    /**
+     * This method is used to launch the periodic events, update and move the ball
+     */
     private void startTimer() {
 
         timeline = new Timeline(new KeyFrame(Duration.seconds(1), e ->{
@@ -67,34 +79,22 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             timeline.setCycleCount(60);
             timeline.play();
 
-         /*
-         PauseTransition pause = new PauseTransition(Duration.millis(100));
-         pause.setOnFinished( e -> {
-                     if(t%400==0){
-                board.moveBall();
-            }
-            if(t<0){
-                t=0;
-                board.setChrono(0);
-            }else if(t%1000==0){
-                board.setChrono(t/1000);
-                jeuView.updateFrame(board, t);
-
-            }
-
-            t=t-100;
-                 });
-         pause.play();
-         */
-
         //https://stackoverflow.com/questions/41779093/timer-in-java-fx
 
     }
 
+    /**
+     * This setter allows us to set the field scoreLabel
+     * @param score
+     */
     public void setScoreLabel(int score) {
         this.scoreLabel.setText("Score : " + score);
     }
 
+    /**
+     * This method allows us to set the field life
+     * @param life
+     */
     public void setLife(int life){
         if(life == 2){
             this.vie3.setVisible(false);
@@ -107,8 +107,10 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         }
     }
 
-
-
+    /**
+     * This method allows us to translate Key Events into movements, and "S" to save
+     * @param ke Keyboard entry
+     */
     @Override
     public void handle(KeyEvent ke) {
         System.out.println(board.toString());

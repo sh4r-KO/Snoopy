@@ -7,6 +7,14 @@ public class PushingBlock extends Entity {
     private Direction direction;
     private boolean pushed = false;
 
+    /**
+     * Constructor of PushingBlock
+     * @param i position of the block on the axis up to down
+     * @param j position of the block on the axis left to right
+     * @param b the board of the game
+     * @param noop snoopy
+     * @param d the direction of teh pushing block
+     */
     public PushingBlock( int i, int j,Board b, Snoopy noop, Direction d){
         //localisation du bloc
         super(i,j);
@@ -16,6 +24,9 @@ public class PushingBlock extends Entity {
         this.direction = d;
     }
 
+    /**
+     * This method allows us to push the pushing block to the right
+     */
     private void isPushedToTheRight(){
 
                 if(noop.getX() == X
@@ -34,6 +45,10 @@ public class PushingBlock extends Entity {
 
                 }
     }
+
+    /**
+     * This method allows us to push the pushing block to the left
+     */
     private void isPushedToTheLeft(){
                 if(noop.getX() == X
                         && noop.getY()==Y+1
@@ -50,6 +65,9 @@ public class PushingBlock extends Entity {
 
                 }
     }
+    /**
+     * This method allows us to push the pushing block up
+     */
     private void isPushedToTheTop(){
                 if(noop.getX() == X+1
                         && noop.getY()==Y
@@ -65,6 +83,9 @@ public class PushingBlock extends Entity {
 
                 //System.out.println("isPushedToTheTop : false"+ "(noop.getX() == X+1 ):"+(noop.getX() == X+1 )+"\n"+ "(noop.getX()):"+(noop.getX())+"\n"+ "(X+1):"+(X+1)+"\n"+ "(noop.getY()==Y ):"+(noop.getY()==Y  )+"\n"+ "(board.getBoard()[X-1][Y].contains(\"0\") ):"+(board.getBoard()[X-1][Y].contains("0"))+"\n"+ "(direction == noop.getDirection() && direction== Direction.N ):"+(direction == noop.getDirection() && direction== Direction.N)+"\n");
     }
+    /**
+     * This method allows us to push the pushing block down
+     */
     private void isPushedToTheBottom(){
                 if(noop.getX() == X-1
                         && noop.getY()==Y
@@ -80,6 +101,9 @@ public class PushingBlock extends Entity {
                 }
     }
 
+    /**
+     * This method manages the movements of the pushing block and its interactions with snoopy
+     */
     public void Action(){
         //check if X,Y contains 2N,2S,2E,2O, if not throw illegal argument exception
         if( ! board.getBoard()[X][Y].contains("2N") && ! board.getBoard()[X][Y].contains("2S") && ! board.getBoard()[X][Y].contains("2E") && ! board.getBoard()[X][Y].contains("2O")){
