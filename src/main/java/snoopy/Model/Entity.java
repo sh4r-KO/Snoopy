@@ -1,8 +1,8 @@
 package snoopy.Model;
 
 public abstract class Entity {
-    int X;
-    int Y;
+    protected int X;
+    protected int Y;
     public Entity(int x, int y) {
         this.X = x;
         this.Y = y;
