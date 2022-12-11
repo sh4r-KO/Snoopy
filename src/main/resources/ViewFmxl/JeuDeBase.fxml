@@ -21,8 +21,9 @@
         <Integer fx:id="column" fx:value="22"/>
 
     </fx:define>
-
-        <Label fx:id="scoreLabel" text="Score : 0" textFill="BLACK" layoutY="20" BorderPane.alignment="TOP_CENTER">
+    <!--
+        <top>
+        <Label fx:id="scoreLabel" text="Score : 0" textFill="BLACK" layoutY="20" layoutX="-200" BorderPane.alignment="TOP_CENTER">
             <BorderPane.margin>
                 <Insets top="25.0" />
             </BorderPane.margin>
@@ -40,8 +41,8 @@
                 -fx-padding: 20 0 0 0;
             </style>
         </Label>
-
-
+        </top>
+-->
         <ImageView fx:id="vie1" fitHeight="50.0" fitWidth="50.0" layoutX="140.0" layoutY="25.0" pickOnBounds="true" preserveRatio="true">
             <image>
                 <Image url="@../img/heart.png" />
@@ -58,9 +59,8 @@
             </image>
         </ImageView>
 
-        <Label fx:id="chronoLabel" text="60" />
-
-
+    <Label fx:id="chronoLabel" text="60" />
+    <Label fx:id="scoreLabel" text="60" />
 
     <center>
         <JeuView fx:id="jeuView" />

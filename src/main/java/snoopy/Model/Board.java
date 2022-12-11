@@ -23,11 +23,9 @@ public class Board {
     public Board() {
         allEntityList = new ArrayList<Entity>();
         this.fullBoard = this.setBoardFromTextFile2("level1.txt", 12, 22);
-        System.out.println("board created:\n"+this.toString());
+        //System.out.println("board created:\n"+this.toString());
     }
     public void levelFinished() {
-        //level finished ?
-
         currentLevelNumber++;
         if(currentLevelNumber > LevelNumberMax) {
             gameWon();
@@ -35,18 +33,30 @@ public class Board {
             allEntityList = new ArrayList<Entity>();
             this.fullBoard  = this.setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
         }
-
     }
     public void restartLevel(){
+        System.out.println("restart level()"+currentLevelNumber);
         setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
+    }
+    public boolean timerPassed() {
+        getSnoopy().loseLife(1);
+        if(getSnoopy().getLife() <= 0){
+            System.out.println(" Snoopy is dead");
+            gameLost();
+        }else{
+            restartLevel();
+            return true;
+        }
+        return false;
     }
     public void setChrono(int chrono) {
         this.chrono = chrono;
     }
     public int getChrono() {
-        notifyAll();
         return this.chrono;
     }
+
+
     public void gameWon(){
         System.out.println("Game won"+score);
         //TODO need a name
@@ -56,7 +66,6 @@ public class Board {
         }catch (IOException e) {
             //exception handling left as an exercise for the reader
         }
-        throw new UnsupportedOperationException("Game won, not coded yet");
     }
     public void gameLost(){
         if(getSnoopy().getLife() == 0) {
@@ -207,7 +216,7 @@ public class Board {
             throw new RuntimeException(e);
         }
         char[] chararray = file.toCharArray();
-        System.out.println("chararray.length = " + chararray.toString());
+        //System.out.println("chararray.length = " + chararray.toString());
 
         //variables for the loop
         int rowCount = 0;
@@ -248,7 +257,7 @@ public class Board {
             }
         }
 
-        System.out.println("found snoopy"+noop.toString());
+        //System.out.println("found snoopy"+noop.toString());
 
         //reset variables for the loop
         rowCount = columnCount= 0;
@@ -322,16 +331,16 @@ public class Board {
                         if (chararray[i + 1] != 'S' && chararray[i + 1] != 'N' && chararray[i + 2] != 'O' && chararray[i + 2] != 'E') {// get the next char to find the direction
                             throw new IllegalArgumentException("Snoopy.Model.setBoardFromText.334 : chararray[i+1] inst NSWE");
                         } else if (chararray[i + 1] == 'S' && chararray[i + 2] == 'O') {
-                            ret[rowCount][columnCount] = '7' + "SO";
+                            ret[rowCount][columnCount] = "07SO";
                             allEntityList.add(new Ball(rowCount, columnCount, this,  Direction.SO));
                         } else if (chararray[i + 1] == 'S' && chararray[i + 2] == 'E') {
-                            ret[rowCount][columnCount] = '7' + "SE";
+                            ret[rowCount][columnCount] = "07SE";
                             allEntityList.add(new Ball(rowCount, columnCount, this,  Direction.SE));
                         } else if (chararray[i + 1] == 'N' && chararray[i + 2] == 'O') {
-                            ret[rowCount][columnCount] = '7' + "NO";
+                            ret[rowCount][columnCount] = "07NO";
                             allEntityList.add(new Ball(rowCount, columnCount, this,  Direction.NO));
                         } else if (chararray[i + 1] == 'N' && chararray[i + 2] == 'E') {
-                            ret[rowCount][columnCount] = '7' + "NE";
+                            ret[rowCount][columnCount] = "07NE";
                             allEntityList.add(new Ball(rowCount, columnCount, this, Direction.NE));
                         }
                     }
@@ -387,7 +396,6 @@ public class Board {
     public String[][] getBoard() {
         return fullBoard;
     }
-
     /*public void update() {
         for (Entity e : allEntityList) {
             e.Action();
@@ -410,8 +418,6 @@ public class Board {
         }
         return ret;
     }
-
-
     //check if all bird are pickedup
     private boolean isAllBirdPickedUp(){
         boolean yes = true;
@@ -423,17 +429,5 @@ public class Board {
             }
         }
         return yes;
-    }
-
-    public void timerPassed() {
-        getSnoopy().loseLife(1);
-        if(getSnoopy().getLife() <= 0){
-            System.out.println(" Snoopy is dead");
-            gameLost();
-        }else{
-            restartLevel();
-        }
-
-
     }
 }

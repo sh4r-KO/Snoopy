@@ -24,8 +24,6 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     @FXML public ImageView vie2;
     @FXML public ImageView vie3;
     @FXML public Label timerLabel;
-
-    private Ball b;
     static Board board;//static.............cant be changed
 
     public JeuDeBaseController() {
@@ -38,26 +36,41 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
         //why initialize and not constructor :
         //https://stackoverflow.com/a/34785707
         this.timerLabel.setText("#### : "+board.getChrono());
-
     }
 
-    public void Startgame(){
-        this.startTimer();
-    }
-    String ret = "";
-    int t = 60000;
+
+
     static Timeline timeline = null;
-    String TIME = "###"+t;
     //https://stackoverflow.com/questions/54963023/java-how-to-cancel-the-timer-immediately-when-some-condition-is-met
     //https://stackoverflow.com/questions/9966136/javafx-periodic-background-task
-    public void setTime(int t){
 
-        ret= t/1000+" : "+t%1000;
+    public void startGame(){
+        startTimer();
     }
+
+
+    int t = 60;
     private void startTimer() {
 
-        timeline = new Timeline(new KeyFrame(Duration.millis(100), e ->{
-            if(t%400==0){
+        timeline = new Timeline(new KeyFrame(Duration.seconds(1), e ->{
+            if(t%2==0){
+                board.moveBall();
+            }
+
+            board.setChrono(t);
+            jeuView.updateFrame(board);
+            setLife(board.getSnoopy().getLife());
+            setScoreLabel(board.getScore());
+            jeuView.updateExtra(t, board.getScore(), board.getSnoopy().getLife());
+            t-=1;
+        }));
+            timeline.setCycleCount(60);
+            timeline.play();
+
+         /*
+         PauseTransition pause = new PauseTransition(Duration.millis(100));
+         pause.setOnFinished( e -> {
+                     if(t%400==0){
                 board.moveBall();
             }
             if(t<0){
@@ -65,22 +78,11 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 board.setChrono(0);
             }else if(t%1000==0){
                 board.setChrono(t/1000);
+                jeuView.updateFrame(board, t);
+
             }
-            jeuView.updateFrame(board, t);
+
             t=t-100;
-        }));
-
-
-        timeline.setCycleCount(Animation.INDEFINITE); // loop forever
-        timeline.play();
-
-         /*
-         PauseTransition pause = new PauseTransition(Duration.millis(100));
-         pause.setOnFinished(
-                 e -> {
-                     jeuView.updateFrame(board);
-                     board.moveBall();
-                     pause.playFromStart(); // loop again
                  });
          pause.play();
          */
@@ -89,7 +91,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
 
     }
 
-    public void setScoreLabel(int score){
+    public void setScoreLabel(int score) {
         this.scoreLabel.setText("Score : " + score);
     }
 
@@ -116,6 +118,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case UP -> {
                 if(timeline.getStatus()== Animation.Status.RUNNING) {
                     board.moveUp();
+
                 }
                 ke.consume();
             }
@@ -134,6 +137,7 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
             case RIGHT -> {
                 if(timeline.getStatus()== Animation.Status.RUNNING) {
                     board.moveRight();
+                    jeuView.updateFrame(board);
                 }
                 ke.consume();
             }
@@ -143,7 +147,9 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
                 }else{
                     timeline.play();
                 }
-                //ke.consume();
+
+
+                ke.consume();
             }
             case SPACE ->{
                 if(timeline.getStatus()== Animation.Status.RUNNING) {

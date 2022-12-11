@@ -30,7 +30,7 @@ public class MenuPaneController extends Controller{
         stage.setScene(scene);
 
         JeuDeBaseController controller = loader.getController();
-        controller.Startgame();
+        controller.startGame();
     }
 
     public void chargerUnePartieCliked() throws IOException {
