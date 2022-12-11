@@ -88,6 +88,7 @@ public class JeuView extends Group {//implements Initializable {
 
         initTime();
         initLife();
+        initScore();
         initBallMatrix();
         drawGreen();
         drawWall();
@@ -149,13 +150,14 @@ public class JeuView extends Group {//implements Initializable {
      */
     private void initTime(){
         time = new Label();
-        time.setText("Time : ");
-        time.setLayoutX(0);
-        time.setLayoutY(670);
+        time.setText("Temps : ");
+        time.setLayoutX(290);
+        time.setLayoutY(680);
         time.setAlignment(Pos.CENTER);
         time.toFront();
 
         //timazere.setStyle("-fx-background-color: #000000;");
+
         this.getChildren().add(time);
     }
     Label score = new Label();
@@ -164,14 +166,16 @@ public class JeuView extends Group {//implements Initializable {
      * This method intializes the score of snoopy on the game board
      */
     private void initScore(){
-        time = new Label();
-        time.setText("Score : ");
-        time.setLayoutX(0);
-        time.setLayoutY(800);
-        time.setAlignment(Pos.CENTER);
-        time.toFront();
-        //timazere.setStyle("-fx-background-color: #000000;");
-        this.getChildren().add(time);
+        score = new Label();
+        score.setAlignment(Pos.CENTER);
+        score.setLayoutX(790);
+        score.setLayoutY(680);
+        score.toFront();
+        score.setStyle("-fx-font-size: 32px;"
+                + "-fx-text-fill: #000000;"
+                + "-fx-font-weight: bold;");
+        score.setText("Score : ");
+        this.getChildren().add(score);
     }
 
     /**
@@ -179,7 +183,11 @@ public class JeuView extends Group {//implements Initializable {
      * @param timeleft the time left for snoopy
      */
     private void drawTime(int timeleft){
-        time.setText("Time left : "+timeleft);
+        time.setStyle("-fx-font-size: 16px;"
+                + "-fx-text-fill: #000000;" +
+                "-fx-font-family: \"Press Start 2P\";"
+                + "-fx-font-weight: bold;");
+        time.setText("Temps : "+timeleft);
     }
 
     /**
@@ -187,7 +195,11 @@ public class JeuView extends Group {//implements Initializable {
      * @param score new score
      */
     private void drawScore(int score){
-        time.setText("Current Score : "+score);
+        this.score.setText("Score : "+score);
+        this.score.setStyle("-fx-font-size: 16px;"
+                + "-fx-text-fill: #000000;" +
+                "-fx-font-family: \"Press Start 2P\";"
+                + "-fx-font-weight: bold;");
     }
 
     /**
@@ -199,7 +211,7 @@ public class JeuView extends Group {//implements Initializable {
     public void updateExtra(int timeleft, int score , int lifeLeft){
         drawTime(timeleft);
         drawScore(score);
-        drawLife(lifeLeft);
+        //drawLife(lifeLeft);
     }
 
     /**

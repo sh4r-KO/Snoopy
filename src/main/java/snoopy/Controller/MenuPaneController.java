@@ -47,7 +47,7 @@ public class MenuPaneController extends Controller{
      * This method tells us that the button "Jeu avancé" has been clicked
      */
     public void JeuAvanceCliked(){
-
+        System.out.println("JeuAvanceCliked");
     }
 
     /**
