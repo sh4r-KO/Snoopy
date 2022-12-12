@@ -47,6 +47,11 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
      * This method allows us to launch the first level of the game
      */
     public void startGame(){
+        board.startGame();
+        startTimer();
+    }
+    public void startLoadedGame(){
+        board.LoadGame();
         startTimer();
     }
 
@@ -102,10 +107,11 @@ public class JeuDeBaseController extends Controller implements EventHandler<KeyE
     }
 
     public void restartGame(){
-        board = new Board();
-        jeuView = new JeuView();
+        //board = new Board();
+        //jeuView = new JeuView();
         t = 60;
         timeline.stop();
+        board.startGame();
         startTimer();
     }
 

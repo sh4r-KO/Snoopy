@@ -23,9 +23,54 @@ public class Board {
      * The constructor of Board
      */
     public Board() {
-        allEntityList = new ArrayList<Entity>();
-        this.fullBoard = this.setBoardFromTextFile2("level1.txt", 12, 22);
+        //allEntityList = new ArrayList<Entity>();
+        //this.fullBoard = this.setBoardFromTextFile2("level1.txt", 12, 22);
         //System.out.println("board created:\n"+this.toString());
+    }
+
+    public void startGame(){
+        allEntityList = new ArrayList<Entity>();
+        this.fullBoard =  setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
+        score = 0;
+        chrono = 60;
+        currentLevelNumber = 1;
+    }
+    public void LoadGame(){
+        this.allEntityList = new ArrayList<Entity>();
+        this.fullBoard =  setBoardFromTextFile2("Save.txt", 12, 22);
+    }
+
+    public boolean gameWon(){
+        try {
+            Files.write(Paths.get("src/main/resources/Scores.txt"), (score +"\n").getBytes(), StandardOpenOption.APPEND);
+        }catch (IOException e) {
+            //exception handling left as an exercise for the reader
+        }
+        SaveScore(score);
+        //save score
+        //gameWon = true;
+        return true;
+    }
+
+    public void SaveScore(int score) {
+        try
+        {
+            String filename= "Scores.txt";
+            FileWriter fw = new FileWriter(filename,true); //the true will append the new data
+            fw.write(score+"\n");//appends the string to the file
+            fw.close();
+        }
+        catch(IOException ioe)
+        {
+            System.err.println("IOException: " + ioe.getMessage());
+        }
+    }
+    public int getScoreFromChrono() {
+        return score = 100*chrono;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
     /**
      * This method allows us to know if we have completed all the levels successfully
@@ -61,20 +106,7 @@ public class Board {
         }
         return false;
     }
-    /**
-     * This method prints if we won the game and the score
-     */
-    public void gameWon(){
-        System.out.println("Game won"+score);
-        //TODO need a name
-        String ret = score +"\n";
-        try {
-            Files.write(Paths.get("src/main/resources/Scores.txt"), ret.getBytes(), StandardOpenOption.APPEND);
-        }catch (IOException e) {
-            //exception handling left as an exercise for the reader
-        }
-        //save score
-    }
+
     /**
      * This method prints that we lost when we snoopy runs out of lives
      */
@@ -425,6 +457,10 @@ public class Board {
                 }
             }
         }
+
+        
+
+
         return ret;
     }
     /**
