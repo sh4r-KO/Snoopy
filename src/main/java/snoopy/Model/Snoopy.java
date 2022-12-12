@@ -7,7 +7,13 @@ public class Snoopy extends Entity {
     private Direction direction;
     private Board snoopyBoard ;
 
-
+    /**
+     *
+     * @param X the position of snoopy on the up to down axis
+     * @param Y the position of snoopy on the left to right axis
+     * @param b the board of the game
+     * @param d the direction of snoopy
+     */
     public Snoopy(int X, int Y,Board b, Direction d) {
         super(X, Y);
         this.snoopyBoard = b;
@@ -15,11 +21,16 @@ public class Snoopy extends Entity {
         // this.snoopyBoard = new Board();
     }
 
-    //direction setter and getter
+    /**
+     * This method sets the direction of Snoopy
+     * @param d the new direction
+     */
     public void setDirection(Direction d) {
         this.direction = d;
     }
-
+    /**
+     * @return the current direction of snoopy
+     */
     public Direction getDirection() {
         return direction;
     }
@@ -29,16 +40,30 @@ public class Snoopy extends Entity {
         String r = "x:" + this.X + " y:" + this.Y + "d:";
         return r;
     }
-
+    /**
+     * This method removes a life from snoopy
+     * @param i number of lives lost
+     */
     public void loseLife(int i) {
         this.PV -= i;
     }
+
+    /**
+     * @return the number of snoopy's lives left
+     */
     public int getLife() {
         return PV;
     }
+    /**
+     * This method set snoopy's life point
+     * @param i nulber of lives lost
+     */
     public void setLife(int i) {
         this.PV = i;
     }
+    /**
+     * This method manages the interactions of snoopy
+     */
     public void Action() {
 
     }

@@ -11,9 +11,10 @@ import java.io.IOException;
 
 public class MenuPaneController extends Controller{
     @FXML private AnchorPane menuPaneAnchor;
-
-
-
+    /**
+     * This method tells us that the button "Jeu de base" has been clicked
+     * @throws IOException
+     */
     public void JeuDeBaseCliked() throws IOException {
         //super.changePane("JeuDeBase.fxml", menuPaneAnchor);
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
@@ -32,24 +33,40 @@ public class MenuPaneController extends Controller{
         JeuDeBaseController controller = loader.getController();
         controller.startGame();
     }
-
+    /**
+     * This method tells us that the button "Charger une partie" has been clicked
+     * @throws IOException
+     */
     public void chargerUnePartieCliked() throws IOException {
         super.changePane("ChargerUnePartie.fxml", menuPaneAnchor);
     }
+    /**
+     * This method tells us that the button "Jeu avancé" has been clicked
+     */
     public void JeuAvanceCliked(){
         System.out.println("JeuAvanceCliked");
     }
-
+    /**
+     * This method tells us that the button "Quitter" has been clicked
+     */
     public void quitterCliked(){
         System.out.println("FirstPaneController.quitterCliked()");
         Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
         stage.close();
     }
+
+    /**
+     * This method tells us that the button "Jeu de base" has been clicked
+     * @throws IOException
+     */
     public void mdpCliked() throws IOException {
         super.changePane("MotDePasse.fxml", menuPaneAnchor);
     }
+    /**
+     * This method tells us that the button "Scores" has been clicked
+     * @throws IOException
+     */
     public void scoresCliked() throws IOException {
         super.changePane("Scores.fxml", menuPaneAnchor);
     }
-
 }

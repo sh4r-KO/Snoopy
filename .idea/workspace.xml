@@ -5,7 +5,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fa9a3b5-c86c-4204-9c70-e1bae4f8f6f9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Controller/Controller.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Controller/Controller.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Controller/JeuDeBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Controller/JeuDeBaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Controller/MenuPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Controller/MenuPaneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/Ball.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/BreakingBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/BreakingBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/InvincibleBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/InvincibleBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/PushingBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/PushingBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/ShowFadeBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/ShowFadeBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/Snoopy.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/Snoopy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/TrappedBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/TrappedBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/TreadMillBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/TreadMillBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/YellowBird.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/YellowBird.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/View/JeuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/View/JeuView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -31,13 +46,13 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

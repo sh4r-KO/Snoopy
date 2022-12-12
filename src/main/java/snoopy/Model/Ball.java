@@ -9,7 +9,13 @@ public class Ball extends Entity {
     private boolean touchWall = false;
     private Board snoopyBoard;
     private Direction d;
-
+    /**
+     * Ball constructor
+     * @param x position variation from up to down
+     * @param y position variation from left to right
+     * @param b the board that the ball is running on
+     * @param d the direction of teh ball
+     */
     public Ball(int x, int y, Board b, Direction d) {
         super(x, y);
         this.snoopyBoard = b;
@@ -18,7 +24,12 @@ public class Ball extends Entity {
         this.d = d;
 
     }
-
+    /**
+     * This setter allows to set the position of the ball
+     * @param x position variation from up to down
+     * @param y position variation from left to right
+     * @param b the board that the ball is running on
+     */
     public void setBall (int x, int y,  Board b){//[12][22]
         this.xPosition = x;
         this.yPosition = y;
@@ -26,7 +37,9 @@ public class Ball extends Entity {
        // System.out.println(toString());
     }
 
-// the wall is at index x = 0, y = 0, so the max index is x = 21, y = 11
+    /**
+     * This method manages the different movements of the ball and its interactions with snoopy
+     */
     public void Action() {
         /*
        advacing meaning : depending on the direction we will be facing, the coordinates shall changes or not accordingly.
@@ -101,48 +114,70 @@ public class Ball extends Entity {
         }
 
 
-    public void collisionWall() {
-        if (xPosition == 1 || yPosition == 1 || xPosition == 20 || yPosition == 10) {
-            touchWall = true;
-        }else{
-            touchWall = false;
-        }
-    }
 
-
-
+    /**
+     * sets the x position of the ball
+     * @param xPosition
+     */
     public void setxPosition(int xPosition) {
         this.xPosition = xPosition;
     }
 
+    /**
+     * sets the y position of the ball
+     * @param yPosition
+     */
     public void setyPosition(int yPosition) {
         this.yPosition = yPosition;
     }
 
+    /**
+     * sets the state of touchWall
+     * @param touchWall
+     */
     public void setTouchWall(boolean touchWall) {
         this.touchWall = touchWall;
     }
 
+    /**
+     * sets the Board of snoopy
+     * @param snoopyBoard
+     */
     public void setSnoopyBoard(Board snoopyBoard) {
         this.snoopyBoard = snoopyBoard;
     }
 
+    /**
+     * @return the speed of the ball
+     */
     public float getSpeed() {
         return speed;
     }
 
+    /**
+     * @return the x position of the ball
+     */
     public int getxPosition() {
         return xPosition;
     }
 
+    /**
+     * @return the y position of the ball
+     */
     public int getyPosition() {
         return yPosition;
     }
 
+    /**
+     * @return if there is a collision between teh ball and the wall
+     */
     public boolean isTouchWall() {
         return touchWall;
     }
 
+    /**
+     * @return the board of snoopy
+     */
     public Board getSnoopyBoard() {
         return snoopyBoard;
     }

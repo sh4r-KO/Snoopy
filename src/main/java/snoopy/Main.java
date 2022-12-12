@@ -13,20 +13,7 @@ import snoopy.Model.Board;
 import java.io.IOException;
 
 public class Main extends Application {
-    //******************************************************************************************************************
-    //---------------------------------A NE PAS SUPPRIMER MEME SI IL Y A DES DOUBLONS OK ????------------------------------
-    //******************************************************************************************************************
-    /*
-    TODO: reduce visibilty of all elements in controllers like public button -> private
-    TODO: make all element in fxml responsive/relative to the size
-    TODO: all modelView must extends ImageView
-    TODO: reduce title of the menu
-    TODO : in case of not enough number in int[][] use hexa to represent the number ABCDEF = 10 11 12 13 14 15
-    TODO : https://stackoverflow.com/questions/49956551/save-data-as-binary-using-objectoutputstream pour le ssauvegardes en BINAIRE
-    */
-    //******************************************************************************************************************
-    //******************************************************************************************************************
-    //******************************************************************************************************************
+    //TODO : https://stackoverflow.com/questions/49956551/save-data-as-binary-using-objectoutputstream pour le ssauvegardes en BINAIRE
 
     public static final int Stage_width = 1440;//75% of 1920
     public static final int Stage_height = 810;//75% of 1080 //coucou
@@ -38,8 +25,6 @@ public class Main extends Application {
 
         AnchorPane anchorPane = loader.load();
         Scene scene = new Scene(anchorPane);
-        String a = "6W7A8N";
-        System.out.println("######################################################################################"+a.replace("6W",""));
 
         stage.addEventFilter(KeyEvent.KEY_PRESSED, new JeuDeBaseController());//can change stage to something else, reduce the scope of the controlller, preferable to use ke.consume() in the controller
         stage.setScene(scene);

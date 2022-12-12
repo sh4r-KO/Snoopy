@@ -19,12 +19,17 @@ public class Board {
     private int LevelNumberMax = 2;//inclusive
     public int score;
     private int chrono;
-
+    /**
+     * The constructor of Board
+     */
     public Board() {
         allEntityList = new ArrayList<Entity>();
         this.fullBoard = this.setBoardFromTextFile2("level1.txt", 12, 22);
         //System.out.println("board created:\n"+this.toString());
     }
+    /**
+     * This method allows us to know if we have completed all the levels successfully
+     */
     public void levelFinished() {
         currentLevelNumber++;
         if(currentLevelNumber > LevelNumberMax) {
@@ -35,6 +40,9 @@ public class Board {
             this.fullBoard  = this.setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
         }
     }
+    /**
+     * This method allows us to restart a level
+     */
     public void restartLevel(){
         System.out.println("restart level()"+currentLevelNumber);
         setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
@@ -53,13 +61,9 @@ public class Board {
         }
         return false;
     }
-    public void setChrono(int chrono) {
-        this.chrono = chrono;
-    }
-    public int getChrono() {
-        return this.chrono;
-    }
-
+    /**
+     * This method prints if we won the game and the score
+     */
     public void gameWon(){
         System.out.println("Game won"+score);
         //TODO need a name
@@ -71,11 +75,19 @@ public class Board {
         }
         //save score
     }
+    /**
+     * This method prints that we lost when we snoopy runs out of lives
+     */
     public void gameLost(){
         if(getSnoopy().getLife() == 0) {
             System.out.println("Game lost");
         }
     }
+    /**
+     * This method saves the score when we win the game
+     * @param nom
+     * @param score
+     */
     public void SaveScore(String nom, int score) {
         try
         {
@@ -89,13 +101,22 @@ public class Board {
             System.err.println("IOException: " + ioe.getMessage());
         }
     }
+    /**
+     * @return new score
+     */
     public int setScore() {
         return score = 100*chrono;
     }
+    /**
+     * @return new score
+     */
     public int getScore() {
         score = setScore();
         return score;
     }
+    /**
+     * This method moves the ball while the level is not finished
+     */
     public void moveBall() {
         for (Entity e : allEntityList) {
             if (e instanceof Ball) {
@@ -106,6 +127,9 @@ public class Board {
             levelFinished();
         }
     }
+    /**
+     * This method detects if we have pressed the key space
+     */
     public void spacePressed(){
 
         for (Entity entity : allEntityList) {
@@ -114,20 +138,37 @@ public class Board {
             }
         }
     }
-
+    /**
+     * This method allows snoopy to move up
+     */
     public void moveUp() {
         this.move(Direction.N,-1,0);
     }
+    /**
+     * This method allows snoopy to move down
+     */
     public void moveDown() {
         this.move(Direction.S,+1,0);
 
     }
+    /**
+     * This method allows snoopy to move left
+     */
     public void moveRight() {
         this.move(Direction.E,0,+1);
     }
+    /**
+     * This method allows snoopy to move right
+     */
     public void moveLeft() {
         this.move(Direction.O,0,-1);
     }
+    /**
+     * This method allows snoopy to move according to the pressed direction from the keyboard
+     * @param pressedDirection pressed direction from the keyboard : up, down, est, west
+     * @param Xmodifier
+     * @param Ymodifier
+     */
     public void move(Direction pressedDirection,int Xmodifier,int Ymodifier) {
         for (Entity entity : allEntityList) {
             if (!(entity instanceof PushingBlock pushB) && !(entity instanceof TrappedBlock tb && tb.triggered()) && !(entity instanceof Ball )){
@@ -201,6 +242,13 @@ public class Board {
             }
         }
     }
+    /**
+     * This method sets the elements of the board from a text file passed in the parameters
+     * @param NameFile text file
+     * @param x
+     * @param y
+     * @return
+     */
     public String[][] setBoardFromTextFile2(String NameFile, int x, int y) {
 
         //intialize somes variables
@@ -379,6 +427,13 @@ public class Board {
         }
         return ret;
     }
+    /**
+     * This method sets a text file from the board of the game
+     * @param board
+     * @param filename
+     * @param path
+     * @throws IOException
+     */
     public void setTxtFromBoard(String[][] board, String filename, String path) throws IOException {
 
         StringBuilder sb = new StringBuilder();
@@ -394,18 +449,21 @@ public class Board {
         path = path + filename;
         Files.write( Paths.get(path), txt.getBytes());
     }
+    /**
+     *
+     * @return Snoopy
+     */
     public Snoopy getSnoopy() {
         return noop;
     }
+    /**
+     *
+     * @return the board of the game
+     */
     public String[][] getBoard() {
         return fullBoard;
     }
-    /*public void update() {
-        for (Entity e : allEntityList) {
-            e.Action();
-        }
-    }
-    */
+
     @Override
     public String toString(){
         String ret = "";
@@ -422,7 +480,10 @@ public class Board {
         }
         return ret;
     }
-    //check if all bird are pickedup
+    /**
+     * This method is used to check if all birds are picked up
+     * @return true if all birds are picked up, false otherwise
+     */
     private boolean isAllBirdPickedUp(){
         boolean yes = true;
         for (Entity e : allEntityList) {
@@ -434,4 +495,12 @@ public class Board {
         }
         return yes;
     }
+
+    public void setChrono(int chrono) {
+        this.chrono = chrono;
+    }
+    public int getChrono() {
+        return this.chrono;
+    }
+
 }

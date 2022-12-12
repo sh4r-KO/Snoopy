@@ -5,6 +5,13 @@ public class TreadMillBlock extends Entity {
     private Snoopy noop;
     private Direction direction;
 
+    /**
+     * Constructor of TreadMillBlock
+     * @param X position of the block on the axis up to down
+     * @param Y position of the block on the axis left to right
+     * @param b the board of the game
+     * @param noop snoopy
+     */
     public TreadMillBlock(int X, int Y,Board b , Snoopy noop , Direction d) {
         //localisation du bloc
         super(X, Y);
@@ -13,6 +20,9 @@ public class TreadMillBlock extends Entity {
         this.board = b;
     }
 
+    /**
+     * This method manages the actions of the TreadMill block and its interactions with snoopy
+     */
     public void Action(){
 
         if (X == noop.getX() && Y == noop.getY() && direction == Direction.E) {//move noop to the right
@@ -37,28 +47,6 @@ public class TreadMillBlock extends Entity {
             noop.setDirection(direction);
             noop.setX(noop.getX() + 1);
         }
-
-        /*else if (X == noop.getX() && Y == noop.getY() && direction == Direction.O) {// move noop to the left
-            noop.setDirection(direction);
-            board.getBoard()[X][Y] -= 8;
-            board.getBoard()[X][Y - 1] += 8;
-            noop.setY(noop.getY() - 1);
-        } else if (X == noop.getX() && Y == noop.getY() && direction == Direction.N) {// move noop to the top
-            noop.setDirection(direction);
-            board.getBoard()[X][Y] -= 8;
-            board.getBoard()[X - 1][Y] += 8;
-            noop.setX(noop.getX() - 1);
-        } else if (X == noop.getX() && Y == noop.getY() && direction == Direction.S) {// move noop to the bottom
-            noop.setDirection(direction);
-            board.getBoard()[X][Y] -= 8;
-            board.getBoard()[X + 1][Y] += 8;
-            noop.setX(noop.getX() + 1);
-        }
-        */
-
-
-
-
     }
 
     @Override

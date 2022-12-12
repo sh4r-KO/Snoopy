@@ -22,12 +22,17 @@ public class JeuView extends Group {//implements Initializable {
     @FXML final int column =22 ;
     private ImageView[][] matrixImagesView;
 
-    //set all images path to images object in constructor
+
+    /**
+     * Constructor of JeuView, it initializes the background
+     */
     public JeuView() {
         initialiseGrassBackGround();
         this.initialize();
     }
-
+    /**
+     * This method initializes the Grass on the board
+     */
     public void initialiseGrassBackGround(){
         for(int i = 1; i<row-1;i++){
             for(int j = 1; j<column-1;j++){
@@ -48,7 +53,9 @@ public class JeuView extends Group {//implements Initializable {
             }
         }
     }
-
+    /**
+     * This method initializes all the images on the matrix : time, lives, ball, wall, grass
+     */
     public void initialize(){
 
         //this.Snoppy = new Image(new File("src/main/resources/img/Stickman_red.png").toURI().toString());
@@ -85,7 +92,9 @@ public class JeuView extends Group {//implements Initializable {
 
     }
     Label life = new Label();
-
+    /**
+     * This method initializes the images of snoopy's lives
+     */
     private void initLife() {
         life.setLayoutX(200);
         life.setLayoutY(670);
@@ -93,11 +102,16 @@ public class JeuView extends Group {//implements Initializable {
         life.setStyle("-fx-background-color: #00ff00; -fx-font-size: 20px; -fx-text-fill: #000000; -fx-font-weight: bold;");
         this.getChildren().add(life);
     }
+    /**
+     * This method prints how many lives are left on the game
+     */
     private void drawLife(int lifeLeft){
         life.setText("Life : "+ lifeLeft+".");
 
     }
-
+    /**
+     * This method initializes the Ball on the game board
+     */
     ImageView[][] matrixViewBall = new ImageView[row][column];
     private void initBallMatrix(){
         matrixViewBall = new ImageView[row][column];
@@ -124,6 +138,9 @@ public class JeuView extends Group {//implements Initializable {
     }
 
     Label time = new Label();
+    /**
+     * This method initializes the time on the game board
+     */
     private void initTime(){
         time = new Label();
         time.setText("Temps : ");
@@ -137,6 +154,10 @@ public class JeuView extends Group {//implements Initializable {
         this.getChildren().add(time);
     }
     Label score = new Label();
+
+    /**
+     * This method intializes the score of snoopy on the game board
+     */
     private void initScore(){
         score = new Label();
         score.setAlignment(Pos.CENTER);
@@ -149,7 +170,10 @@ public class JeuView extends Group {//implements Initializable {
         score.setText("Score : ");
         this.getChildren().add(score);
     }
-
+    /**
+     * This method shows how much time is left
+     * @param timeleft the time left for snoopy
+     */
     private void drawTime(int timeleft){
         time.setStyle("-fx-font-size: 16px;"
                 + "-fx-text-fill: #000000;" +
@@ -157,6 +181,10 @@ public class JeuView extends Group {//implements Initializable {
                 + "-fx-font-weight: bold;");
         time.setText("Temps : "+timeleft);
     }
+    /**
+     * This method show the current score on the game board
+     * @param score new score
+     */
     private void drawScore(int score){
         this.score.setText("Score : "+score);
         this.score.setStyle("-fx-font-size: 16px;"
@@ -164,21 +192,28 @@ public class JeuView extends Group {//implements Initializable {
                 "-fx-font-family: \"Press Start 2P\";"
                 + "-fx-font-weight: bold;");
     }
-
+    /**
+     * This method allows us to update the display of the score, time left and lives left
+     * @param timeleft
+     * @param score
+     * @param lifeLeft
+     */
     public void updateExtra(int timeleft, int score , int lifeLeft){
         drawTime(timeleft);
         drawScore(score);
         //drawLife(lifeLeft);
     }
-
+    /**
+     * This method updates the frame of the game board
+     * @param p
+     */
     public void updateFrame(Board p) {
 
-        /*if (p == null || p.getBoard() == null || p.getBoard().length == 0|| p.getBoard()[0].length == 0) {
+        if (p == null || p.getBoard() == null || p.getBoard().length == 0|| p.getBoard()[0].length == 0) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() : p or getBoard() is null or getBoard() empty");
         }if (p.getBoard().length != row || p.getBoard()[0].length != column) {
             throw new IllegalArgumentException("snoopy.Model.Board.update() size is not the same as the view size");
-        }*/
-        //System.out.println(toString(p));
+        }
         for (int i = 1; i < row-1; i++) {
             for (int j = 1; j < column - 1; j++) {
                 String T = p.getBoard()[i][j];//.strip();
@@ -258,6 +293,9 @@ public class JeuView extends Group {//implements Initializable {
         }
     }
 
+    /**
+     * This method draws the green background on the game board
+     */
     private void drawGreen(){//matrixless?
         for (int i = 2; i < row-2; i++) {
             for (int j = 2; j < column-2; j++) {
@@ -272,7 +310,9 @@ public class JeuView extends Group {//implements Initializable {
             }
         }
     }
-
+    /**
+     * This method draws the wall on the display of teh game
+     */
     public void drawWall(){
 
         //corner
@@ -299,6 +339,12 @@ public class JeuView extends Group {//implements Initializable {
             doThis(row-1, i, "MurBas.png");
         }
     }
+    /**
+     * This method sets images on a particular positions in the board
+     * @param i x Position on the up to down axis
+     * @param j y Position on the left to right axis
+     * @param FileName The name of the image file
+     */
     private void doThis(int i, int j, String FileName){
         matrixImagesView[i][j].setImage( new Image(new File("src/main/resources/img/"+FileName).toURI().toString()));
     }
