@@ -28,6 +28,7 @@
                 <Menu mnemonicParsing="false" text="Menu">
                     <items>
                         <MenuItem mnemonicParsing="false" text="Nouvelle Partie" onAction="#restartGame"/>
+                        <MenuItem mnemonicParsing="false" text="Menu" onAction="#returnMenu"/>
                         <MenuItem mnemonicParsing="false" text="Quitter" onAction="#quitGame"/>
                     </items>
                     <style>

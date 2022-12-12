@@ -41,13 +41,10 @@ public class Ball extends Entity {
      * This method manages the different movements of the ball and its interactions with snoopy
      */
     public void Action() {
-        /*
-       advacing meaning : depending on the direction we will be facing, the coordinates shall changes or not accordingly.
-            SO : x = x +1 y = y +1	en bas a droite
-            SE : x = x -1 y =  y +1	en bas a gauche
-            NE : x = x -1 y = y -1  	en haut a dauche
-            NO : x = x +1 y = y -1	en haut a droite
-         *///System.out.println("ball movement"+toString());
+        if(xPosition == snoopyBoard.getSnoopy().getX() && yPosition == snoopyBoard.getSnoopy().getY()){
+            snoopyBoard.getSnoopy().setLife(snoopyBoard.getSnoopy().getLife()-1);
+        }
+
             if (d == Direction.SO && snoopyBoard.getBoard()[xPosition][yPosition].contains("7SO")) { // = 7A
                 if(yPosition == 20){
                     d = Direction.SE;

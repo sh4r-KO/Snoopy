@@ -16,7 +16,7 @@ public class Board {
     private  ArrayList<Entity> allEntityList ;
     private String[][] fullBoard;
     private int currentLevelNumber = 1;
-    private int LevelNumberMax = 2;//inclusive
+    private int LevelNumberMax = 3;//inclusive
     public int score;
     private int chrono;
     /**
@@ -80,9 +80,7 @@ public class Board {
         if(currentLevelNumber > LevelNumberMax) {
             gameWon();
         } else {//load next level
-
-            allEntityList = new ArrayList<Entity>();
-            this.fullBoard  = this.setBoardFromTextFile2("level"+currentLevelNumber+".txt", 12, 22);
+         startGame();
         }
     }
     /**
@@ -318,7 +316,7 @@ public class Board {
             } else {
                 //empty
                 if (tmp == '8') {
-                    if (chararray[i + 1] != 'N' && chararray[i + 1] != 'S' && chararray[i + 1] != 'W' && chararray[i + 1] != 'E') {// get the next char to find the direction
+                    if (chararray[i + 1] != 'N' && chararray[i + 1] != 'S' && chararray[i + 1] != 'O' && chararray[i + 1] != 'E') {// get the next char to find the direction
                         throw new IllegalArgumentException("Snoopy.Model.setBoardFromText.283 : chararray[i+1] inst NSWE");
                     } else if (chararray[i + 1] == 'N') {
                         ret[rowCount][columnCount] = "08N";
@@ -328,8 +326,8 @@ public class Board {
                         ret[rowCount][columnCount] = "08S";
                         noop = new Snoopy(rowCount, columnCount, this, Direction.S);
                         allEntityList.add(noop);
-                    } else if (chararray[i + 1] == 'W') {
-                        ret[rowCount][columnCount] = "08W";
+                    } else if (chararray[i + 1] == 'O') {
+                        ret[rowCount][columnCount] = "08O";
                         noop = new Snoopy(rowCount, columnCount, this, Direction.O);
                         allEntityList.add(noop);
                     } else if (chararray[i + 1] == 'E') {
@@ -339,6 +337,27 @@ public class Board {
                     }
                 }
             }
+        }
+
+        String e ="";
+        boolean here = false;
+
+        for (char c : chararray) {
+            if(here){
+                e=e+c+"";
+            }
+            if (c == '#') {
+                here = true;
+            }
+
+        }
+        if(here) {
+
+            String[] words = e.split(" ");
+            setChrono(Integer.parseInt(words[0]));
+            setScore(Integer.parseInt(words[1]));
+            noop.setLife(Integer.parseInt(words[2]));
+            currentLevelNumber = Integer.parseInt(words[3]);
         }
 
         //System.out.println("found snoopy"+noop.toString());
@@ -395,7 +414,7 @@ public class Board {
                         allEntityList.add(new ShowFadeBlock(rowCount, columnCount, this, noop));
                     }
                     case '6' -> {//treadmillblock
-                        if (chararray[i + 1] != 'N' && chararray[i + 1] != 'S' && chararray[i + 1] != 'W' && chararray[i + 1] != 'E') {// get the next char to find the direction
+                        if (chararray[i + 1] != 'N' && chararray[i + 1] != 'S' && chararray[i + 1] != 'O' && chararray[i + 1] != 'E') {// get the next char to find the direction
                             throw new IllegalArgumentException("Snoopy.Model.setBoardFromText.316 : chararray[i+1] inst NSWE");
                         } else if (chararray[i + 1] == 'N') {
                             ret[rowCount][columnCount] = "6" + chararray[i + 1];
@@ -458,7 +477,7 @@ public class Board {
             }
         }
 
-        
+
 
 
         return ret;
@@ -480,6 +499,7 @@ public class Board {
             //prehaprs sb.stripTrailing() ? or sb.strip() ?
             sb.append("\n");
         }
+        sb.append("#"+getChrono()+" "+getScore()+" "+getSnoopy().getLife()+" "+currentLevelNumber+" ");
         String txt = sb.toString();
         //FileUtils.writeStringToFile(new File("test.txt"), "Hello File", forName("UTF-8"));
         path = path + filename;

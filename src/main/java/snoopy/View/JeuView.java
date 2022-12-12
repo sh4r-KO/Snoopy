@@ -268,7 +268,7 @@ public class JeuView extends Group {//implements Initializable {
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocTapisRoulantBas.png").toURI().toString()));
                     } else if (T.equals("6E")) {
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocTapisRoulantDroite.png").toURI().toString()));
-                    } else if (T.equals("6W")) {
+                    } else if (T.equals("6O")) {
                         matrixImagesView[i][j].setImage(new Image(new File("src/main/resources/img/BlocTapisRoulantGauche.png").toURI().toString()));
                     }
                 } else if (T.contains("8")) {

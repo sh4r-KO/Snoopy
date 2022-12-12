@@ -5,9 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3fa9a3b5-c86c-4204-9c70-e1bae4f8f6f9" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/resources/levels/level3.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Controller/JeuDeBaseController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Controller/JeuDeBaseController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Controller/MenuPaneController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Controller/MenuPaneController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/Ball.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/Ball.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/Model/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/Model/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/snoopy/View/JeuView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/snoopy/View/JeuView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/ViewFmxl/JeuDeBase.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/ViewFmxl/JeuDeBase.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/levels/Save.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/levels/Save.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/levels/level1.txt" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/levels/level1.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

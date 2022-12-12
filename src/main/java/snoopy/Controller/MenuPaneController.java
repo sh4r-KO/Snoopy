@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class MenuPaneController extends Controller{
+    JeuDeBaseController jdbc;
     @FXML private AnchorPane menuPaneAnchor;
     /**
      * This method tells us that the button "Jeu de base" has been clicked
@@ -30,15 +31,29 @@ public class MenuPaneController extends Controller{
         Scene scene = new Scene(borderPane);
         stage.setScene(scene);
 
-        JeuDeBaseController controller = loader.getController();
-        controller.startGame();
+        jdbc = loader.getController();
+        jdbc.startGame();
     }
     /**
      * This method tells us that the button "Charger une partie" has been clicked
      * @throws IOException
      */
     public void chargerUnePartieCliked() throws IOException {
-        super.changePane("ChargerUnePartie.fxml", menuPaneAnchor);
+        Stage stage = (Stage) menuPaneAnchor.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(getClass().getResource("/ViewFmxl/JeuDeBase.fxml"));
+        BorderPane borderPane = null;
+        try{
+            borderPane = loader.load();
+
+        }catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        Scene scene = new Scene(borderPane);
+        stage.setScene(scene);
+
+        jdbc = loader.getController();
+        jdbc.startLoadedGame();
     }
     /**
      * This method tells us that the button "Jeu avancé" has been clicked
