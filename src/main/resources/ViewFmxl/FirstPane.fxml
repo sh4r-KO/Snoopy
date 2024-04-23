@@ -14,7 +14,7 @@
       <font>
          <Font size="110.0" />
       </font></Label>
-   <Button id="#btnjouer" fx:id="jouerB" layoutX="513.0" layoutY="445.0" mnemonicParsing="false" onAction="#JouerCliked" prefHeight="58.0" prefWidth="415.0" stylesheets="@style.css" text="JOUER">
+   <Button id="#btnjouer" fx:id="jouerB" layoutX="513.0" layoutY="445.0" mnemonicParsing="false" onAction="#JouerCliked" prefHeight="58.0" prefWidth="415.0" text="JOUER">
       <style>
          -fx-background-radius: 40;
          -fx-font-family: "Press Start 2P";

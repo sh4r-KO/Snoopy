@@ -2,78 +2,69 @@ package snoopy.Model;
 
 import javax.net.ssl.SNIHostName;
 
-public class Snoopy {
-    private int X;
-    private int Y;
+public class Snoopy extends Entity {
+    private int PV = 3;//when 0 game over
+    private Direction direction;
     private Board snoopyBoard ;
 
-    public void setX(int X) {
-        this.X = X;
+    /**
+     *
+     * @param X the position of snoopy on the up to down axis
+     * @param Y the position of snoopy on the left to right axis
+     * @param b the board of the game
+     * @param d the direction of snoopy
+     */
+    public Snoopy(int X, int Y,Board b, Direction d) {
+        super(X, Y);
+        this.snoopyBoard = b;
+        this.direction = d;
+        // this.snoopyBoard = new Board();
     }
 
-    public void setY(int Y) {
-        this.Y = Y;
+    /**
+     * This method sets the direction of Snoopy
+     * @param d the new direction
+     */
+    public void setDirection(Direction d) {
+        this.direction = d;
     }
 
-    public void setSnoopyBoard(Board snoopyBoard){
-        this.snoopyBoard = snoopyBoard;
+    /**
+     * @return the current direction of snoopy
+     */
+    public Direction getDirection() {
+        return direction;
     }
 
-
-    public int getX() {
-        return X;
-    }
-
-    public int getY() {
-        return Y;
-    }
-
-    public Board getSnoopyBoard(){
-        return snoopyBoard;
-    }
-
-
-
-    enum Direction {
-        NORD,
-        SUD,
-        OUEST,
-        EST;
-    }
-
-    public Snoopy(int X, int Y, Direction d) {
-        this.X = X;
-        this.Y = Y;
-       // this.snoopyBoard = new Board();
-    }
-
-    public Snoopy(Board b){
-        //localisation Snoopy
-        snoopyBoard = b;
-
-        for (int i = 0; i < 12; i++) {
-            for (int j = 0; j < 22; j++) {
-                if ( snoopyBoard.board[i][j] == 8) {
-                    System.out.println("/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////");
-                    snoopyBoard.setNoop(new Snoopy(i, j, Direction.NORD));
-                    break;
-                }
-            }
-        }//new Snoopy(i, j, Snoopy.Direction.NORD)
-    }
-
-
-
-
-    //set
-
-    
     @Override
     public String toString() {
         String r = "x:" + this.X + " y:" + this.Y + "d:";
         return r;
     }
 
+    /**
+     * This method removes a life from snoopy
+     * @param i nulber of lives lost
+     */
+    public void loseLife(int i) {
+        this.PV -= i;
+    }
 
+    /**
+     * @return the number of snoopy's lives left
+     */
+    public int getLife() {
+        return PV;
+    }
 
+    /**
+     * This method manages the interactions of snoopy
+     */
+    public void Action() {
+
+        //touch trap
+        //touch ball
+        //touch bird
+
+    }
 }
